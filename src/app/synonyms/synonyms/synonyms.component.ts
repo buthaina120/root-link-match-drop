@@ -10,7 +10,7 @@ import { firstValueFrom } from 'rxjs';
   styleUrls: ['./synonyms.component.css'],
 })
 export class SynonymsComponent implements OnInit {
-  synonyms: string[] = [];
+  synonyms: string[] = ["سعيد","مسرور"];
 
   constructor(private rest: ApiService) {}
 
