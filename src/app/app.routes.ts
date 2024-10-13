@@ -6,5 +6,5 @@ export const routes: Routes = [
   { path: 'synonyms', component: SynonymsComponent },
   { path: 'roots', component: RootsComponent },
 
-  { path: '', redirectTo: '/synonyms', pathMatch: 'full' },
+  // { path: '', redirectTo: '/synonyms', pathMatch: 'full' },
 ];
