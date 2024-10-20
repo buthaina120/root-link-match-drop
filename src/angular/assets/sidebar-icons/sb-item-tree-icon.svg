@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18.5" height="21.5" viewBox="0 0 18.5 21.5">
+  <g id="hierarchy-square-01-stroke-rounded" transform="translate(0.75 0.75)">
+    <path id="Path_36301" data-name="Path 36301" d="M14,19.5H13c-2.828,0-4.243,0-5.121-.879S7,16.328,7,13.5v-2M7,8v3.5m0,0h7" transform="translate(-3 -2)" fill="none" stroke="#444" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Path_36302" data-name="Path 36302" d="M14,11.5c0-1.179,0-1.768.351-2.134S15.269,9,16.4,9h1.2c1.131,0,1.7,0,2.049.366S20,10.321,20,11.5s0,1.768-.351,2.134S18.731,14,17.6,14H16.4c-1.131,0-1.7,0-2.049-.366S14,12.679,14,11.5Z" transform="translate(-3 -2)" fill="none" stroke="#444" stroke-width="1.5"/>
+    <path id="Path_36303" data-name="Path 36303" d="M14,19.5c0-1.178,0-1.768.351-2.134S15.269,17,16.4,17h1.2c1.131,0,1.7,0,2.049.366S20,18.322,20,19.5s0,1.768-.351,2.134S18.731,22,17.6,22H16.4c-1.131,0-1.7,0-2.049-.366S14,20.678,14,19.5Z" transform="translate(-3 -2)" fill="none" stroke="#444" stroke-width="1.5"/>
+    <path id="Path_36304" data-name="Path 36304" d="M5.286,2H8.714C10.789,2,11,3.11,11,5s-.211,3-2.286,3H5.286C3.211,8,3,6.89,3,5S3.211,2,5.286,2Z" transform="translate(-3 -2)" fill="none" stroke="#444" stroke-width="1.5"/>
+  </g>
+</svg>

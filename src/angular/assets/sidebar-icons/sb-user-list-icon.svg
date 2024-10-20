@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18.666" height="21.5" viewBox="0 0 18.666 21.5">
+  <g id="Component_504_2" data-name="Component 504 – 2" transform="translate(0.75 0.75)">
+    <g id="task-done-02-stroke-rounded" transform="translate(-2.5 -2)">
+      <path id="Path_36527" data-name="Path 36527" d="M19.5,13V9.368c0-3.474,0-5.21-1.025-6.289S15.8,2,12.5,2h-3C6.2,2,4.55,2,3.525,3.079S2.5,5.895,2.5,9.368v5.263c0,3.474,0,5.21,1.025,6.289S6.2,22,9.5,22H11" fill="none" stroke="#444" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Path_36529" data-name="Path 36529" d="M7,2l.082.493c.2,1.2.3,1.8.719,2.151S8.828,5,10.041,5h1.917c1.214,0,1.821,0,2.24-.355s.519-.954.719-2.151L15,2" fill="none" stroke="#444" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Path_36530" data-name="Path 36530" d="M7,16h4M7,11h8" fill="none" stroke="#444" stroke-linecap="round" stroke-width="1.5"/>
+    </g>
+    <path id="Path_36325" data-name="Path 36325" d="M14,19.441a3.462,3.462,0,0,1,5.726,0M18.294,14.38A1.432,1.432,0,1,1,16.863,13,1.407,1.407,0,0,1,18.294,14.38Z" transform="translate(-2.501 0.559)" fill="none" stroke="#444" stroke-linecap="round" stroke-width="1"/>
+  </g>
+</svg>

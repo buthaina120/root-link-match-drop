@@ -1,0 +1,37 @@
+<!--?xml version="1.0" encoding="utf-8"?-->
+<!-- Generator: Adobe Illustrator 28.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" class="active" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 265.1 325" style="enable-background:new 0 0 265.1 325;" xml:space="preserve" width="265.1000061035156" height="325">
+<style type="text/css">
+	.st0{fill:#FFFFFF;stroke:#B5B5B5;stroke-width:0.75;stroke-miterlimit:10;}
+
+  @keyframes draw1 {
+    0% {
+        stroke-dashoffset: 507px;
+    }
+    25% {
+        stroke-dashoffset: 400px;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+  svg .svg-elem-1 {
+  stroke-dashoffset: 846.8317260742188px;
+  stroke-dasharray: 846.8317260742188px;
+  fill: transparent;
+  -webkit-transition: stroke-dashoffset 1s cubic-bezier(0.47, 0, 0.745, 0.715) 0s,
+                        fill 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 0.8s;
+          transition: stroke-dashoffset 1s cubic-bezier(0.47, 0, 0.745, 0.715) 0s,
+                fill 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 0.8s;
+                animation: draw1 3000ms ease-in-out;
+}
+svg.active .svg-elem-1 {
+  stroke-dashoffset: 0;
+  fill: rgb(255, 255, 255);
+}
+</style>
+<g id="Component_360_1">
+	<path id="Path_34754-2" class="st0 svg-elem-1" d="M136.9,0.5L0.5,134.4c0,0,120.5,155,131.1,189.8c0.2,0.6,0.9,0.6,0.9-0.1
+		c4.9-87.1,132-178.2,132-178.2L158.6,24.5L136.9,0.5z"></path>
+</g>
+</svg>

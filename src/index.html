@@ -1,13 +1,74 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>SiwarGames</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <title>منصة سوار للمعاجم اللغوية</title>
+    <meta
+      name="description"
+      content="منصة سوار للمعاجم اللغوية، منصة رقمية تهدف إلى حوسبة الصناعة المعجمية، وتتيح للمستفيد البحث في جميع المعاجم المنشورة فيها. كما تتيح للمؤلف حوسبة معجمه ونشره للمستفيدين وتحديثه بشكل دائم، مع الاستفادة من الأدوات اللغوية والحاسوبية التي توفرها المنصة."
+    />
+    <meta
+      name="keywords"
+      content="منصة سوار, المعاجم اللغوية, حوسبة الصناعة المعجمية, البحث في المعاجم, تأليف المعاجم, نشر المعاجم, مجمع الملك سلمان العالمي للغة العربية, خدمة اللغة العربية, تعزيز إسهام اللغة العربية, الأدوات اللغوية, الأدوات الحاسوبية, الذكاء الاصطناعي, البحث المتقدم, دراسة الظواهر المعجمية, رقمنة المعاجم, معايير الصناعة المعجمية, LMF معيار, تحسين دقة المعاجم, تعزيز جودة المعاجم, تجربة استخدام المستفيدين, تطوير المعاجم, المنهجيات العلمية, تمكين اللغة العربية, تقنيات الذكاء الاصطناعي, المصادر اللغوية, المشاريع اللغوية, رقمنة معاجم الورقية, معاجم حديثة, صناعة المعاجم, باحثون ومهتمون في المعاجم"
+    />
+    <meta name="author" content="منصة سوار للمعاجم اللغوية" />
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-02ZFDSZSB4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function ga() {
+        dataLayer.push(arguments);
+      }
+      ga('js', new Date());
+
+      ga('config', 'G-02ZFDSZSB4', { send_page_view: false });
+    </script>
+    <script
+      src="https://www.google.com/recaptcha/api.js?render=explicit&onload=loadCaptcha&hl=ar"
+      async
+      defer
+    ></script>
+  </head>
+  <body class="bg">
+    <app-root></app-root>
+    <script>
+      (g => {
+        var h,
+          a,
+          k,
+          p = 'The Google Maps JavaScript API',
+          c = 'google',
+          l = 'importLibrary',
+          q = '__ib__',
+          m = document,
+          b = window;
+        b = b[c] || (b[c] = {});
+        var d = b.maps || (b.maps = {}),
+          r = new Set(),
+          e = new URLSearchParams(),
+          u = () =>
+            h ||
+            (h = new Promise(async (f, n) => {
+              await (a = m.createElement('script'));
+              e.set('libraries', [...r] + '');
+              for (k in g)
+                e.set(
+                  k.replace(/[A-Z]/g, t => '_' + t[0].toLowerCase()),
+                  g[k]
+                );
+              e.set('callback', c + '.maps.' + q);
+              a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+              d[q] = f;
+              a.onerror = () => (h = n(Error(p + ' could not load.')));
+              a.nonce = m.querySelector('script[nonce]')?.nonce || '';
+              m.head.append(a);
+            }));
+        d[l]
+          ? console.warn(p + ' only loads once. Ignoring:', g)
+          : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
+      })({ key: 'AIzaSyDZDLj3jndKBV7pjTUX66YVRJSJXiyCcmY', v: 'weekly' });
+    </script>
+  </body>
 </html>

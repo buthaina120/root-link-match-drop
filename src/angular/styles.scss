@@ -1,0 +1,501 @@
+/* You can add global styles to this file, and also import other style files */
+@import url(lara-light-teal-custom.scss);
+@import 'primeflex/primeflex.scss';
+@import 'assets/styles/layout/layout.scss';
+@import 'assets/sdaia/styles/custom.scss';
+@import 'simple-keyboard/build/css/index.css';
+
+@font-face {
+  font-family: 'Janna LT';
+  --font-family: 'Janna LT';
+  font-style: normal;
+  font-weight: 400;
+  src: url(assets/font/a-jannat-lt.woff2) format('woff2');
+}
+
+* {
+  --font-family: 'Janna LT';
+  font-family: 'Janna LT';
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+}
+
+body {
+  --font-family: 'Janna LT';
+  font-family: 'Janna LT';
+}
+
+h1.text-bold {
+  font-weight: 700 !important;
+}
+
+:root {
+  --focus-ring: 0 0 0 0.2rem #d1d4d21a;
+  --font-family: 'Janna LT';
+  font-family: 'Janna LT';
+}
+
+.ksaa-shadow {
+  @include styleclass('shadow-5 hover:shadow-7 transition-all transition-duration-500');
+}
+
+.card-gray-alpha {
+  background-color: white !important;
+  padding-top: 2px !important;
+  border-radius: 10px !important;
+}
+
+.card-gray-alpha .p-panel-header {
+  border-radius: 10px;
+  margin: 10px;
+  background: #52a39e;
+  color: white;
+}
+
+.card-gray-alpha .p-panel-content {
+  background-color: rgba(118, 201, 35, 0.04) !important;
+}
+
+.icon-flipped {
+  transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+}
+
+app-search {
+  .main-search {
+    .p-button {
+      height: 100%;
+    }
+    .p-button .p-button-icon-left {
+      margin-left: 0.5rem;
+    }
+    input {
+      border-bottom-left-radius: 0 !important;
+      border-top-left-radius: 0 !important;
+      border-left: none;
+    }
+  }
+}
+.p-button .p-button-icon-left {
+  margin-left: 0.5rem;
+}
+app-search {
+  p-inputMask {
+    flex-grow: 1;
+    .p-inputtext {
+      width: 100% !important;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  p-button {
+    .p-button {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+  }
+}
+
+app-navbar {
+  .p-menuitem-text {
+    color: var(--primary-color) !important;
+  }
+}
+
+app-result-page-private {
+  .filters .p-panel-content {
+    padding: 0;
+  }
+  .p-panel-icons {
+    flex-grow: 1;
+    text-align: left;
+  }
+  p-panel {
+    .p-panel-header {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+  }
+}
+
+.bg {
+  background-size: contain;
+  background-clip: border-box;
+  background-position: center;
+  background-repeat: repeat;
+  margin: 0;
+}
+
+.dir-ltr {
+  direction: ltr;
+}
+
+.dir-rtl {
+  direction: rtl;
+}
+
+.has-label .p-listbox-header:after {
+  content: 'تحديد / إلغاء الكل';
+  margin-right: 3px;
+  color: black;
+  font-size: 14px !important;
+}
+
+.p-multiselect {
+  li {
+    gap: 0.5rem;
+  }
+  .p-checkbox {
+    margin-right: 0.5rem;
+    margin-left: 1rem;
+  }
+}
+
+// Toastr
+.p-toast .p-toast-message .p-toast-message-content .p-toast-message-text {
+  margin: 0 1rem 0 0;
+}
+
+// dict styles
+.dict-style .p-button.p-button-icon-only {
+  padding: 0;
+}
+
+.p-dropdown-item .user-item small {
+  font-size: 8px;
+  display: block;
+}
+
+dashboard-topbar {
+  .layout-topbar .layout-topbar-button span.p-badge.p-badge-danger {
+    display: block;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  word-context {
+    // FIX_ME: this is needed to show the popup overlay in last row, but will destroy the responsive in mobile view
+    p-table .p-datatable > .p-datatable-wrapper {
+      overflow: visible;
+    }
+  }
+  app-lexical-entry {
+    .table-visible-overflow p-table .p-datatable > .p-datatable-wrapper {
+      overflow: visible;
+    }
+  }
+}
+@media (max-width: 768px) {
+  app-home-details {
+    .index-section__item {
+      width: 250px !important;
+    }
+    .laptop-section .p-dialog {
+      width: 100% !important;
+    }
+  }
+  result-page-public {
+    .lexical-entry-card__header .lemma {
+      margin-right: 10px !important;
+    }
+    .lexical-entry-card__header .open-card-icon {
+      margin-right: auto;
+    }
+    .search-section {
+      top: 0 !important;
+      .vw-50 {
+        width: 100% !important;
+      }
+    }
+    .drawer-buttons {
+      top: 125px !important;
+    }
+    .lexical-entry-card__details.selected {
+      padding: 2rem 1rem 1rem 1rem !important;
+    }
+    .lexical-entry-card__details__sense__example {
+      font-size: 14px;
+    }
+  }
+  app-pub-result-right-filters .right-side-filter {
+    height: 70svh !important;
+  }
+}
+
+@media (max-width: 450px) {
+  result-page-public {
+    .lexical-entry-card__header .lemma {
+      margin-right: 10px !important;
+    }
+    .pattern-and-root {
+      display: none !important;
+    }
+    .lexical-entry-card__header .open-card-icon {
+      margin-right: auto;
+    }
+    .search-section {
+      top: 0 !important;
+      .vw-50 {
+        width: 100% !important;
+      }
+    }
+    .drawer-buttons {
+      top: 125px !important;
+    }
+    .lexical-entry-card__details.selected {
+      padding: 2rem 1rem 1rem 1rem !important;
+    }
+    .lexical-entry-card__details__sense__example {
+      font-size: 14px;
+    }
+  }
+  app-dict-information {
+    .dict-info-comp .dict-info {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  app-home-details {
+    .index-section__item {
+      width: 150px !important;
+    }
+    .laptop-section .p-dialog {
+      width: 100% !important;
+    }
+  }
+  app-home-search {
+    .search-container .header {
+      font-size: 8.2vw !important;
+    }
+    .search-container .sub-header {
+      font-size: 4.6vw !important;
+    }
+  }
+
+  app-add-lexicon .features .card img {
+    width: 22px;
+  }
+  .main-search {
+    .p-inputgroup-addon:last-child {
+      display: none !important;
+    }
+  }
+  app-search {
+    .main-search .p-inputgroup .p-inputtext {
+      border-bottom-left-radius: 15px !important;
+      border-top-left-radius: 15px !important;
+    }
+  }
+}
+
+app-add-lexicon button[type='submit'] {
+  background-color: #219f8a;
+  border-radius: 15px;
+}
+
+// RTL styles
+[dir='rtl'] {
+  .p-buttonset .p-button:first-of-type {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+  }
+  .p-buttonset .p-button:last-of-type {
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .p-float-label label {
+    right: 10px;
+  }
+  .p-dropdown-panel .p-dropdown-header .p-dropdown-filter {
+    padding-right: 8px;
+    margin-right: initial;
+    padding-left: 1.75rem;
+  }
+  .p-dropdown-panel .p-dropdown-header .p-dropdown-filter-icon {
+    right: inherit;
+    left: 0.75rem;
+  }
+  .p-inputgroup-addon:last-child,
+  .p-inputgroup p-button:last-child button,
+  .p-inputgroup input:last-child,
+  .p-inputgroup > .p-inputwrapper:last-child > .p-component,
+  .p-inputgroup > .p-inputwrapper:last-child > .p-component > .p-inputtext {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+  .p-inputgroup-addon:first-child,
+  .p-inputgroup > .p-inputwrapper:first-child > .p-component,
+  .p-inputgroup > .p-inputwrapper:first-child > .p-component > .p-inputtext,
+  .p-inputgroup input:first-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+
+  .p-dialog-content .p-inputgroup button:last-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .p-inputgroup .p-inputwrapper {
+    display: inherit;
+  }
+  .p-inputgroup-addon:last-child {
+    border-right: none;
+    border-left: 1px solid #ced4da;
+  }
+  .p-inputgroup-addon.bg-transparent {
+    background: transparent;
+  }
+  .p-calendar-w-btn .p-inputtext {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+  .p-calendar-w-btn .p-datepicker-trigger {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+// Autocomplate in dialog
+.p-overlay {
+  width: initial;
+}
+
+app-lexical-entry {
+  .p-tabview-nav-content {
+    // fixes the scroll buttons in tabview
+    direction: ltr;
+  }
+}
+
+.read-only {
+  button {
+    display: none;
+  }
+  input,
+  p-dropdown,
+  p-checkbox,
+  textarea {
+    pointer-events: none;
+  }
+  .read-only-excluded {
+    pointer-events: visible !important;
+  }
+}
+
+// Override the NG prime sidebar overlay style
+.p-sidebar-mask.p-component-overlay {
+  background-color: transparent !important;
+}
+
+.content-container {
+  min-height: calc(100vh - 250px);
+}
+
+.color-custom-green,
+.text-main-theme {
+  color: #52a39d;
+}
+.bg-custom-green,
+.bg-main-theme {
+  background-color: #52a39d !important;
+}
+.bg-sec-theme {
+  background-color: #0f2837;
+}
+
+app-contactus {
+  button[type='submit'] {
+    background-color: #219f8a;
+    border-radius: 15px;
+  }
+  .contact-info {
+    padding: 0 20px;
+    h5,
+    a {
+      color: #fff;
+    }
+  }
+  .social-media-links {
+    border: 1px solid;
+    text-align: center;
+    border-radius: 15px;
+
+    i {
+      color: #fff;
+      font-size: 24px;
+    }
+    img {
+      height: 30px;
+    }
+
+    img:last-child {
+      display: none;
+      background-color: #fff;
+      border-radius: 6px;
+      border: 1px solid #fff;
+    }
+    a:hover {
+      img:first-child {
+        display: none;
+      }
+      img:last-child {
+        display: inline;
+      }
+    }
+  }
+}
+.text-ellipsis {
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.logo-text-animate-container {
+  // background-image: url('/assets/bg-logo-text-animate-container.svg');
+  // background-repeat: no-repeat;
+  // background-size: 284px;
+  width: 284px !important;
+  app-home-text-animation {
+    svg {
+      width: 186px;
+    }
+  }
+}
+
+.p-autocomplete-panel .p-autocomplete-items .p-focus {
+  color: #495057;
+  background: #e9ecef;
+}
+:root {
+  --custom-color: #66b0e9;
+}

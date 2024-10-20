@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5" viewBox="0 0 19.5 21.5">
+  <g id="file-block-stroke-rounded" transform="translate(0.75 0.75)">
+    <path id="Path_36683" data-name="Path 36683" d="M4.025,3.025a3.5,3.5,0,1,0,4.95,4.95m-4.95-4.95a3.5,3.5,0,1,1,4.95,4.95m-4.95-4.95,4.95,4.95" transform="translate(8 11)" fill="none" stroke="#444" stroke-width="1.5"/>
+    <path id="Path_36684" data-name="Path 36684" d="M12.5,22h-.773c-3.261,0-4.892,0-6.024-.8a4.133,4.133,0,0,1-.855-.805C4,19.331,4,17.8,4,14.727V12.182c0-2.963,0-4.445.469-5.628A7.233,7.233,0,0,1,8.838,2.441C10.1,2,11.67,2,14.818,2a11.254,11.254,0,0,1,3.417.252,4.133,4.133,0,0,1,2.5,2.35A9.426,9.426,0,0,1,21,7.818v4.364" transform="translate(-4 -2)" fill="none" stroke="#444" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Path_36685" data-name="Path 36685" d="M11,22a3.333,3.333,0,0,1,3.333-3.333,8.48,8.48,0,0,0,2.1-.057,1.667,1.667,0,0,0,1.179-1.179,8.48,8.48,0,0,0,.057-2.1A3.333,3.333,0,0,1,21,12" transform="translate(-11 -12)" fill="none" stroke="#444" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

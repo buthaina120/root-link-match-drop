@@ -1,0 +1,13 @@
+<svg id="Component_201_1" data-name="Component 201 – 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="44" height="42" viewBox="0 0 44 42">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#eff3f6"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect id="Rectangle_20073" data-name="Rectangle 20073" width="44" height="42" rx="12" fill="url(#linear-gradient)"/>
+  <g id="Group_24578" data-name="Group 24578" transform="translate(-935 -395)">
+    <path id="Path_23915" data-name="Path 23915" d="M475.332,585.924H473.6a4.267,4.267,0,0,1-4.267-4.266,6.4,6.4,0,0,1,6.4-6.4H481.6a6.4,6.4,0,0,1,6.4,6.4,4.267,4.267,0,0,1-4.267,4.266H482m2-21.333a5.333,5.333,0,1,1-5.334-5.333A5.334,5.334,0,0,1,484,564.591Z" transform="translate(473 -156.59)" fill="none" stroke="#0f2837" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_24117" data-name="Path 24117" d="M490.665,585.924H494.4a4.266,4.266,0,0,0,4.266-4.266,6.4,6.4,0,0,0-6.4-6.4h-1.6M488,569.924a5.333,5.333,0,0,0,0-10.666" transform="translate(473 -156.59)" fill="none" stroke="#ff7638" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>

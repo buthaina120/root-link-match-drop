@@ -1,0 +1,185 @@
+app-sdaia-home {
+  .p-breadcrumb .p-menuitem-separator {
+    transform: rotate(180deg) !important;
+    padding: 0px 5px;
+    font-size: 1.75rem !important;
+  }
+  .p-breadcrumb ul li .p-menuitem-link .p-menuitem-icon {
+    font-size: 1.75rem !important;
+  }
+  .card-gray-alpha .p-panel-header {
+    background: #25315b;
+  }
+  .p-checkbox .p-checkbox-box {
+    border-color: #9691d8 !important;
+    background: #9691d8 !important;
+  }
+}
+
+app-sdaia-search {
+  .p-inputtext.p-autocomplete-input {
+    width: 300px;
+    border-radius: 15px;
+  }
+
+}
+
+// Custom Dicts responsive styles
+@media (max-width: 1440px) {
+  app-sdaia-home {
+    .home-section {
+      height: 335px;
+    }
+  }
+}
+
+@media (max-width: 1199px) {
+  app-custom-dict-layout {
+    .home-section {
+      height: 900px !important;
+
+    }
+    .home-section .menu {
+      margin: 50px 60px 0px 140px;
+    }
+    .dict-info-comp {
+      padding: 0px 4vw !important;
+    }
+  }
+  app-sdaia-dicts-display {
+    .card:last-child {
+      margin-bottom: 0;
+      padding: 5px !important;
+    }
+    .card .dict-info__details .card-info.show {
+      max-height: initial !important;
+
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  app-custom-dict-layout {
+    .home-section .menu .dict-logo {
+      height: 30px !important;
+    }
+    .home-section {
+      height: 500px !important;
+
+      background-image: none;
+      background-color: #213a49;
+    }
+    .home-section .menu {
+      margin: 30px !important;
+    }
+    .dict-info-comp {
+      padding: 0px 8vw !important;
+    }
+    .home-section .menu a {
+      font-size: 16px;
+    }
+    .dict-title {
+      font-size: 26px;
+    }
+    .categories-title {
+      font-size: 32px;
+    }
+    .content-hero img {
+      width: 50% !important;
+      margin: 25px auto !important;
+    }
+    .dict-info-comp .dict-data__header {
+      background-image: none !important;
+    }
+  }
+  app-sdaia-dicts-display {
+    .card:last-child {
+      margin-bottom: 0;
+      padding: 5px !important;
+    }
+    .card .dict-info__details .card-info.show {
+      max-height: initial !important;
+    }
+
+  }
+}
+
+@media (max-width: 500px) {
+  app-custom-dict-layout {
+    .home-section {
+      height: 500px !important;
+
+      background-image: none;
+      background-color: #213a49;
+    }
+    .home-section .menu {
+      flex-flow: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin: 40px 40px 0px 0;
+      .dict-logo {
+        height: 30px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      a {
+        font-size: 16px;
+      }
+      ul {
+        display: none !important;
+      }
+    }
+    .content-hero img {
+      width: 50% !important;
+      margin: 25px auto !important;
+    }
+    .dict-info-comp {
+      padding: 0px 4vw !important;
+    }
+    .dict-info-comp .dict-data__header .header-font {
+      font-size: 18px;
+    }
+    .dict-info-comp .dict-data__letters {
+      flex-direction: column;
+      padding: 25px;
+    }
+    .p-paginator .p-paginator-pages .p-paginator-page,
+    .p-paginator .p-paginator-first,
+    .p-paginator .p-paginator-prev,
+    .p-paginator .p-paginator-next,
+    .p-paginator .p-paginator-last {
+      min-width: 35px;
+      height: 35px;
+    }
+    .p-paginator {
+      padding: 0.5rem 0;
+    }
+  }
+
+  .dict-info-comp .dict-data__header {
+    background-image: none !important;
+  }
+
+  .dict-info__details .card-info.show {
+    transition-delay: 0ms;
+    max-height: none;
+  }
+
+  app-sdaia-dicts-display {
+    .card:last-child {
+      margin-bottom: 0;
+      padding: 5px !important;
+    }
+    .card .dict-info__details .card-info.show {
+      max-height: initial !important;
+    }
+  }
+  app-sdaia-search .p-inputtext.p-autocomplete-input {
+    width: 210px;
+    border-radius: 15px;
+  }
+  .cta-btn-hero {
+    padding: 2px 28px !important;
+  }
+
+}

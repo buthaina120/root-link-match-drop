@@ -1,0 +1,13 @@
+<svg id="Component_203_1" data-name="Component 203 – 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="44" height="42" viewBox="0 0 44 42">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#eff3f6"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect id="Rectangle_20076" data-name="Rectangle 20076" width="44" height="42" rx="12" fill="url(#linear-gradient)"/>
+  <g id="Group_24581" data-name="Group 24581" transform="translate(-934.666 -1020.667)">
+    <path id="Path_23902" data-name="Path 23902" d="M585.331,657.258v-.667a16.648,16.648,0,0,0-.327-4.727,6.667,6.667,0,0,0-4.28-4.28,16.693,16.693,0,0,0-4.727-.326h-6.666c-3.734,0-5.6,0-7.027.726a6.654,6.654,0,0,0-2.913,2.914c-.727,1.426-.727,3.293-.727,7.026v5.334c0,3.733,0,5.6.727,7.026A6.654,6.654,0,0,0,562.3,673.2c1.427.726,3.293.726,7.027.726H576a16.693,16.693,0,0,0,4.727-.326,6.667,6.667,0,0,0,4.28-4.28,16.648,16.648,0,0,0,.327-4.727v-.667" transform="translate(385.001 381.409)" fill="none" stroke="#0f2837" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_24201" data-name="Path 24201" d="M566.664,665.924v-8m5.333,8V655.258m5.334,10.666v-5.333" transform="translate(385.001 381.409)" fill="none" stroke="#ff7638" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>

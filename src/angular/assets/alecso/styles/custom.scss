@@ -1,0 +1,101 @@
+app-alecso-home {
+  .p-breadcrumb .p-menuitem-separator {
+    transform: rotate(180deg) !important;
+    padding: 0px 5px;
+    font-size: 1.75rem !important;
+  }
+  .p-breadcrumb ul li .p-menuitem-link .p-menuitem-icon {
+    font-size: 1.75rem !important;
+  }
+}
+
+// Custom Dicts responsive styles
+@media (max-width: 1440px) {
+  app-alecso-home {
+    .home-section {
+      height: 335px;
+    }
+  }
+}
+
+@media (max-width: 1199px) {
+  app-alecso-home {
+    .home-section {
+      height: 200px;
+    }
+    .home-section .menu {
+      margin: 50px 60px 0px 140px;
+    }
+    .dict-info-comp {
+      padding: 0px 8vw;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  app-alecso-home {
+    .home-section .menu .dict-logo {
+      height: 50px;
+    }
+    .home-section {
+      height: 120px;
+      background-image: none;
+      background-color: #213a49;
+    }
+    .home-section .menu {
+      margin: 40px 60px 0px 140px;
+    }
+    .dict-info-comp {
+      padding: 0px 8vw;
+    }
+    .home-section .menu a {
+      font-size: 16px;
+    }
+    .dict-title {
+      font-size: 26px;
+    }
+    .categories-title {
+      font-size: 32px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  app-alecso-home {
+    .home-section {
+      height: 120px;
+      background-image: none;
+      background-color: #213a49;
+    }
+    .home-section .menu {
+      margin: 40px 40px 0px 0;
+      .dict-logo {
+        height: 30px;
+      }
+      a {
+        font-size: 16px;
+      }
+    }
+    .dict-info-comp {
+      padding: 0px 4vw;
+    }
+    .dict-info-comp .dict-data__header .header-font {
+      font-size: 18px;
+    }
+    .dict-info-comp .dict-data__letters {
+      flex-direction: column;
+      padding: 25px;
+    }
+    .p-paginator .p-paginator-pages .p-paginator-page,
+    .p-paginator .p-paginator-first,
+    .p-paginator .p-paginator-prev,
+    .p-paginator .p-paginator-next,
+    .p-paginator .p-paginator-last {
+      min-width: 35px;
+      height: 35px;
+    }
+    .p-paginator {
+      padding: 0.5rem 0;
+    }
+  }
+}

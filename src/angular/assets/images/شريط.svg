@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="199.846" height="198.618" viewBox="0 0 199.846 198.618">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#5f958f"/>
+      <stop offset="1" stop-color="#0f2837"/>
+    </radialGradient>
+    <filter id="شريط_سفلي" x="0" y="0" width="199.846" height="198.618" filterUnits="userSpaceOnUse">
+      <feOffset dx="10" dy="5.66" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.075" result="blur"/>
+      <feFlood flood-opacity="0.129"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#شريط_سفلي)">
+    <rect id="شريط_سفلي-2" data-name="شريط سفلي" width="157.396" height="156.168" rx="35.39" transform="translate(11.22 15.56)" fill="url(#radial-gradient)"/>
+  </g>
+</svg>

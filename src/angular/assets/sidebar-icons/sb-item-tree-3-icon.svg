@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19.5" height="21.5" viewBox="0 0 19.5 21.5">
+  <g id="workflow-square-09-stroke-rounded" transform="translate(0.75 0.75)">
+    <path id="Path_36651" data-name="Path 36651" d="M3,19c0,1.414,0,2.121.439,2.561S4.586,22,6,22s2.121,0,2.561-.439S9,20.414,9,19s0-2.121-.439-2.561S7.414,16,6,16s-2.121,0-2.561.439S3,17.586,3,19Z" transform="translate(-3 -2)" fill="none" stroke="#444" stroke-width="1.5"/>
+    <path id="Path_36652" data-name="Path 36652" d="M3,5c0,1.414,0,2.121.439,2.561S4.586,8,6,8s2.121,0,2.561-.439S9,6.414,9,5s0-2.121-.439-2.561S7.414,2,6,2s-2.121,0-2.561.439S3,3.586,3,5Z" transform="translate(-3 -2)" fill="none" stroke="#444" stroke-width="1.5"/>
+    <path id="Path_36653" data-name="Path 36653" d="M15,5c0,1.414,0,2.121.439,2.561S16.586,8,18,8s2.121,0,2.561-.439S21,6.414,21,5s0-2.121-.439-2.561S19.414,2,18,2s-2.121,0-2.561.439S15,3.586,15,5Z" transform="translate(-3 -2)" fill="none" stroke="#444" stroke-width="1.5"/>
+    <path id="Path_36654" data-name="Path 36654" d="M6,8v8" transform="translate(-3 -2)" fill="none" stroke="#444" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Path_36655" data-name="Path 36655" d="M6,12h8c1.886,0,2.828,0,3.414-.586S18,9.886,18,8" transform="translate(-3 -2)" fill="none" stroke="#444" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>
