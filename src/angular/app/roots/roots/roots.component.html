@@ -1,1 +1,35 @@
-<p>roots works!</p>
+
+<div class="example-container">
+    <h2>حروف الكلمة المتاحة</h2>
+    <div
+      id="letters"
+      cdkDropList
+      [cdkDropListData]="letters"
+      cdkDropListConnectedTo="currentWord"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div *ngFor="let letter of letters" class="example-card" cdkDrag>
+        {{ letter }}
+      </div>
+    </div>
+  </div>
+  
+  <div class="example-container">
+    <h2>الكلمة المكونة</h2>
+    <div
+      id="currentWord"
+      cdkDropList
+      [cdkDropListData]="currentWord"
+      cdkDropListConnectedTo="letters"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div *ngFor="let letter of currentWord" class="example-card" cdkDrag>
+        {{ letter }}
+      </div>
+    </div>
+  </div>
+  
+
+  
