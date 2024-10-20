@@ -1,3 +1,18 @@
-<p>synonyms works!</p>
+<div class="card-container">
+    <div *ngFor="let card of cards" (click)="flipCard(card)" [@flipState]="card.flipped ? 'active' : 'inactive'" class="card">
+      <div class="card-inner">
+        <div class="card-front" *ngIf="card.flipped">{{ card.word }}</div>
+        <div class="card-back" *ngIf="!card.flipped">{{ card.synonym }}</div>
+      </div>
+    </div>
+  </div>
+  
 
-<div>{{ synonyms }}</div>
+  
+  <div class="score">
+    <p>النقاط: {{ score }}</p>
+    <p>عدد المحاولات: {{ attempts }}</p>
+  </div>
+  
+<!-- زر إعادة اللعبة -->
+<button (click)="restartGame()" class="restart-button">إعادة اللعبة</button>
