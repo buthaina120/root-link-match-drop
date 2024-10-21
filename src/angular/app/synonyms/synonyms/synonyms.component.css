@@ -5,8 +5,8 @@
 }
 
 .card {
-  width: 100px; /* عرض البطاقة */
-  height: 100px; /* ارتفاع البطاقة */
+  width: 150px; /* عرض البطاقة */
+  height: 150px; /* ارتفاع البطاقة */
   perspective: 1000px; /* منظور البطاقة */
 }
 
@@ -28,7 +28,7 @@
   align-items: center;
   font-size: 20px; /* حجم الخط */
   color: white;
-  border: 1px solid #ccc; /* إطار البطاقة */
+  border: 1px solid #fdfdfd; /* إطار البطاقة */
   border-radius: 10px; /* زوايا البطاقة */
 }
 
