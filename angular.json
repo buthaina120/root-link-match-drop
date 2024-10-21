@@ -16,15 +16,14 @@
             "outputPath": "dist/siwar-games",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/angular/favicon.ico",
+              "src/angular/assets",
+              "src/angular/sitemap.xml",
+              "src/angular/robots.txt",
+              "src/assets"
             ],
             "styles": [
               "node_modules/leaflet/dist/leaflet.css",
@@ -77,10 +76,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               {
@@ -88,9 +84,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/angular/styles.scss"
-            ],
+            "styles": ["src/angular/styles.scss"],
             "scripts": []
           }
         }

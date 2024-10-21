@@ -1,0 +1,64 @@
+<div class="flex flex-column mt-7">
+  <div
+    class="flex justify-content-between w-10 m-auto border-bottom-1 pb-4 border-gray-300"
+  >
+    <div class="flex justify-content-between w-12 flex-wrap"></div>
+  </div>
+</div>
+<div class="flex justify-content-center flex-wrap p-3 w-12 m-auto my-3 gap-3">
+  <div class="w-full md:w-5 lg:w-3 xl:w-3">
+    <a
+      class="flex h-15rem card m-0 dict-card cursor-pointer"
+      [routerLink]="['/roots']"
+    >
+      <img
+        class="align-items-center m-auto"
+        src="../../../angular/assets/roots-game.png"
+        alt="لعبة الجذر"
+        height="200"
+        width="200"
+      />
+    </a>
+
+    <a class="px-" [routerLink]="['/roots']">
+      <div
+        class="card mt-3 py-2 flex justify-content-center bg-black-alpha-90 text-white cursor-pointer text-right align-items-center description overflow-hidden px-0"
+      >
+        <span
+          tooltipPosition="bottom"
+          class="btn-wrap description max-h-2rem overflow-hidden w-12 text-center px-4"
+        >
+          لعبة الجذر
+        </span>
+      </div>
+    </a>
+  </div>
+
+  <div class="w-full md:w-5 lg:w-3 xl:w-3">
+    <a
+      class="flex h-15rem card m-0 dict-card cursor-pointer"
+      [routerLink]="['/synonyms']"
+    >
+      <img
+        class="align-items-center m-auto"
+        src="../../../angular/assets/roots-game.png"
+        alt="لعبة المترادفات"
+        height="200"
+        width="200"
+      />
+    </a>
+
+    <a class="px-" [routerLink]="['/synonyms']">
+      <div
+        class="card mt-3 py-2 flex justify-content-center bg-black-alpha-90 text-white cursor-pointer text-right align-items-center description overflow-hidden px-0"
+      >
+        <span
+          tooltipPosition="bottom"
+          class="btn-wrap description max-h-2rem overflow-hidden w-12 text-center px-4"
+        >
+          لعبة المترادفات
+        </span>
+      </div>
+    </a>
+  </div>
+</div>
