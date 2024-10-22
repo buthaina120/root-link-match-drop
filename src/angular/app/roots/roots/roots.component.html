@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لعبة ذاكرة</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-  <div *ngIf=flag class="container">
+
+  <div *ngIf=false class="container">
     <div class="row justify-content-center text-center">
       <!-- الشعار -->
       <div class="col-12">
@@ -66,8 +58,8 @@
   </div>
 
 
-<div *ngIf="!flag" class="container text-center">
-  <div class="row mb-3">
+<div *ngIf="true" class="container text-center">
+  <div class="">
     <div class="col">
       <div class="d-inline-block px-2 py-1 bg-light text-dark rounded">
         <p>النقاط: {{ points }}</p>
@@ -80,39 +72,27 @@
     </div>
   </div>
 
-  <div class="row justify-content-center align-items-center">
-    <div class="col-md-6 text-center">
-      <h2>حروف الكلمة المتاحة</h2>
-      <div
-        id="letters"
-        cdkDropList
-        [cdkDropListData]="letters"
-        cdkDropListConnectedTo="currentWord"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div *ngFor="let letter of letters" class="example-card" cdkDrag>
-          {{ letter }}
-        </div>
-      </div>
+  <div> جذر: {{originalWord}}</div>
+  <div class="card flex flex-wrap gap-3">
+    <div class="p-2 border-1 surface-border border-round w-15rem">
+        <ul class="list-none flex flex-row gap-2 p-0 m-0">
+            <li 
+                *ngFor="let letter of availableLetters" 
+                class="p-2 shadow-1"
+                pDraggable 
+                (onDragStart)="dragStart(letter)" 
+                (onDragEnd)="dragEnd()">
+                    {{letter}}
+            </li>
+        </ul>
     </div>
-  </div>
-
-  <div class="row justify-content-center mt-3">
-    <div class="col-md-6 text-center">
-      <h2>الكلمة المكونة</h2>
-      <div
-        id="currentWord"
-        cdkDropList
-        [cdkDropListData]="currentWord"
-        cdkDropListConnectedTo="letters"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div *ngFor="let letter of currentWord" class="example-card" cdkDrag>
-          {{ letter }}
-        </div>
-      </div>
+    <div class="p-2 border-1 surface-border border-round w-15rem" pDroppable (onDrop)="drop()">
+        <p class="text-center surface-border border-bottom-1">Drop Zone</p>
+        <ul class="list-none flex flex-row gap-2 p-0 m-0" *ngIf="selectedLetters" >
+            <li *ngFor="let letter of selectedLetters" class="p-2 border-round shadow-1">
+                {{letter}}
+            </li>
+        </ul>
     </div>
   </div>
 
@@ -128,12 +108,6 @@
   </div>
 </div>
 
-      
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-
-
+    
 
 

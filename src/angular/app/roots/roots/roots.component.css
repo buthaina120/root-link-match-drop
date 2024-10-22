@@ -28,10 +28,7 @@ body {
   border: 1px solid #ccc;
   width: 500px; /* عرض ثابت */
   height: 500px; /* ارتفاع ثابت */
-  display: flex;
   flex-direction: column;
-  justify-content: center; /* مركزية عمودية */
-  align-items: center; /* مركزية أفقية */
 }
 
 costum-card {
