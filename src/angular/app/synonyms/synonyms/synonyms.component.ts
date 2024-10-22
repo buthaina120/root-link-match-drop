@@ -2,23 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common'; // استيراد CommonModule
-
-
+ 
+ 
 interface Card {
   id: number;       // معرف فريد للبطاقة
   word: string;     // الكلمة
   synonym: string;  // المترادف
   flipped: boolean; // حالة القلب
 }
-
-
+ 
+ 
 @Component({
   selector: 'app-synonyms',
   standalone: true,
   templateUrl: './synonyms.component.html',
   styleUrls: ['./synonyms.component.css'],
   imports: [CommonModule], // إضافة CommonModule هنا
-
+ 
   animations: [
     trigger('flipState', [
       state('active', style({
@@ -33,20 +33,21 @@ interface Card {
   ]
 })
 export class SynonymsComponent implements OnInit {
-  
-    
+ 
+  flag = true;
   cards: Card[] = []; // تخزين البطاقات
   flippedCards: Card[] = []; // بطاقات مقلوبة
   matchedCards: Card[] = []; // بطاقات مطابقة
   score: number = 0; // عدد النقاط
   attempts: number = 0; // عدد المحاولات
-
+ 
   constructor() { }
-
-  ngOnInit() {
-    this.startGame(); // بدء اللعبة عند تحميل المكون
+ 
+ 
+  setflag (){
+    this.flag=!this.flag
   }
-
+  
   startGame() {
     this.cards = [
       { id: 1, word: 'حزين', synonym: 'مكتئب', flipped: false },
@@ -60,11 +61,11 @@ export class SynonymsComponent implements OnInit {
     ];
     this.shuffleCards(); // خلط البطاقات
   }
-
+ 
   shuffleCards() {
     this.cards.sort(() => Math.random() - 0.5);
   }
-
+ 
   flipCard(card: Card) {
     if (this.flippedCards.length < 2 && !this.flippedCards.includes(card) && !this.matchedCards.includes(card)) {
       card.flipped = true; // قلب البطاقة
@@ -75,35 +76,77 @@ export class SynonymsComponent implements OnInit {
       }
     }
   }
-
+  showDialog: boolean = false; // للتحكم في عرض الـ Dialog
+  dialogMessage: string = ''; // رسالة الـ Dialog
   checkMatch() {
     const [firstCard, secondCard] = this.flippedCards;
-
-    // التحقق من المطابقة بناءً على المترادفات
+  
     if (
       (firstCard.word === secondCard.synonym) ||
       (firstCard.synonym === secondCard.word)
     ) {
       this.matchedCards.push(firstCard, secondCard);
-      this.score += 1; // زيادة النقاط عند المطابقة
+      this.score += 1;
+  
+      // تحقق هنا إذا تمت مطابقة جميع البطاقات
+      if (this.matchedCards.length === this.cards.length) {
+        // عرض رسالة "أحسنت" عند إنهاء جميع المطابقات
+        this.dialogMessage = 'أحسنت! لقد أتممت جميع المطابقات بنجاح!';
+        this.showDialog = true;
+      }
     } else {
       setTimeout(() => {
         firstCard.flipped = false;
         secondCard.flipped = false;
       }, 1000);
     }
-    this.flippedCards = []; // إعادة تعيين البطاقات المقلوبة
+    this.flippedCards = [];
+  }  
+  timeLeft: number = 60; // النسبة المئوية للوقت المتبقي
+intervalId: any; // لتخزين معرف المؤقت
+
+startTimer() {
+  this.timeLeft = 60;
+  this.intervalId = setInterval(() => {
+    if (this.timeLeft > 0) {
+      this.timeLeft -= 1;
+    } else {
+      clearInterval(this.intervalId);
+      // عرض رسالة "حاول مرة أخرى" عند انتهاء الوقت
+      this.dialogMessage = 'حاول مرة أخرى! انتهى الوقت.';
+      this.showDialog = true;
+    }
+  }, 1000);
+  
+   // تحديث كل ثانية
+   if (this.matchedCards.length === this.cards.length) {
+    clearInterval(this.intervalId); // إيقاف المؤقت
+    this.dialogMessage = 'أحسنت! لقد أتممت جميع المطابقات بنجاح!';
+    this.showDialog = true;
   }
+  
+}
+closeDialog() {
+  this.showDialog = false;  // إخفاء الـ Dialog
+  this.restartGame();       // إعادة تشغيل اللعبة
+}
 
 
-  // دالة لإعادة ضبط اللعبة
-  restartGame() {
-    this.startGame(); // بدء اللعبة من جديد
-    this.score = 0; // إعادة تعيين النقاط
-    this.attempts = 0; // إعادة تعيين عدد المحاولات
-    this.flippedCards = []; // إعادة تعيين البطاقات المقلوبة
-    this.matchedCards = []; // إعادة تعيين البطاقات المطابقة
-  }
+// تأكد من بدء المؤقت عند بدء اللعبة
+ngOnInit() {
+  this.startGame(); // بدء اللعبة
+  this.startTimer(); // بدء المؤقت
+}
 
+// أضف هذا السطر لإعادة المؤقت عند إعادة تشغيل اللعبة
+restartGame() {
+  clearInterval(this.intervalId); // تأكد من إيقاف المؤقت
+  this.score = 0;                 // إعادة تعيين النقاط
+  this.attempts = 0;              // إعادة تعيين المحاولات
+  this.flippedCards = [];         // إعادة تعيين البطاقات المقلوبة
+  this.matchedCards = [];         // إعادة تعيين البطاقات المطابقة
+  this.startGame();               // إعادة بدء اللعبة
+  this.startTimer();              // إعادة تشغيل المؤقت
+}
 
 }

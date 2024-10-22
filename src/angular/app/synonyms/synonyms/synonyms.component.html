@@ -1,18 +1,56 @@
-<div class="card-container">
-    <div *ngFor="let card of cards" (click)="flipCard(card)" [@flipState]="card.flipped ? 'active' : 'inactive'" class="card">
-      <div class="card-inner">
-        <div class="card-front" *ngIf="card.flipped">{{ card.word }}</div>
-        <div class="card-back" *ngIf="!card.flipped">{{ card.synonym }}</div>
+<!--<div *ngIf=flag class="card-container">
+  <div *ngFor="let card of cards" (click)="flipCard(card)" [@flipState]="card.flipped ? 'active' : 'inactive'" class="card">
+    <div class="card-inner">
+      <div class="card-front" *ngIf="card.flipped">{{ card.word }}</div>
+      <div class="card-back" *ngIf="!card.flipped">{{ card.synonym }}</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="score">
+  <p>النقاط: {{ score }}</p>
+  <p>عدد المحاولات: {{ attempts }}</p>
+</div>
+
+ زر إعادة اللعبة
+<button (click)="restartGame()" class="restart-button">إعادة اللعبة</button> -->
+
+<div class="game-container">
+  <div class="score-panel">
+    <div class="score-box">
+      <span>النقاط: {{ score }}</span>
+    </div>
+    <div class="attempts-box">
+      <span>المحاولات: {{ attempts }}</span>
+    </div>  
+  </div>
+  <div class="timer-container">
+    <div class="progress-bar" [style.width.%]="(timeLeft / 60) * 100"></div>
+    <span class="timer-text">{{ timeLeft }} ثانية متبقية</span>
+  </div>
+
+  <div class="cards-grid">
+    <div *ngFor="let card of cards" class="card" (click)="flipCard(card)">
+      <div class="card-inner" [ngClass]="{'flipped': card.flipped}">
+        <!-- وجه البطاقة الأمامي -->
+        <div class="card-face card-front"></div>
+        <!-- وجه البطاقة الخلفي -->
+        <div class="card-face card-back">{{ card.word }}</div>
       </div>
     </div>
   </div>
-  
 
-  
-  <div class="score">
-    <p>النقاط: {{ score }}</p>
-    <p>عدد المحاولات: {{ attempts }}</p>
+
+  <button class="restart-button" (click)="restartGame()">إعادة اللعبة</button>
+</div>
+<!-- Dialog Box -->
+<div class="dialog-overlay" *ngIf="showDialog">
+  <div class="dialog-box">
+    <h2>{{ dialogMessage }}</h2>
+    <button class="dialog-button" (click)="closeDialog()">حسناً</button>
   </div>
-  
-<!-- زر إعادة اللعبة -->
-<button (click)="restartGame()" class="restart-button">إعادة اللعبة</button>
+</div>
+
