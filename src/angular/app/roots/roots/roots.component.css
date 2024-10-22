@@ -1,3 +1,50 @@
+
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #fff;
+  direction: rtl;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.logo {
+  width: 100px; /* تعديل حجم الشعار */
+}
+
+
+
+.d-flex {
+  margin-top: 20px;
+}
+
+.container {
+  background-color: #f8f8f8; /* لون رمادي فاتح */
+  padding: 30px; /* مسافة داخلية بين المحتوى والإطار */
+  border-radius: 15px; /* زوايا دائرية */
+  border: 1px solid #ccc;
+  width: 500px; /* عرض ثابت */
+  height: 500px; /* ارتفاع ثابت */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* مركزية عمودية */
+  align-items: center; /* مركزية أفقية */
+}
+
+costum-card {
+  background-color: #2e2121;
+  margin-bottom: 60px; /* إضافة مسافة بين البطاقات */
+}
+
+
+
+/*******************************************/
+
+
+
 .example-container {
     width: 400px;
     max-width: 100%;
@@ -9,10 +56,10 @@
   .example-list {
     border: 1px solid #ccc;
     min-height: 100px;
-    flex-direction: row; /* اجعل العناصر تتجه أفقيًا */
-    flex-wrap: wrap; /* يسمح بتوزيع البطاقات في عدة صفوف */
+    flex-direction: row;
+    flex-wrap: wrap; 
     padding: 10px;
-    gap: 10px; /* المسافة بين العناصر */
+    gap: 10px; 
   }
   
   .example-card {

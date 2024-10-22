@@ -6,6 +6,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SynonymsComponent } from './synonyms/synonyms/synonyms.component';
 import { RootsComponent } from './roots/roots/roots.component';
 import { AppComponent } from './app.component';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [],
@@ -16,7 +17,9 @@ import { AppComponent } from './app.component';
     RootsComponent,
     BrowserAnimationsModule,
     DragDropModule,
-    AppComponent],
+    AppComponent,
+    CardModule
+  ],
   providers: [],
 })
 export class AppModule {}
