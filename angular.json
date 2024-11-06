@@ -23,14 +23,17 @@
               "src/angular/assets",
               "src/angular/sitemap.xml",
               "src/angular/robots.txt",
-              "src/assets"
+              "src/assets",
+              "src/favicon.ico"
             ],
             "styles": [
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/leaflet-control-geocoder/dist/Control.Geocoder.css",
               "src/angular/styles.scss",
               "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeicons/primeicons.css"
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+
             ],
             "scripts": []
           },
