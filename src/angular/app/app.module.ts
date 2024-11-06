@@ -7,6 +7,7 @@ import { SynonymsComponent } from './synonyms/synonyms/synonyms.component';
 import { RootsComponent } from './roots/roots/roots.component';
 import { AppComponent } from './app.component';
 import { CardModule } from 'primeng/card';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [],
@@ -18,7 +19,8 @@ import { CardModule } from 'primeng/card';
     BrowserAnimationsModule,
     DragDropModule,
     AppComponent,
-    CardModule
+    CardModule,
+    TooltipModule
   ],
   providers: [],
 })

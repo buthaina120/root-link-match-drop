@@ -11,24 +11,24 @@ body {
   margin: 0;
 }
 
-.logo {
-  width: 100px; /* تعديل حجم الشعار */
-}
-
-
 
 .d-flex {
   margin-top: 20px;
 }
 
 .container {
-  background-color: #f8f8f8; /* لون رمادي فاتح */
+  background-color: #fff; /* لون رمادي فاتح */
   padding: 30px; /* مسافة داخلية بين المحتوى والإطار */
   border-radius: 15px; /* زوايا دائرية */
   border: 1px solid #ccc;
-  width: 500px; /* عرض ثابت */
-  height: 500px; /* ارتفاع ثابت */
+  width: 800px; /* عرض ثابت */
+  min-height: 700px; /* ارتفاع ثابت */
   flex-direction: column;
+  display: flex;
+  justify-content: center; /* مركزية عمودية */
+  align-items: center; /* مركزية أفقية */
+  /*justify-content: space-evenly;*/
+  gap: 20px;
 }
 
 costum-card {
@@ -36,42 +36,103 @@ costum-card {
   margin-bottom: 60px; /* إضافة مسافة بين البطاقات */
 }
 
+.highlight {
+  background-color: #F8F8F8;
+}
 
 
 /*******************************************/
 
 
+  .text-danger {
+    color: red;
+  }
+  
+/*منطقة السحب*/
+.list-item {
+  font-size: 1.5rem; /* زيادة حجم الخط */
+  padding: 10px 15px; /* زيادة المساحة حول النص */
+  min-width: 70px; /* تعيين عرض ثابت */
+  min-height: 70px; /* تعيين ارتفاع ثابت */
+  display: flex; /* لتوسيع العنصر بشكل مركزي */
+  justify-content: center; /* محاذاة المحتوى في الوسط أفقياً */
+  align-items: center; /* محاذاة المحتوى في الوسط عمودياً */
+  background-color: #6fb3af; /* تغيير لون الخلفية */
+  color:#fff;
+  border-radius: 10px; /* زوايا دائرية */
+  border: 4px solid #52a39d; /* حدود بيضاء */
+}
 
-.example-container {
-    width: 400px;
-    max-width: 100%;
-    margin: 0 25px 25px 0;
-    display: inline-block;
-    vertical-align: top;
-  }
-  
-  .example-list {
-    border: 1px solid #ccc;
-    min-height: 100px;
-    flex-direction: row;
-    flex-wrap: wrap; 
-    padding: 10px;
-    gap: 10px; 
-  }
-  
-  .example-card {
-    background-color: #f9f9f9;
-    border: 1px solid #000;
-    border-radius: 8px; /* زوايا مستديرة */
-    padding: 10px;
-    width: 50px; /* عرض البطاقة */
-    text-align: center; /* محاذاة النص في المنتصف */
-    cursor: move; /* تشير إلى إمكانية السحب */
-    transition: transform 0.2s; /* تأثير التحويل عند السحب */
-  }
-  
-  .example-card:active {
-    transform: scale(1.05); /* تأثير تكبير البطاقة عند السحب */
-  }
-  
-  
+
+.card {
+  background-color: #f8f8f8;
+  margin-bottom: 0%;
+}
+
+
+/******************ANIMATION**********************/
+.animation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+/*************منطقة الافلات ***********/
+.letter-box {
+  padding: 10px 15px; /* زيادة المساحة حول النص */
+  width: 70px; /* عرض المربع */
+  height: 70px; /* ارتفاع المربع */
+  display: flex; /* لتوسيع العنصر بشكل مركزي */
+  justify-content: center; /* محاذاة المحتوى في الوسط أفقياً */
+  align-items: center; /* محاذاة المحتوى في الوسط عمودياً */
+  background-color: #ffffff; /* لون الخلفية */
+  color: #fff; /* لون النص */
+  border-radius: 10px; /* زوايا دائرية */
+  border: 3px solid #dbdbdb; /* حدود بيضاء */
+  transition: background-color 0.3s; /* تأثير التغيير */
+}
+
+.letter-box.filled {
+  background-color: #0f2837; /* لون الخلفية عند وجود حرف */
+  border: 3px solid #ffffff; /* حدود بيضاء */
+  font-size: 1.5rem; /* زيادة حجم الخط */
+}
+
+
+
+/****************نجوم******************/
+
+
+.label {
+  font-weight: bold;
+  color: #0f2837;
+}
+
+.value {
+  font-size: 1.5rem;
+  color: #0f2837;
+}
+
+.separator {
+  width: 1px;
+  height: 5rem;
+  background-color: #95A5A6;
+}
+
+.buttons-container button {
+  background-color: #0f2837 !important;
+  color: #ffffff !important;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 15%;
+}
+
+.filled-star {
+  fill: #52a39d; /* لون النجوم المملوءة */
+}
+
+.empty-star {
+  fill: lightgray; /* لون النجوم الفارغة */
+}

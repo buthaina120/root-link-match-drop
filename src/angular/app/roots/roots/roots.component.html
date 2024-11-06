@@ -1,53 +1,85 @@
 
-  <div *ngIf=false class="container">
+ 
+ <html lang="ar">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة ذاكرة</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+ 
+ <div *ngIf="flag" class="container " style="  background-color: #f8f8f8;">
     <div class="row justify-content-center text-center">
       <!-- الشعار -->
       <div class="col-12">
-        <img src="../../../angular/assets/roots-game.png" alt="شعار اللعبة" class="logo">
+        <img src="../../../angular/assets/rootLogo.png" alt="شعار اللعبة" class="logo" style="width: 200px; height: auto;">
       </div>
 
       <!-- زر ابدأ -->
-      <div  (click)="setflag()" class="col-12 my-3">
-        <button pButton type="button" class=" bg-sec-theme px-3">ابدأ</button>
+      <div  (click)="setflag() ;startGame() " class="col-12 my-3">
+        <button pButton type="button" class="text-2xl bg-sec-theme px-4">ابدأ</button>
       </div>
 
       <!-- أزرار التحكم -->
       <div class="col-12">
         <div class="d-flex justify-content-center">
-          <button pButton type="button" class="bg-sec-theme p-2 m-2" (click)="showInstructions()">
+          <button pButton type="button" pTooltip="تعليمات اللعبة" tooltipPosition="bottom" class="bg-sec-theme p-2 m-2" (click)="showInstructions()">
             <i class="pi pi-question-circle"></i>
           </button>
-          <button pButton type="button" class="bg-sec-theme p-2 m-2">
-            <i class="pi pi-volume-up"></i>
-          </button>
+       
         </div>
       </div>
 
       <!-- Dialog -->
-      <p-dialog header="تعليمات لعبة جذر" [(visible)]="display" modal="modal" [responsive]="true" [style]="{ width: '50vw' }">
-        <p> هدف اللعبة: تكوين الجذر الصحيح من الكلمة المشتقة!  </p>
-       
-        <div class="row"> 
-        <div class="col-md-6">
-          <p-card header="1"  styleClass="custom-card">
-            <p>
-              ابدأ اللعب: سترى كلمة مشتقة من جذر مع حروف متناثرة. ولديك خمس بطاقات للإجابة.
-            </p>
-          </p-card>
-        </div>
-        <div class="col-md-6" >
-          <p-card header="2" styleClass="custom-card"   >
-            <p>
-              رتب الحروف: استخدم الماوس أو اللمس لترتيب الحروف في دقيقتين.          </p>
-          </p-card>
-        </div>
-      </div>
-        <p> 
-          استمتع باللعب، واستعد لتحسين مهاراتك اللغوية بطريقة ممتعة ومثيرة!
-        </p>
 
+      <p-dialog class="" [(visible)]="display" modal="modal" [responsive]="true" [style]="{ width: '650px',color:'black' }">
+        <p  class="text-2xl font-bold" >تعليمات لعبة جذر</p>
+        <p> هدف اللعبة: تكوين الجذر الصحيح من الكلمة المشتقة!  </p>
+    
+        <div class="row">
+            <div class="col-md-6">
+                <p-card styleClass="custom-card" 
+                [style]="{ 
+                  minHeight: '250px', 
+                  height: 'auto', 
+                  border: '2px', 
+                  borderRadius: '15px', 
+                  backgroundColor: '#f8f8f8', 
+                  color: 'black', 
+                  boxShadow: '0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0)' 
+                }">
+                  <p  class="text-2xl font-bold" >1</p>
+                  <p>
+                        ابدأ اللعب: سترى كلمة مشتقة من جذر مع حروف متناثرة. ولديك ثلاث بطاقات للإجابة.
+                  </p>
+                </p-card>
+            </div>
+            <div class="col-md-6">
+                <p-card styleClass="custom-card" 
+                [style]="{ 
+                  minHeight: '250px', 
+                  height: 'auto', 
+                  border: '2px', 
+                  borderRadius: '15px', 
+                  backgroundColor: '#f8f8f8', 
+                  color: 'black', 
+                  boxShadow: '0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0)' 
+                }">
+                  <p  class="text-2xl font-bold" >2</p>
+                  <p>
+                        رتب الحروف: استخدم الماوس أو اللمس لترتيب الحروف في دقيقة.
+                    </p>
+                </p-card>
+            </div>
+        </div>
+        <div class=" m-4">
+          <p> 
+            استمتع باللعب، واستعد لتحسين مهاراتك اللغوية بطريقة ممتعة ومثيرة!
+        </p>
+        </div>
         
       </p-dialog>
+    
 
 
 
@@ -58,27 +90,136 @@
   </div>
 
 
-<div *ngIf="true" class="container text-center">
-  <div class="">
+<div *ngIf="!flag" class="container text-center">
+  
+  
+  
+
+  <div class="row">
     <div class="col">
-      <div class="d-inline-block px-2 py-1 bg-light text-dark rounded">
-        <p>النقاط: {{ points }}</p>
+      <div class="d-inline-block px-2 py-1 rounded mt-3 font-bold">
+        <p class="m-0">النقاط:</p>
+        <p class="border highlight rounded">{{ points }}</p>
       </div>
     </div>
+
+    <div class="col font-bold">
+      <div class="d-flex justify-content-center">
+        <button (click)="back()" pButton type="button" class="bg-custom-green p-2 m-2" [disabled]="currentIndex === 0">
+          <i class="pi pi-angle-right"></i>
+        </button>
+        <div class=" p-2 m-1" >
+          <p>{{currentIndex + 1}}/3</p>
+
+        </div>
+        <button (click)="next()" pButton type="button" class="bg-custom-green p-2 m-2" [disabled]="currentIndex === cards.length - 1">
+          <i class="pi pi-angle-left"></i>
+        </button>
+      </div>    
+    </div>
+
     <div class="col">
-      <div class="d-inline-block px-2 py-1 bg-light text-dark rounded">
-        <p>الوقت: {{ time }}</p>
+      <div class="d-inline-block px-2 py-1 mt-3 font-bold">
+        <p class="m-0" [ngClass]="{'text-danger': time <= 10}" >الوقت: </p>
+        <p class="border highlight rounded" [ngClass]="{'text-danger': time <= 10}"> {{ time }}</p>
+        
       </div>
     </div>
+
+    <p-dialog [(visible)]="isDialogVisible" [modal]="true" [closable]="false" class="bg-sec-theme " [style]="{ width: '22rem'}">
+      <div class="mb-4 text-center">
+        <p class="text-2xl font-bold">انتهى الوقت</p>
+      </div>
+      <div class="stars text-center mb-4">
+        <ng-container *ngFor="let star of stars; let i = index">
+          <svg
+            class="m-2"
+            [ngClass]="{ 'filled-star': i < getStarsCount(), 'empty-star': i >= getStarsCount() }"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="50px"
+            height="50px"
+          >
+            <path d="M12 .587l3.668 7.571 8.314 1.184-6.004 5.831 1.417 8.268L12 18.896l-7.395 3.892 1.417-8.268-6.004-5.831 8.314-1.184z" />
+          </svg>
+        </ng-container>
+      </div>
+    
+   
+    
+      <button
+        type="p-button"
+        (click)="restartGame()"
+        class="p-2 m-2 p-button p-component bg-custom-green"
+      >
+        <i class="m-2 pi pi-replay" style="font-size: 1rem"></i></button>
+    </p-dialog>
+    
+  
+  
+    <p-dialog [(visible)]="isWinDialogVisible" [modal]="true" [closable]="false" [style]="{ width: '22rem'}">
+      <div class="win-content text-center">
+        <h2 class="title">أكملت اللعبة</h2>
+    
+        <div class="stars mb-4">
+          <ng-container *ngFor="let star of stars; let i = index">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              [ngClass]="{ 'filled-star': i < getStarsCount(), 'empty-star': i >= getStarsCount() }"
+              viewBox="0 0 24 24"
+              width="50px"
+              height="50px"
+              class="m-2"
+                      >
+              <path d="M12 .587l3.668 7.571 8.314 1.184-6.004 5.831 1.417 8.268L12 18.896l-7.395 3.892 1.417-8.268-6.004-5.831 8.314-1.184z" />
+            </svg>
+          </ng-container>
+        </div>
+    
+        <div class="stats d-flex justify-content-around mb-4">
+          <div class="points">
+            <p class="label">النقاط</p>
+            <p class="value">{{ points }}</p>
+          </div>
+          <div class="separator"></div>
+          <div class="time">
+            <p class="label">الوقت</p>
+            <p class="value">{{ timeWhenWon }}</p>
+          </div>
+        </div>
+    
+        <div class="buttons-container d-flex justify-content-center">
+          <button pButton icon="pi pi-star" class="p-button-rounded p-button-secondary m-2"></button>
+          <button pButton icon="pi pi-replay" class=" p-button-secondary m-2" (click)="restartGame()"></button>
+        </div>
+      </div>
+    </p-dialog>
+    
+  
+
   </div>
 
-  <div> جذر: {{originalWord}}</div>
-  <div class="card flex flex-wrap gap-3">
-    <div class="p-2 border-1 surface-border border-round w-15rem">
-        <ul class="list-none flex flex-row gap-2 p-0 m-0">
+  <div class="card row gap-3">
+    <div class="text-2xl font-bold "> جذر: {{ currentCard.originalWord }}</div>
+
+    <div *ngIf="isCorrectAnimation" class="animation-container">
+      <span class="animate__animated animate__tada">✨
+        <p class="font-bold"> أحسنت </p> 
+        <p class="p-1 font-bold bg-custom-green rounded"> + 5<!--{{ points }}--> نقاط </p>
+      </span>
+    </div>
+  
+    <div *ngIf="isFailureAnimation" class="animation-container">
+      <span class="animate__animated animate__shakeX">❌
+        <p class="font-bold "> حاول مرة أخرى </p> 
+
+      </span>
+    </div>
+    <div class="p-2 surface-border border-round w-25rem">
+        <ul class=" flex flex-warp gap-2 p-0 m-0 justify-content-center">
             <li 
                 *ngFor="let letter of availableLetters" 
-                class="p-2 shadow-1"
+                class="p-2 text-center list-item"
                 pDraggable 
                 (onDragStart)="dragStart(letter)" 
                 (onDragEnd)="dragEnd()">
@@ -86,28 +227,30 @@
             </li>
         </ul>
     </div>
-    <div class="p-2 border-1 surface-border border-round w-15rem" pDroppable (onDrop)="drop()">
-        <p class="text-center surface-border border-bottom-1">Drop Zone</p>
-        <ul class="list-none flex flex-row gap-2 p-0 m-0" *ngIf="selectedLetters" >
-            <li *ngFor="let letter of selectedLetters" class="p-2 border-round shadow-1">
-                {{letter}}
-            </li>
-        </ul>
+    
+    
+
+
+    <div class="p-2" pDroppable (onDrop)="drop($event)">
+      <div class="flex flex-wrap gap-2 p-0 m-0 justify-content-center">
+        <div *ngFor="let letter of correctAnswerLetters; let i = index" class="letter-box " [ngClass]="{'filled': selectedLetters[i]}">
+          {{ selectedLetters[i] || '' }}
+        </div>
+      </div>
     </div>
+    
   </div>
 
-  <div class="row mt-3 justify-content-center">
-    <div class="col-md-3 text-center">
-      <button class="btn btn-primary me-2">
-        <i class="pi pi-arrow-left"></i>
+  <div class="row">
+    <div class="justify-content-center">
+      <button (click)="clearLetters()"  [disabled]="cardStates[currentIndex].isCardSolved" pButton type="button" class="bg-sec-theme p-2 m-2" pTooltip="إعادة تعيين الحروف" tooltipPosition="right">
+        <i class="pi pi-replay"></i>
       </button>
-      <button class="btn btn-primary">
+      <button (click)="hint()" [disabled]="hintUsed"  pButton type="button" class="bg-sec-theme p-2 m-2" pTooltip="تلميح الحرف الأول" tooltipPosition="left">
         <i class="pi pi-lightbulb"></i>
       </button>
     </div>
   </div>
+
 </div>
-
-    
-
 
