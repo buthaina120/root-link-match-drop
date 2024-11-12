@@ -31,6 +31,61 @@ body {
   gap: 20px;
 }
 
+.cardWidth{
+  width: 30rem !important;
+}
+
+/* إعدادات الشاشة الصغيرة */
+@media (max-width: 768px) {
+  .container {
+    width: 100%; /* يأخذ العرض كامل الشاشة */
+    height: 100vh; /* الحد الأدنى للارتفاع مناسب للشاشة */
+    padding: 15px; /* تقليل المسافة الداخلية */
+    gap: 15px; /* تقليل التباعد بين العناصر */
+    border: none;  
+    }
+
+    .row{
+    padding: auto 0%; 
+    align-items: center;
+    }
+
+  .card{
+    margin: 0 10px;
+    width: 100%;
+  }
+
+
+}
+
+/* إعدادات الشاشة الأصغر، مثل الهواتف */
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    height: 100vh;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 8px;
+    border: none;
+  }
+  .row{
+    margin: 10px;
+    padding: auto 0%; 
+    align-items: center;
+    
+    }
+
+   .col {
+    padding: 0;
+   }
+
+  .card{
+    width: 100%;
+    padding: 10px 15%;
+  }    
+
+}
+
 costum-card {
   background-color: #2e2121;
   margin-bottom: 60px; /* إضافة مسافة بين البطاقات */
@@ -115,6 +170,7 @@ costum-card {
   color: #0f2837;
 }
 
+
 .separator {
   width: 1px;
   height: 5rem;
@@ -136,3 +192,5 @@ costum-card {
 .empty-star {
   fill: lightgray; /* لون النجوم الفارغة */
 }
+
+

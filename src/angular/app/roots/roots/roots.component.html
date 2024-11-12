@@ -30,9 +30,8 @@
         </div>
       </div>
 
-      <!-- Dialog -->
 
-      <p-dialog class="" [(visible)]="display" modal="modal" [responsive]="true" [style]="{ width: '650px',color:'black' }">
+      <p-dialog class="" [(visible)]="display" modal="modal" [responsive]="true" [style]="{  width: '90%', maxWidth: '650px',color:'black' }" [styleClass]="'custom-dialog'">      
         <p  class="text-2xl font-bold" >تعليمات لعبة جذر</p>
         <p> هدف اللعبة: تكوين الجذر الصحيح من الكلمة المشتقة!  </p>
     
@@ -95,7 +94,7 @@
   
   
 
-  <div class="row">
+  <div class="row " style=" column-gap: 35px;">
     <div class="col">
       <div class="d-inline-block px-2 py-1 rounded mt-3 font-bold">
         <p class="m-0">النقاط:</p>
@@ -150,7 +149,7 @@
       <button
         type="p-button"
         (click)="restartGame()"
-        class="p-2 m-2 p-button p-component bg-custom-green"
+        class="p-2 m-2 p-button p-component bg-custom-green" pTooltip="إعادة اللعبة"tooltipPosition="bottom"
       >
         <i class="m-2 pi pi-replay" style="font-size: 1rem"></i></button>
     </p-dialog>
@@ -189,8 +188,8 @@
         </div>
     
         <div class="buttons-container d-flex justify-content-center">
-          <button pButton icon="pi pi-star" class="p-button-rounded p-button-secondary m-2"></button>
-          <button pButton icon="pi pi-replay" class=" p-button-secondary m-2" (click)="restartGame()"></button>
+          <button pButton icon="pi pi-star" class="p-button-rounded p-button-secondary m-2" pTooltip="عرض لوحة النتائج" tooltipPosition="right"></button>
+          <button pButton icon="pi pi-replay" class=" p-button-secondary m-2" (click)="restartGame()"pTooltip="إعادة اللعبة"tooltipPosition="left"></button>
         </div>
       </div>
     </p-dialog>
@@ -215,18 +214,20 @@
 
       </span>
     </div>
-    <div class="p-2 surface-border border-round w-25rem">
-        <ul class=" flex flex-warp gap-2 p-0 m-0 justify-content-center">
-            <li 
-                *ngFor="let letter of availableLetters" 
-                class="p-2 text-center list-item"
-                pDraggable 
-                (onDragStart)="dragStart(letter)" 
-                (onDragEnd)="dragEnd()">
-                    {{letter}}
-            </li>
-        </ul>
-    </div>
+    <div class="cardWidth p-2 surface-border border-round ">
+        <ul class="flex flex-wrap gap-2 p-0 m-0 justify-content-center">
+          <li 
+              *ngFor="let letter of availableLetters" 
+              class="p-2 text-center list-item"
+              pDraggable 
+              (onDragStart)="dragStart(letter)" 
+              (onDragEnd)="dragEnd()"
+              (click)="moveToSelected(letter)"> <!-- إضافة حدث click هنا -->
+                  {{ letter }}
+          </li>
+      </ul>
+  </div>
+  
     
     
 

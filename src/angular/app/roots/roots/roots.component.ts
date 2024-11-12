@@ -101,7 +101,7 @@ export class RootsComponent implements OnInit {
   
   points: number = 0;  // النقاط
   cardPoints: number[] = []; // لتخزين النقاط لكل بطاقة
-  time: number = 60; // الوقت بالثواني
+  time: number = 30; // الوقت بالثواني
   timerInterval: any;
   timeWhenWon: number = 0; // لتخزين الوقت عند الفوز
   isDialogVisible: boolean = false; // لإظهار الحوار
@@ -134,7 +134,6 @@ export class RootsComponent implements OnInit {
       isCardSolved: false // تعيين القيمة المبدئية
 
     }));
-    this.resetGame();
     /*
     this.getRoot('مستشفى').then((root) => {
       this.root = root;
@@ -146,7 +145,7 @@ export class RootsComponent implements OnInit {
   }
 
   startTimer() {
-    this.time = 60; // تعيين الوقت إلى 60 ثانية عند بدء اللعبة
+    this.time = 30; // تعيين الوقت إلى 30 ثانية عند بدء اللعبة
     clearInterval(this.timerInterval); // تأكد من إيقاف المؤقت القديم إذا كان موجودًا
     
     // بدء العد التنازلي
@@ -158,6 +157,7 @@ export class RootsComponent implements OnInit {
               this.warningSound.play();
             }
             if (this.time <= 0) {
+              clearInterval(this.timerInterval); // إيقاف المؤقت عند وصول الوقت إلى 0
               this.isDialogVisible = true; // عرض الحوار عند انتهاء الوقت
             }
         }
@@ -254,13 +254,20 @@ loadCardState() {
   
   // دالة تولد عدد معين من الحروف العشوائية بالعربية
   generateRandomLetters(count: number): string[] {
+    const arabicLetters = [
+      'ء','ا', 'أ', 'إ', 'آ', 'ؤ', 'ئ', // همزات مع الواو والياء
+      'ب', 'ت', 'تَ', 'ث', 'ج', 'ح', 'خ', 'د', 'ذ', 'ر', 'ز', 'س', 'ش', 'ص', 'ض', 'ط', 'ظ', 
+      'ع', 'غ', 'ف', 'ق', 'ك', 'ل', 'م', 'ن', 'ه', 'و', 'ي', 'ة', 'ى', // ألف مقصورة
+    ];
+  
     const letters = [];
     for (let i = 0; i < count; i++) {
-      const randomCharCode = 0x0621 + Math.floor(Math.random() * 28); // نطاق الحروف العربية
-      letters.push(String.fromCharCode(randomCharCode));
+      const randomLetter = arabicLetters[Math.floor(Math.random() * arabicLetters.length)];
+      letters.push(randomLetter);
     }
     return letters;
   }
+  
   
 
 
@@ -269,21 +276,45 @@ loadCardState() {
   }
 
 
+  drop(event: DragEvent) {
+    event.preventDefault();
 
-drop(event: DragEvent) {
-  event.preventDefault(); // إيقاف السلوك الافتراضي للحدث
-  if (this.draggedProduct) {
-      const index = this.availableLetters.indexOf(this.draggedProduct);
-      if (index !== -1) {
-          this.selectedLetters.push(this.draggedProduct);
-          this.availableLetters.splice(index, 1);
-          this.cardStates[this.currentIndex].availableLetters = [...this.availableLetters];
-          this.cardStates[this.currentIndex].selectedLetters = [...this.selectedLetters];
-          this.checkWinCondition();
-      }
-      this.draggedProduct = null;
+    const targetElement = event.target as HTMLElement;
+    const targetIndex = Array.from(targetElement.parentElement?.children || []).indexOf(targetElement);
+
+    // التأكد من أن الحرف المسحوب هو ضمن الحروف المتاحة
+    if (this.draggedProduct && this.availableLetters.includes(this.draggedProduct)) {
+        // التأكد من أن المربع المستهدف فارغ قبل إضافة الحرف
+        if (!this.selectedLetters[targetIndex]) {
+            // إضافة الحرف للمربع
+            this.selectedLetters[targetIndex] = this.draggedProduct;
+
+            // إزالة الحرف من قائمة الحروف المتاحة
+            const index = this.availableLetters.indexOf(this.draggedProduct);
+            if (index !== -1) {
+                this.availableLetters.splice(index, 1);
+            }
+
+            // تحديث الحالة
+            this.cardStates[this.currentIndex].availableLetters = [...this.availableLetters];
+            this.cardStates[this.currentIndex].selectedLetters = [...this.selectedLetters];
+        }
+    }
+
+    // إعادة تعيين الحرف المسحوب
+    this.draggedProduct = null;
+
+    // التحقق من الكلمة فقط إذا تم ملء جميع المربعات
+   
+    if (this.selectedLetters.filter(letter => letter !== null).length === this.selectedLetters.length) {
+      this.checkWinCondition() 
+
   }
+  
 }
+
+
+
 
   dragEnd() {
     this.draggedProduct = null;
@@ -293,42 +324,71 @@ drop(event: DragEvent) {
     return this.availableLetters.indexOf(word);
   }
 
+  moveToSelected(letter: string): void {
+    const index = this.availableLetters.indexOf(letter);
+    if (index !== -1) {
+        // إزالة الحرف من قائمة الأحرف المتاحة
+        this.availableLetters.splice(index, 1);
+        // إضافة الحرف إلى قائمة الحروف المختارة
+        this.selectedLetters.push(letter);
+
+        // تحديث الحالة
+        this.cardStates[this.currentIndex].availableLetters = [...this.availableLetters];
+        this.cardStates[this.currentIndex].selectedLetters = [...this.selectedLetters];
+
+        // تحقق إذا كانت جميع المربعات مليئة (أي لا يوجد null)
+        if (this.selectedLetters.filter(letter => letter !== null).length === this.selectedLetters.length) {
+            this.checkWinCondition();
+        }
+    }
+}
+
+
 
 
 checkWinCondition() {
   if (
-      this.selectedLetters.length === this.currentCard.targetWord.length &&
-      this.selectedLetters.join('') === this.currentCard.targetWord
+    this.selectedLetters.length === this.currentCard.targetWord.length &&
+    this.selectedLetters.join('') === this.currentCard.targetWord
   ) {
-      const currentState = this.cardStates[this.currentIndex];
-      currentState.points += 5;
-      this.points += 5;
-      this.timeWhenWon = 60 - this.time;
+    // إذا كانت الإجابة صحيحة
+    const currentState = this.cardStates[this.currentIndex];
+    currentState.points += 5;
+    this.points += 5;
+    this.timeWhenWon = 30 - this.time;
 
-      this.availableLetters = [];
-      this.showFeedback(true);
-      currentState.isCardSolved = true; // تحديث حالة حل البطاقة
+      this.availableLetters = []; // مسح الحروف المتاحة
+      this.showFeedback(true); // إظهار ملاحظات النجاح
+      currentState.isCardSolved = true; // تحديث حالة البطاقة
 
-      setTimeout(() => {
-          const allCardsSolved = this.cardStates.every(state => state.points > 0);
+    // تحقق إذا كانت هذه هي البطاقة الأخيرة
+    setTimeout(() => {
+      const allCardsSolved = this.cardStates.every(state => state.points > 0);
 
-          if (allCardsSolved) {
-            //this.updateLeaderboard(); // إضافة المدخلات الجديدة
-              this.isWinDialogVisible = true;
-          } else {
-              const nextIndex = this.currentIndex + 1;
-              if (nextIndex < this.cards.length) {
-                  this.currentIndex++;
-                  this.loadCardState();
-              }
-          }
-      }, 2000);
+      if (allCardsSolved) {
+        // إذا تم حل جميع البطاقات، إيقاف الموقت
+        clearInterval(this.timerInterval); // إيقاف الموقت عند حل جميع البطاقات
+        
+        // الانتظار لمدة 2 ثانية قبل عرض مربع الحوار
+        setTimeout(() => {
+          this.isWinDialogVisible = true; // إظهار مربع الفوز
+        }, 2000); // الانتظار لمدة 2 ثانية
+      } else {
+        const nextIndex = this.currentIndex + 1;
+        if (nextIndex < this.cards.length) {
+          this.currentIndex++;
+          this.loadCardState(); // تحميل البطاقة التالية
+        }
+      }
+    }, this.currentIndex === this.cards.length - 1 ? 0 : 2000); // إذا كانت البطاقة الأخيرة، لا يتم التأخير
   } else if (this.selectedLetters.length === this.currentCard.targetWord.length) {
-      this.showFeedback(false);
-      this.clearLetters();
+    // إذا كانت المربعات مليئة ولكن الإجابة غير صحيحة
+    this.showFeedback(false); // إظهار ملاحظات الخطأ
+    setTimeout(() => {
+      this.clearLetters(); // مسح الحروف في حال الإجابة الخاطئة
+    }, 2000); // الانتظار لمدة 2 ثانية
   }
 }
-
 
 
   
@@ -348,7 +408,8 @@ checkWinCondition() {
     }
 }
 
-  
+
+
 
   next() {
     this.clickSound.play();
@@ -414,7 +475,7 @@ checkWinCondition() {
 
     }));
     this.currentIndex = 0; // إعادة تعيين الفهرس إلى البطاقة الأولى
-    this.time = 60; // إعادة تعيين الوقت
+    this.time = 30; // إعادة تعيين الوقت
     this.resetGame(); // إعادة تعيين اللعبة
   }
   
