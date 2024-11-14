@@ -1,0 +1,201 @@
+
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #fff;
+  direction: rtl;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+
+.d-flex {
+  margin-top: 20px;
+}
+
+.container {
+  background-color: #fff; /* لون رمادي فاتح */
+  padding: 30px; /* مسافة داخلية بين المحتوى والإطار */
+  border-radius: 15px; /* زوايا دائرية */
+  border: 1px solid #ccc;
+  width: 800px; /* عرض ثابت */
+  min-height: 700px; /* ارتفاع ثابت */
+  flex-direction: column;
+  display: flex;
+  justify-content: center; /* مركزية عمودية */
+  align-items: center; /* مركزية أفقية */
+  /*justify-content: space-evenly;*/
+  gap: 20px;
+}
+
+.cardWidth{
+  width: 30rem !important;
+}
+
+/* إعدادات الشاشة الصغيرة */
+@media (max-width: 768px) {
+  
+  .container {
+    width: 100%; /* يأخذ العرض كامل الشاشة */
+    height: 100vh; /* الحد الأدنى للارتفاع مناسب للشاشة */
+    padding: 15px; /* تقليل المسافة الداخلية */
+    gap: 15px; /* تقليل التباعد بين العناصر */
+    border: none;  
+    position: fixed;
+    align-items: center;
+    align-content: center;
+    justify-content: center; /* توسيط أفقي */
+    align-items: center;    /* توسيط عمودي */
+    }
+
+    .row{
+    padding: auto 0%; 
+    align-items: center;
+    }
+
+  .card{
+    margin: 0 10px;
+    width: 100%;
+  }
+
+
+}
+
+/* إعدادات الشاشة الأصغر، مثل الهواتف */
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    height: 100vh;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 8px;
+    border: none;
+  }
+  .row{
+    margin: 10px;
+    padding: auto 0%; 
+    align-items: center;
+    
+    }
+
+   .col {
+    padding: 0;
+   }
+
+  .card{
+    width: 100%;
+    padding: 10px 15%;
+  }    
+
+}
+.drag-element {
+  touch-action: none;
+}
+costum-card {
+  background-color: #2e2121;
+  margin-bottom: 60px; /* إضافة مسافة بين البطاقات */
+}
+
+.highlight {
+  background-color: #F8F8F8;
+}
+
+
+/*******************************************/
+
+
+  .text-danger {
+    color: red;
+  }
+  
+/*منطقة السحب*/
+.list-item {
+  font-size: 1.5rem; /* زيادة حجم الخط */
+  padding: 10px 15px; /* زيادة المساحة حول النص */
+  min-width: 70px; /* تعيين عرض ثابت */
+  min-height: 70px; /* تعيين ارتفاع ثابت */
+  display: flex; /* لتوسيع العنصر بشكل مركزي */
+  justify-content: center; /* محاذاة المحتوى في الوسط أفقياً */
+  align-items: center; /* محاذاة المحتوى في الوسط عمودياً */
+  background-color: #6fb3af; /* تغيير لون الخلفية */
+  color:#fff;
+  border-radius: 10px; /* زوايا دائرية */
+  border: 4px solid #52a39d; /* حدود بيضاء */
+}
+
+
+.card {
+  background-color: #f8f8f8;
+  margin-bottom: 0%;
+}
+
+
+/******************ANIMATION**********************/
+.animation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+/*************منطقة الافلات ***********/
+.letter-box {
+  padding: 10px 15px; /* زيادة المساحة حول النص */
+  width: 70px; /* عرض المربع */
+  height: 70px; /* ارتفاع المربع */
+  display: flex; /* لتوسيع العنصر بشكل مركزي */
+  justify-content: center; /* محاذاة المحتوى في الوسط أفقياً */
+  align-items: center; /* محاذاة المحتوى في الوسط عمودياً */
+  background-color: #ffffff; /* لون الخلفية */
+  color: #fff; /* لون النص */
+  border-radius: 10px; /* زوايا دائرية */
+  border: 3px solid #dbdbdb; /* حدود بيضاء */
+  transition: background-color 0.3s; /* تأثير التغيير */
+}
+
+.letter-box.filled {
+  background-color: #0f2837; /* لون الخلفية عند وجود حرف */
+  border: 3px solid #ffffff; /* حدود بيضاء */
+  font-size: 1.5rem; /* زيادة حجم الخط */
+}
+
+
+
+/****************نجوم******************/
+
+
+.label {
+  font-weight: bold;
+  color: #0f2837;
+}
+
+.value {
+  font-size: 1.5rem;
+  color: #0f2837;
+}
+
+.separator {
+  width: 1px;
+  height: 5rem;
+  background-color: #95A5A6;
+}
+
+.buttons-container button {
+  background-color: #0f2837 !important;
+  color: #ffffff !important;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 15%;
+}
+
+.filled-star {
+  fill: #52a39d; /* لون النجوم المملوءة */
+}
+
+.empty-star {
+  fill: lightgray; /* لون النجوم الفارغة */
+}
