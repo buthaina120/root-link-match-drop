@@ -254,7 +254,6 @@ export class RootsComponent implements OnInit {
       'ئ', // همزات مع الواو والياء
       'ب',
       'ت',
-      'تَ',
       'ث',
       'ج',
       'ح',
@@ -353,31 +352,35 @@ export class RootsComponent implements OnInit {
   }
 
   moveToSelected(letter: string): void {
-      if (this.availableLetters.length === this.currentCard.targetWord.length) {
-        return; // منع إضافة الحروف إذا كانت قائمة السحب مليئة
-      }
-         
+    if (this.availableLetters.length === this.currentCard.targetWord.length) {
+      return; // منع إضافة الحروف إذا كانت قائمة السحب مليئة
+    }
+
     const index = this.availableLetters.indexOf(letter);
     if (index !== -1) {
       // إزالة الحرف من قائمة الأحرف المتاحة
       this.availableLetters.splice(index, 1);
-  
+
       // التأكد من وجود خانة فارغة في قائمة الحروف المختارة
       let placed = false;
       for (let i = 0; i < this.selectedLetters.length; i++) {
-        if (this.selectedLetters[i] === null || this.selectedLetters[i] === undefined || this.selectedLetters[i] === "") {
+        if (
+          this.selectedLetters[i] === null ||
+          this.selectedLetters[i] === undefined ||
+          this.selectedLetters[i] === ''
+        ) {
           // إضافة الحرف في أول خانة فارغة
           this.selectedLetters[i] = letter;
           placed = true;
           break;
         }
       }
-  
+
       // إذا لم توجد خانة فارغة، أضف الحرف في النهاية
       if (!placed) {
         this.selectedLetters.push(letter);
       }
-  
+
       // تحديث الحالة
       this.cardStates[this.currentIndex].availableLetters = [
         ...this.availableLetters,
@@ -385,18 +388,17 @@ export class RootsComponent implements OnInit {
       this.cardStates[this.currentIndex].selectedLetters = [
         ...this.selectedLetters,
       ];
-  
+
       // تحقق إذا كانت جميع المربعات ممتلئة
       if (
-        this.selectedLetters.filter((letter) => letter !== null && letter !== undefined && letter !== "").length ===
-        this.selectedLetters.length
+        this.selectedLetters.filter(
+          (letter) => letter !== null && letter !== undefined && letter !== ''
+        ).length === this.selectedLetters.length
       ) {
         this.checkWinCondition();
       }
     }
   }
-  
-  
 
   checkWinCondition() {
     if (
