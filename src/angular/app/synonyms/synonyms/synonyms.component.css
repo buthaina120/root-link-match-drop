@@ -1,6 +1,26 @@
+.card {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.card {
+  flex: 1 1 100px; 
+  margin: 10px;
+  max-width: 150px;
+  font-size: clamp(1rem, 2vw, 1.5rem); 
+  width: 100%;
+  max-width: 150px;
+}
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 .highlight {
   background-color: #F8F8F8;
@@ -15,17 +35,29 @@
   min-height: 700px;
   flex-direction: column;
   display:flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: auto;
   position: relative;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #0f2837;
+  direction: rtl;
+  box-sizing: border-box;
+  margin: 0 auto;
+  .p-component {
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+
 }
+
+
 
 body {
   font-family: 'Janna LT', sans-serif;
+  overflow-x: hidden;
 }
 
 .level-buttons {
@@ -43,7 +75,7 @@ body {
   cursor: pointer;
   transition: border 0.3s ease;
   font-size: 1.5rem;
-  min-width: 150px;
+  width: 200px;
   border: #82bbb7;
   height: 120px;
 
@@ -52,6 +84,23 @@ body {
 .level-button:hover {
   background-color: #0f2837;
   color:#82bbb7 ;
+}
+.level-button.selected {
+  background-color: #0f2837;
+  color:#82bbb7 ;
+}
+
+.start-button{
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #0f2837;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: border 0.3s ease;
+  font-size: 1.5rem;
+  min-width: 100px;
+  border: #82bbb7;
+  height: 50px;
 }
 
 .score-panel {
@@ -83,24 +132,22 @@ body {
   padding: inherit;
   align-content: center;
 }
-.cards-grid.level-1 { gap: 20px; }
-.cards-grid.level-2 { gap: 20px; }
-.cards-grid.level-3 { gap: 20px; }
-.cards-grid.level-4 { gap: 20px; }
+
 
 .card {
   width: 100px;
   height: 100px;
+  margin: 10px;
   perspective: 1000px;
   position: relative;
   font-size: 20px;
   border: none;
   background-color: transparent;
-
 }
+
 .card.matched {
   opacity: 0;
-  transition: opacity 0.6s ease-in;
+  transition: opacity 1.3s ease-in;
 }
 
 .card-inner {
@@ -140,6 +187,8 @@ body {
   font-size: 30px;
   color: rgb(255, 255, 255);
   border-radius: 20px;
+  font-size: 20px; 
+  font-size: 1.3rem;
 }
 
 .card-front {
@@ -160,6 +209,7 @@ body {
 .row{
   align-items: center;
   font-size: 1.2rem;
+  gap: 80px;
 }
 .restart-button {
   padding: 10px 10px;
@@ -309,7 +359,7 @@ body {
   cursor: pointer;
   transition: border 0.3s ease;
   font-size: 1.5rem;
-  min-width: 200px;
+  width: 200px;
 
 }
 .data-type-selection button img {
@@ -318,11 +368,11 @@ body {
 }
 
 
-.data-type-selection button:hover  {
+.data-type-selection button.selected  {
   border: 2px solid #0f2837; 
 }
 
-.data-type-selection button:focus {
+.data-type-selection button:hover {
   border: 2px solid #0f2837; 
 }
  
@@ -351,10 +401,136 @@ body {
   border-radius: 15%;
 }
 .filled-star {
-  fill: #52a39d; 
+  fill: #4c9085; 
 }
  
 .empty-star {
   fill: lightgray;
 }
+.progress-bar.warning {
+  background-color: rgb(170, 25, 25);
+}
+.start-button-container {
+  margin-top: 60px;
+}
+
+
+.buttons-container button {
+  background-color: #0f2837 !important;
+  color: #ffffff !important;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 15%;
+}
+
+
+/* شاشة الهاتف المحمول */
+@media (max-width: 768px) {
+  .container {
+width: 100%;
+height:100vh;
+}
+.data-type-selection, .level-buttons {
+  display: flex;
+}
+.data-type-button, .level-button {
+  flex: 1 1 45%; /* تجعل الأزرار تأخذ 45% من العرض في الشاشات الأصغر */
+}
+  .points, .attempts {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .button-bar {
+    width: 100%;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(3, 1fr); /* لعرض ثلاث بطاقات في الصف الواحد */
+    gap: 8px;
+  }
+  p-dialog {
+    max-width: 90vw; /* يخلي الحوار ما يخرج عن العرض */
+    max-height: 80vh;
+  overflow-y: auto;
+  justify-content: center;
+align-items: center;
+  }
+  
+}
+
+/* الأجهزة اللوحية */
+@media (max-width: 480px) {
+  .cards-grid {
+    grid-template-columns: repeat(4, 1fr); /* لعرض أربع بطاقات في الصف الواحد */
+  }
+
+  .level-buttons {
+    gap:0px;
+  }
+  .data-type-button, .level-button {
+    width: 100%;
+  }
+  .container {
+    width: 100%;
+    height:100vh;
+    padding: 0px;
+    flex-direction: column;
+    display:flex;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border: none;
+    margin-left: 10px;
+    }
+    .data-type-selection button {
+      width: 100%;
+
+    }
  
+    .cards-grid.level-1 { gap: 0px; }
+    .cards-grid.level-2 { gap: 0px; }
+    .cards-grid.level-3 { gap: 0px; }
+
+
+    .timer-container {
+      width: 100%;
+      height: 40px;
+    
+  }
+  
+  .cards-grid[_ngcontent-ng-c3773314731] {
+    grid-template-columns: auto auto auto auto;
+    background-color: #f2f2f3;
+    border-radius: inherit;
+    padding: inherit;
+    align-content: center;
+    width: 100%;
+}
+.card{
+  width: 90px;
+  height: 90px;
+  margin: 10px;
+  perspective: 1000px;
+  position: relative;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+}
+.row{
+  gap: 30px;
+  align-items: stretch;
+
+}
+.custom-card{
+  display: flex; flex-direction: column;
+}
+
+.cardGap{
+  margin-bottom: 20px;
+}
+p-dialog {
+  width: 90%; /* عرض الحوارات صغير */
+}
+}

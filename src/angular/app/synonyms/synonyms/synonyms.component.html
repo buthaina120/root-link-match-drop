@@ -12,134 +12,148 @@
       <img src="../../../angular/assets/tabiqgame.png" alt="شعار اللعبة" class="logo" style="width: 200px; height: auto;">
     </div>
     <div (click)="setflag()" class="col-12 my-3">
-      <button pButton type="button" style="color: white; border-radius: 10px;" class="text-2xl bg-sec-theme px-4">ابدأ</button>
+      <button pButton type="button" class=" pButton text-2xl bg-sec-theme px-4">ابدأ</button>
     </div>
 
   
     <div class="col-12">
       <div class="d-flex justify-content-center">
-        <button pButton type="button" style="color: white; border-radius: 10px; padding: 15px;" pTooltip="تعليمات اللعبة" tooltipPosition="bottom" class="bg-sec-theme p-2 m-2" (click)="showInstructions()">
+        <button pButton type="button"  pTooltip="تعليمات اللعبة" tooltipPosition="bottom" class="bg-sec-theme p-2 m-2" (click)="showInstructions()">
           <i class="pi pi-question-circle"></i>
         </button>
       </div>
     </div>
 
-    <p-dialog [(visible)]="display" modal="modal" [responsive]="true" [style]="{ width: '650px', color: 'black' }">
-      <p  class="text-2xl font-bold" >تعليمات لعبة طابق</p>
-      <p> هدف اللعبة: مطابقة جميع البطاقات بأقل وقت ممكن! </p>
- 
-      <div class="row">
-          <div class="col-md-6">
-              <p-card styleClass="custom-card"
-              [style]="{
-                minHeight: '250px',
-                height: 'auto',
-                border: '2px',
-                borderRadius: '15px',
-                backgroundColor: '#f8f8f8',
-                color: 'black',
-                boxShadow: '0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0)'
-              }">
-                <p  class="text-2xl font-bold" >1</p>
-                <p>اختر مستوى الصعوبة:
-                <p>سهل:بطاقات أقل ،تحد بسيط.</p>
-                <p>متوسط:بطاقات أكثر،صعوبة معتدلة.</p>
-                <p>صعب:اختبار حقيقي لذاكرتك.</p>
-                <p>خبير:التحدي الأصعب.</p>
-              </p-card>
-          </div>
-          <div class="col-md-6">
-              <p-card styleClass="custom-card"
-              [style]="{
-                minHeight: '250px',
-                height: 'auto',
-                border: '2px',
-                borderRadius: '15px',
-                backgroundColor: '#f8f8f8',
-                color: 'black',
-                boxShadow: '0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0)'
-              }">
-                <p  class="text-2xl font-bold" >2</p>
-                <p>
-                      اختر نوع التحدي
-                     <p>مرادفات: طابق الكلمات المتشابهة.</p>
-                     <p>متضادات: اكتشف الكلمات المعاكسة.</p>
-                     <p>ترجمات: صِل الكلمات بلغات مختلفة.</p>
-              </p-card>
-          </div>
+    <p-dialog [(visible)]="display" modal="modal" [responsive]="true" [style]="{ width: '700px', color: 'black' }">
+      <p class="text-2xl font-bold text-center">تعليمات لعبة طابق</p>
+      <p class="mb-4 text-center">هدف اللعبة: مطابقة جميع البطاقات بأقل وقت ممكن!</p>
+    
+      <div class="row" style="display: flex; justify-content: space-between; align-items: center; gap: 0rem;">
+        <!-- البطاقة الأولى -->
+        <div class="col-md-6 cardGap">
+          <p-card styleClass="custom-card"
+          [style]="{
+            minHeight: '265px',
+            height: 'auto',
+            border: '2px',
+            borderRadius: '15px',
+            backgroundColor: '#f8f8f8',
+            color: 'black',
+            boxShadow: '0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0)'
+          }">
+            <p class="text-2xl font-bold">1</p>
+            <p>اختر مستوى الصعوبة:</p>
+            <p>سهل: 4×3 بطاقات</p>
+            <p>متوسط: 4×4 بطاقات</p>
+            <p>صعب: 4×5 بطاقات</p>
+          </p-card>
+        </div>
+    
+        <!-- البطاقة الثانية -->
+        <div class="col-md-6">
+          <p-card styleClass="custom-card"
+          [style]="{
+           
+            minHeight: '250px',
+            height: 'auto',
+            border: '2px',
+            borderRadius: '15px',
+            alignitems: 'flex-start',
+            backgroundColor: '#f8f8f8',
+            color: 'black',
+            boxShadow: '0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0)'
+          }">
+            <p class="text-2xl font-bold">2</p>
+            <p>اختر نوع التحدي:</p>
+            <p>مترادفات: طابق الكلمات المتشابهة.</p>
+            <p>متضادات: اكتشف الكلمات المعاكسة.</p>
+            <p>ترجمات: صِل الكلمات بلغات مختلفة.</p>
+          </p-card>
+        </div>
       </div>
-      <div class=" m-4">
-        <p>
-          استمتع باللعب، واستعد لتحسين مهاراتك اللغوية بطريقة ممتعة ومشوقه!
-      </p>
+    
+      <div class="text-center m-4">
+        <p>استمتع باللعب، واستعد لتحسين مهاراتك اللغوية بطريقة ممتعة ومشوقة!</p>
       </div>
-
-
-    </p-dialog>
+    </p-dialog>         
   </div>
 </div>
 
 <div *ngIf="levelflag" class="container" style="background-color: #f2f2f3;">
 
-  <p >نوع التحدي:</p>
+  <p>نوع التحدي</p>
   <div class="data-type-selection">
-    <button (click)=" selectedDataType = 'synonyms'; startGame()" class="data-type-button" >
-      <img src="../../../angular/assets/synonymsicon.png" alt="أيقونة المرادفات" >
+    <button (click)="selectedDataType = 'synonyms'" 
+            class="data-type-button" 
+            [class.selected]="selectedDataType === 'synonyms'">
+      <img src="../../../angular/assets/synonymsicon.png" alt="أيقونة المرادفات">
       <p>مترادفات</p>
     </button>
 
-    <button (click)="selectedDataType = 'antonyms'; startGame()" class="data-type-button" >
-      <img src="../../../angular/assets/antonymsicon.png" alt="أيقونة الأضداد" >
+    <button (click)="selectedDataType = 'antonyms'" 
+            class="data-type-button" 
+            [class.selected]="selectedDataType === 'antonyms'">
+      <img src="../../../angular/assets/antonymsicon.png" alt="أيقونة الأضداد">
       <p>متضادات</p>
     </button>
    
-    <button (click)="selectedDataType = 'translations'; startGame()" class="data-type-button">
-      <img src="../../../angular/assets/translationsicon.png" alt="أيقونة الترجمات" >
+    <button (click)="selectedDataType = 'translations'" 
+            class="data-type-button" 
+            [class.selected]="selectedDataType === 'translations'">
+      <img src="../../../angular/assets/translationsicon.png" alt="أيقونة الترجمات">
       <p>ترجمات</p>
     </button>
   </div>
+
   <p >مستوى الصعوبة</p>
   <div class="level-buttons">
-    <button (click)="selectLevel(1)" class="level-button">سهل</button>
-    <button (click)="selectLevel(2)" class="level-button">متوسط</button>
-    <button (click)="selectLevel(3)" class="level-button">صعب</button>
-    <button (click)="selectLevel(4)" class="level-button">محترف</button>
+    <button (click)="selectedLevel = 1" class="level-button" [class.selected]="selectedLevel === 1">سهل</button>
+    <button (click)="selectedLevel = 2" class="level-button"[class.selected]="selectedLevel === 2">متوسط</button>
+    <button (click)="selectedLevel = 3" class="level-button"[class.selected]="selectedLevel === 3">صعب</button>
   </div>
+  <button (click)="selectLevel()" *ngIf="selectedDataType && selectedLevel" class="mt-4 start-button">ابدأ</button>
 
 </div>
-
-<div *ngIf="gameflag" class="container  text-center">
+<!-- الكود الخاص بواجهة اللعبة -->
+<div *ngIf="gameflag" class="container text-center">
+  <!-- زر الرجوع -->
   <div class="back-arrow" (click)="goBack()">
     <i class="pi pi-arrow-right"></i>
   </div>
-
-
-
+  
+  <!-- معلومات النقاط والمحاولات -->
   <div class="row">
+    <!-- النقاط -->
     <div class="col">
       <div class="d-inline-block px-2 py-1 rounded mt-3 font-bold">
         <p class="m-0">النقاط:</p>
         <p class="border highlight rounded">{{ points }}</p>
       </div>
     </div>
+    <!-- نوع التحدي -->
     <div class="col">
-    <p>{{gameType}}</p>
+      <p>{{gameType}}</p>
     </div>
+    <!-- المحاولات -->
     <div class="col">
       <div class="d-inline-block px-2 py-1 rounded mt-3 font-bold">
         <p class="m-0">المحاولات:</p>
         <p class="border highlight rounded">{{ attempts }}</p>
       </div>
     </div>
-
-
   </div>
-
+  
+  <!-- مؤقت اللعبة -->
   <div class="timer-container">
-    <div class="progress-bar" [style.width.%]="(timeLeft / maxTime) * 100"></div>
-    <span class="timer-text">{{ timeLeft }} ثانية متبقية</span>
+    <div
+      class="progress-bar"
+      [ngClass]="{'warning': timeLeft <= 10}"
+      [style.width.%]="(timeLeft / maxTime) * 100">
+    </div>
+    <div class="timer-text">{{ timeLeft }} ثواني</div>
   </div>
-
+  
+  <!-- شبكة البطاقات -->
   <div class="cards-grid" [ngClass]="{'level-1': difficulty === 1, 'level-2': difficulty === 2, 'level-3': difficulty === 3, 'level-4': difficulty === 4}">
     <div *ngFor="let card of cards" class="card" (click)="flipCard(card)"
          [ngClass]="{'matched': matchedCards.includes(card), 'flipped': card.flipped}">
@@ -149,79 +163,67 @@
       </div>
     </div>
   </div>
-
 </div>
-
-
-
-
-<p-dialog [(visible)]="showDialog" [modal]="true" [closable]="false" class="bg-sec-theme " [style]="{ width: '22rem'}">
+<!-- حوار "انتهى الوقت" -->
+<p-dialog [(visible)]="showDialog" [modal]="true" [closable]="false" class="bg-sec-theme" [style]="{ width: '22rem' }">
   <div class="mb-4 text-center">
     <p class="text-2xl font-bold">انتهى الوقت</p>
   </div>
   <div class="stars text-center mb-4">
     <ng-container *ngFor="let star of stars; let i = index">
-      <svg
-        class="m-2"
-        [ngClass]="{ 'filled-star': i < getStarsCount(), 'empty-star': i >= getStarsCount() }"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="50px"
-        height="50px"
-      >
+      <svg class="m-2" [ngClass]="{ 'filled-star': i < getStarsCount(), 'empty-star': i >= getStarsCount() }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="50px" height="50px">
         <path d="M12 .587l3.668 7.571 8.314 1.184-6.004 5.831 1.417 8.268L12 18.896l-7.395 3.892 1.417-8.268-6.004-5.831 8.314-1.184z" />
       </svg>
     </ng-container>
   </div>
-
-
-
-  <button
-    type="p-button"
-    (click)="restartGame()"
-    class="p-2 m-2 p-button p-component bg-custom-green"
-  >
-    <i class="m-2 pi pi-replay" style="font-size: 1rem"></i></button>
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <button type="button" (click)="restartGame()" class="p-2 m-2 p-button p-component bg-custom-green" pTooltip="إعادة اللعبة" tooltipPosition="bottom">
+      <i class="m-2 pi pi-replay" style="font-size: 1rem"></i>
+    </button>
+  </div>
+</p-dialog>
+<!-- حوار "أحسنت" عند الفوز -->
+<p-dialog [(visible)]="showWinDialog" [modal]="true" [closable]="false" [style]="{ width: '22rem' }">
+  <div class="win-content text-center">
+    <h2 class="title">أحسنت</h2>
+    <p class="text-2xl font-bold text-center">تهانينا!</p>
+    <div class="stars mb-4">
+      <ng-container *ngFor="let star of stars; let i = index">
+        <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{ 'filled-star': i < getStarsCount(), 'empty-star': i >= getStarsCount() }" viewBox="0 0 24 24" width="50px" height="50px" class="m-2">
+          <path d="M12 .587l3.668 7.571 8.314 1.184-6.004 5.831 1.417 8.268L12 18.896l-7.395 3.892 1.417-8.268-6.004-5.831 8.314-1.184z" />
+        </svg>
+      </ng-container>
+    </div>
+    <div class="stats d-flex justify-content-around mb-4">
+      <div class="points">
+        <p class="label">النقاط</p>
+        <p class="value">{{ points }}</p>
+      </div>
+      <div class="separator"></div>
+      <div class="time">
+        <p class="label">المحاولات</p>
+        <p class="value">{{ attempts }}</p>
+      </div>
+    </div>
+    <div class="buttons-container d-flex justify-content-center">
+      <!-- زر إعادة اللعبة -->
+      <button 
+        pButton 
+        class="pi pi-replay p-button-secondary m-2" 
+        (click)="currentLevel === 3 ? restartFromFirstLevel() : restartGame(); showWinDialog = false;" 
+        pTooltip="إعادة اللعبة" 
+        tooltipPosition="right">
+      </button>
+      <!-- زر المستوى التالي -->
+      <button 
+        *ngIf="currentLevel < 3" 
+        pButton 
+        class="pi pi-backward p-button-rounded p-button-secondary m-2" 
+        pTooltip="المستوى التالي" 
+        tooltipPosition="left" 
+        (click)="nextLevel(); showWinDialog = false;">
+      </button>
+    </div>
+  </div>
 </p-dialog>
 
-
-
-
-
-<p-dialog [(visible)]=" showWinDialog" [modal]="true" [closable]="false" [style]="{ width: '22rem'}">
-<div class="win-content text-center">
-  <h2 class="title">أكملت اللعبة</h2>
-
-  <div class="stars mb-4">
-    <ng-container *ngFor="let star of stars; let i = index">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        [ngClass]="{ 'filled-star': i < getStarsCount(), 'empty-star': i >= getStarsCount() }"
-        viewBox="0 0 24 24"
-        width="50px"
-        height="50px"
-        class="m-2"
-                >
-        <path d="M12 .587l3.668 7.571 8.314 1.184-6.004 5.831 1.417 8.268L12 18.896l-7.395 3.892 1.417-8.268-6.004-5.831 8.314-1.184z" />
-      </svg>
-    </ng-container>
-  </div>
-
-  <div class="stats d-flex justify-content-around mb-4">
-    <div class="points">
-      <p class="label">النقاط</p>
-      <p class="value">{{ points }}</p>
-    </div>
-    <div class="separator"></div>
-    <div class="time">
-      <p class="label">المحاولات</p>
-      <p class="value">{{ attempts }}</p>
-    </div>
-  </div>
-
-  <div class="buttons-container d-flex justify-content-center">
-    <button pButton class="pi pi-star p-button-rounded p-button-secondary m-2"></button>
-    <button  pButton  class="pi pi-replay p-button-secondary m-2" (click)="closeDialog()"></button>
-  </div>
-</div>
-</p-dialog>
