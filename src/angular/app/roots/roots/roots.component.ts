@@ -353,13 +353,28 @@ export class RootsComponent implements OnInit {
   }
 
   moveToSelected(letter: string): void {
+    
     const index = this.availableLetters.indexOf(letter);
     if (index !== -1) {
       // إزالة الحرف من قائمة الأحرف المتاحة
       this.availableLetters.splice(index, 1);
-      // إضافة الحرف إلى قائمة الحروف المختارة
-      this.selectedLetters.push(letter);
-
+  
+      // التأكد من وجود خانة فارغة في قائمة الحروف المختارة
+      let placed = false;
+      for (let i = 0; i < this.selectedLetters.length; i++) {
+        if (this.selectedLetters[i] === null || this.selectedLetters[i] === undefined || this.selectedLetters[i] === "") {
+          // إضافة الحرف في أول خانة فارغة
+          this.selectedLetters[i] = letter;
+          placed = true;
+          break;
+        }
+      }
+  
+      // إذا لم توجد خانة فارغة، أضف الحرف في النهاية
+      if (!placed) {
+        this.selectedLetters.push(letter);
+      }
+  
       // تحديث الحالة
       this.cardStates[this.currentIndex].availableLetters = [
         ...this.availableLetters,
@@ -367,16 +382,18 @@ export class RootsComponent implements OnInit {
       this.cardStates[this.currentIndex].selectedLetters = [
         ...this.selectedLetters,
       ];
-
-      // تحقق إذا كانت جميع المربعات مليئة (أي لا يوجد null)
+  
+      // تحقق إذا كانت جميع المربعات ممتلئة
       if (
-        this.selectedLetters.filter((letter) => letter !== null).length ===
+        this.selectedLetters.filter((letter) => letter !== null && letter !== undefined && letter !== "").length ===
         this.selectedLetters.length
       ) {
         this.checkWinCondition();
       }
     }
   }
+  
+  
 
   checkWinCondition() {
     if (
