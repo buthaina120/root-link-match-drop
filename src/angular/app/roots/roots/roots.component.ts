@@ -353,7 +353,10 @@ export class RootsComponent implements OnInit {
   }
 
   moveToSelected(letter: string): void {
-    
+      if (this.availableLetters.length === this.currentCard.targetWord.length) {
+        return; // منع إضافة الحروف إذا كانت قائمة السحب مليئة
+      }
+         
     const index = this.availableLetters.indexOf(letter);
     if (index !== -1) {
       // إزالة الحرف من قائمة الأحرف المتاحة
