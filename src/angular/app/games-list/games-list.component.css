@@ -1,0 +1,34 @@
+.btn-wrap {
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  .description {
+    width: 200px;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+.dict-card {
+  position: relative;
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+.icon-input {
+  .icon-input__text-field {
+    padding-left: 1rem;
+  }
+
+  .icon-input__icon {
+    left: 1rem;
+  }
+}
+
+.soon-label {
+  width: 27px;
+  top: -47px;
+  left: 27px;
+  position: absolute;
+}
