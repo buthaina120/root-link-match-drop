@@ -5,6 +5,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SynonymsComponent } from './synonyms/synonyms/synonyms.component';
 import { RootsComponent } from './roots/roots/roots.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { AntonymsComponent } from './antonyms/antonyms/antonyms.component';
+//import { TranslationsComponent } from './translations/translations/translations.component';
+@NgModule({
+  declarations: [
+    
+    ],
+  imports: [BrowserModule, HttpClientModule, SynonymsComponent,RootsComponent, BrowserAnimationsModule],
+  providers: []
 import { AppComponent } from './app.component';
 import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
