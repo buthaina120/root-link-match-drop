@@ -87,7 +87,7 @@ body {
 }
 
 .start-button {
-  padding: 10px 20px;
+  padding: 10px;
   color: #fff;
   background-color: #0f2837;
   border-radius: 15px;
@@ -96,7 +96,6 @@ body {
   font-size: 1.5rem;
   min-width: 100px;
   border: #82bbb7;
-  height: 50px;
 }
 
 .score-panel {
@@ -404,7 +403,7 @@ body {
   border-radius: 15%;
 }
 .filled-star {
-  fill: #4c9085;
+  fill: gold;
 }
 
 .empty-star {
