@@ -8,9 +8,6 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
-
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideClientHydration,
   withHttpTransferCacheOptions,
@@ -31,5 +28,3 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
   ],
 };
- 
-

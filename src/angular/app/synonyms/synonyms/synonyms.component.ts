@@ -1,19 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Howl } from 'howler';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 interface Card {
   id: number;
-  word1: string; 
-  matchingWord: string; 
+  word1: string;
+  matchingWord: string;
   flipped: boolean;
-  state?: string; 
+  state?: string;
 }
 
 @Component({
@@ -21,7 +26,13 @@ interface Card {
   standalone: true,
   templateUrl: './synonyms.component.html',
   styleUrls: ['./synonyms.component.css'],
-  imports: [CommonModule, ButtonModule,DialogModule,CardModule,TooltipModule],
+  imports: [
+    CommonModule,
+    ButtonModule,
+    DialogModule,
+    CardModule,
+    TooltipModule,
+  ],
   animations: [
     trigger('flipState', [
       state('active', style({ transform: 'rotateY(200deg)' })),
@@ -29,14 +40,17 @@ interface Card {
       state('matched', style({ opacity: 0, transform: 'scale(0.8)' })), // اجعل البطاقات تتلاشى وتختفي
       transition('active => inactive', animate('500ms ease-out')),
       transition('inactive => active', animate('500ms ease-in')),
-      transition('* => matched', animate('100ms ease-in')) // تعديل عند الانتقال إلى حالة المطابقة
+      transition('* => matched', animate('100ms ease-in')), // تعديل عند الانتقال إلى حالة المطابقة
     ]),
     trigger('cardMatchState', [
       state('win', style({ transform: 'scale(1.2)', backgroundColor: 'gold' })),
       transition('* => win', animate('600ms ease-in-out')),
     ]),
     trigger('cardErrorState', [
-      state('error', style({ transform: 'translateX(0)', backgroundColor: '#e57373' })),
+      state(
+        'error',
+        style({ transform: 'translateX(0)', backgroundColor: '#e57373' })
+      ),
       transition('* => error', [
         animate('100ms', style({ transform: 'translateX(-5px)' })),
         animate('100ms', style({ transform: 'translateX(5px)' })),
@@ -44,18 +58,17 @@ interface Card {
         animate('100ms', style({ transform: 'translateX(0)' })),
       ]),
     ]),
-  ]
+  ],
 })
 export class SynonymsComponent implements OnInit {
   correctSound = new Howl({ src: ['../../../angular/assets/correct.wav'] });
   wrongSound = new Howl({ src: ['../../../angular/assets/wrong.mp3'] });
   warningSound = new Howl({ src: ['../../../angular/assets/ticktick 1.mp3'] });
 
-
   homeflag = true;
   levelflag = false;
   gameflag = false;
-  display:boolean = false;
+  display: boolean = false;
   cards: Card[] = [];
   flippedCards: Card[] = [];
   matchedCards: Card[] = [];
@@ -68,23 +81,26 @@ export class SynonymsComponent implements OnInit {
   gameStarted: boolean = false;
   intervalId: any;
   difficulty: number = 1;
-  maxTime: number = 60; 
+  maxTime: number = 60;
   timeLeft: number = this.maxTime;
-  selectedDataType: string = ''; 
-  gameType: string = 'مترادفات'; 
+  selectedDataType: string = '';
+  gameType: string = 'مترادفات';
   selectedApi: 'synonyms' | 'antonyms' | 'translations' = 'synonyms';
   dataType: string = 'synonyms';
-  selectedLevel: number =0;
+  selectedLevel: number = 0;
   currentLevel: number = 1; // 1 = سهل، 2 = متوسط، 3 = صعب
-showLevelUpDialog: boolean = false;
+  showLevelUpDialog: boolean = false;
 
-
-
-setDataType(type: string) {
-  this.selectedDataType = type;
-  this.gameType = type === 'synonyms' ? 'مترادفات' : type === 'antonyms' ? 'متضادات' : 'ترجمات';
-  this.startGame();
-}
+  setDataType(type: string) {
+    this.selectedDataType = type;
+    this.gameType =
+      type === 'synonyms'
+        ? 'مترادفات'
+        : type === 'antonyms'
+        ? 'متضادات'
+        : 'ترجمات';
+    this.startGame();
+  }
   constructor() {}
   setflag() {
     this.homeflag = false;
@@ -102,17 +118,29 @@ setDataType(type: string) {
   }
 
   setTimerBasedOnLevel() {
-    this.maxTime = [40, 60, 80,][this.difficulty - 1] || 60;
-    this.timeLeft = this.maxTime; 
+    this.maxTime = [40, 60, 80][this.difficulty - 1] || 60;
+    this.timeLeft = this.maxTime;
   }
 
   startGame() {
     const cardPairs = this.loadCardsBasedOnSelection();
     const selectedPairs = this.getPairsBasedOnDifficulty(cardPairs);
-    const uniqueCards = selectedPairs.map((pair, index) => [
-      { id: index * 2 + 1, word1: pair.word1, matchingWord: pair.matchingWord, flipped: false },
-      { id: index * 2 + 2, word1: pair.matchingWord, matchingWord: pair.word1, flipped: false }
-    ]).flat();
+    const uniqueCards = selectedPairs
+      .map((pair, index) => [
+        {
+          id: index * 2 + 1,
+          word1: pair.word1,
+          matchingWord: pair.matchingWord,
+          flipped: false,
+        },
+        {
+          id: index * 2 + 2,
+          word1: pair.matchingWord,
+          matchingWord: pair.word1,
+          flipped: false,
+        },
+      ])
+      .flat();
 
     this.cards = uniqueCards;
     this.shuffleCards();
@@ -125,11 +153,10 @@ setDataType(type: string) {
     this.gameflag = true;
   }
 
-
   private loadCardsBasedOnSelection() {
     switch (this.selectedDataType) {
       case 'synonyms':
-        this.gameType = 'مترادفات'; 
+        this.gameType = 'مترادفات';
         return [
           { word1: 'جميل', matchingWord: 'حسن' },
           { word1: 'عاقل', matchingWord: 'حكيم' },
@@ -140,9 +167,9 @@ setDataType(type: string) {
           { word1: 'هادئ', matchingWord: 'رائق' },
           { word1: 'شجاع', matchingWord: 'مقدام' },
           { word1: 'مبدع', matchingWord: 'خلاق' },
-          { word1: 'غامض', matchingWord: 'مبهم' }
+          { word1: 'غامض', matchingWord: 'مبهم' },
         ];
-        
+
       case 'antonyms':
         this.gameType = 'متضادات';
         return [
@@ -155,12 +182,10 @@ setDataType(type: string) {
           { word1: 'طويل', matchingWord: 'قصير' },
           { word1: 'غني', matchingWord: 'معدم' },
           { word1: 'مشرق', matchingWord: 'مظلم' },
-          { word1: 'هادئ', matchingWord: 'صاخب' }
-  
-          
+          { word1: 'هادئ', matchingWord: 'صاخب' },
         ];
       case 'translations':
-        this.gameType = 'ترجمات'; 
+        this.gameType = 'ترجمات';
         return [
           { word1: 'شمس', matchingWord: 'Sun' },
           { word1: 'جبل', matchingWord: 'Mountain' },
@@ -171,13 +196,15 @@ setDataType(type: string) {
           { word1: 'نهر', matchingWord: 'River' },
           { word1: 'زهرة', matchingWord: 'Flower' },
           { word1: 'منزل', matchingWord: 'House' },
-          { word1: 'نجمة', matchingWord: 'Star' }
+          { word1: 'نجمة', matchingWord: 'Star' },
         ];
       default:
         return [];
     }
   }
-  private getPairsBasedOnDifficulty(cardPairs: { word1: string; matchingWord: string }[]) {
+  private getPairsBasedOnDifficulty(
+    cardPairs: { word1: string; matchingWord: string }[]
+  ) {
     return cardPairs.slice(0, this.difficulty * 2 + 4);
   }
 
@@ -198,7 +225,7 @@ setDataType(type: string) {
       this.checkForWin();
     }, 2000);
   }
-  
+
   checkForWin() {
     if (this.matchedCards.length === this.cards.length) {
       clearInterval(this.intervalId);
@@ -208,15 +235,15 @@ setDataType(type: string) {
   }
 
   displayWinMessage() {
-  this.warningSound.stop();
-  this.correctSound.play();
-  this.showWinDialog = true; 
-  if (this.currentLevel < 3) { 
-    this.showLevelUpDialog = true; // إظهار حوار الترقية إذا لم يكن في المستوى الأخير
-  } else {
-    this.showLevelUpDialog = false; // إخفاء حوار الترقية إذا كان في المستوى الأخير
+    this.warningSound.stop();
+    this.correctSound.play();
+    this.showWinDialog = true;
+    if (this.currentLevel < 3) {
+      this.showLevelUpDialog = true; // إظهار حوار الترقية إذا لم يكن في المستوى الأخير
+    } else {
+      this.showLevelUpDialog = false; // إخفاء حوار الترقية إذا كان في المستوى الأخير
+    }
   }
-}
 
   nextLevel() {
     if (this.currentLevel < 3) {
@@ -237,8 +264,6 @@ setDataType(type: string) {
     this.setDataType(this.selectedDataType); // تأكيد نوع التحدي
     this.selectLevel(); // بدء اللعبة بالمستوى الأول
   }
-  
-  
 
   shuffleCards() {
     this.cards.sort(() => Math.random() - 0.5);
@@ -248,7 +273,11 @@ setDataType(type: string) {
     if (!this.intervalId) {
       this.startTimer();
     }
-    if (this.flippedCards.length < 2 && !this.flippedCards.includes(card) && !this.matchedCards.includes(card)) {
+    if (
+      this.flippedCards.length < 2 &&
+      !this.flippedCards.includes(card) &&
+      !this.matchedCards.includes(card)
+    ) {
       card.flipped = true;
       this.flippedCards.push(card);
       if (this.flippedCards.length === 2) {
@@ -260,26 +289,29 @@ setDataType(type: string) {
 
   checkMatch() {
     const [firstCard, secondCard] = this.flippedCards;
-    if ((firstCard.word1 === secondCard.matchingWord) || (firstCard.matchingWord === secondCard.word1)) {
+    if (
+      firstCard.word1 === secondCard.matchingWord ||
+      firstCard.matchingWord === secondCard.word1
+    ) {
       this.matchedCards.push(firstCard, secondCard);
       this.points += 1;
-  
+
       this.correctSound.play();
-  
+
       // تأخير إخفاء البطاقات
       setTimeout(() => {
         firstCard.flipped = false;
         secondCard.flipped = false;
-  
+
         // تطبيق حالة 'matched' على البطاقات لإخفائها
         firstCard['state'] = 'matched';
         secondCard['state'] = 'matched';
       }, 3000); // تأخير لمدة 1000 مللي ثانية (1 ثانية)
-  
+
       this.checkForWin();
     } else {
       this.wrongSound.play();
-  
+
       // تأخير إغلاق البطاقات في حالة الخطأ
       setTimeout(() => {
         firstCard.flipped = false;
@@ -297,9 +329,7 @@ setDataType(type: string) {
     this.restartGame();
   }
 
-  ngOnInit() {
-   
-  }
+  ngOnInit() {}
 
   restartGame() {
     clearInterval(this.intervalId);
@@ -314,7 +344,7 @@ setDataType(type: string) {
     this.showDialog = false;
     this.showWinDialog = false;
     this.showLevelUpDialog = false;
-  }  
+  }
   getStarsCount(): number {
     const totalCards = this.cards.length;
     const matchedCardsCount = this.matchedCards.length;
@@ -331,5 +361,4 @@ setDataType(type: string) {
     clearInterval(this.intervalId);
     this.timeLeft = this.maxTime;
   }
-  
 }
