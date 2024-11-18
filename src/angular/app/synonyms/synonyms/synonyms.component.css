@@ -10,10 +10,10 @@
   align-items: center;
 }
 .card {
-  flex: 1 1 100px; 
+  flex: 1 1 100px;
   margin: 10px;
   max-width: 150px;
-  font-size: clamp(1rem, 2vw, 1.5rem); 
+  font-size: clamp(1rem, 2vw, 1.5rem);
   width: 100%;
   max-width: 150px;
 }
@@ -23,7 +23,7 @@
   box-sizing: border-box;
 }
 .highlight {
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
   width: 80px;
 }
 .container {
@@ -34,7 +34,7 @@
   width: 800px;
   min-height: 700px;
   flex-direction: column;
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -44,26 +44,23 @@
   color: #0f2837;
   direction: rtl;
   box-sizing: border-box;
-  margin: 0 auto;
+  margin-top: 3%;
+
   .p-component {
     margin: 0 auto;
     padding: 0;
   }
-  
-
 }
 
-
-
 body {
-  font-family: 'Janna LT', sans-serif;
+  font-family: "Janna LT", sans-serif;
   overflow-x: hidden;
 }
 
 .level-buttons {
   gap: 20px;
   align-items: center;
-  margin-top: 20px; 
+  margin-top: 20px;
 }
 
 .level-button {
@@ -78,19 +75,18 @@ body {
   width: 200px;
   border: #82bbb7;
   height: 120px;
-
 }
 
 .level-button:hover {
   background-color: #0f2837;
-  color:#82bbb7 ;
+  color: #82bbb7;
 }
 .level-button.selected {
   background-color: #0f2837;
-  color:#82bbb7 ;
+  color: #82bbb7;
 }
 
-.start-button{
+.start-button {
   padding: 10px 20px;
   color: #fff;
   background-color: #0f2837;
@@ -111,7 +107,8 @@ body {
   margin-bottom: 20px;
 }
 
-.score-box, .attempts-box {
+.score-box,
+.attempts-box {
   background-color: #4c9085;
   color: white;
   font-size: 20px;
@@ -120,19 +117,19 @@ body {
   text-align: center;
 }
 
-.score-box span, .attempts-box span {
+.score-box span,
+.attempts-box span {
   font-weight: bold;
 }
 
 .cards-grid {
   display: inline-grid;
-  grid-template-columns: auto auto auto auto ;
+  grid-template-columns: auto auto auto auto;
   background-color: #f2f2f3;
   border-radius: inherit;
   padding: inherit;
   align-content: center;
 }
-
 
 .card {
   width: 100px;
@@ -173,10 +170,11 @@ body {
   align-items: center;
   font-size: 10px;
   border-radius: 8px;
-  font-family: 'Janna LT', sans-serif;
+  font-family: "Janna LT", sans-serif;
 }
 
-.card-front, .card-back {
+.card-front,
+.card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -187,26 +185,24 @@ body {
   font-size: 30px;
   color: rgb(255, 255, 255);
   border-radius: 20px;
-  font-size: 20px; 
+  font-size: 20px;
   font-size: 1.3rem;
 }
 
 .card-front {
   background-size: 80%;
-    background-position: center;
-    background-repeat: no-repeat;
- 
-    background-color: rgb(255, 255, 255);
-    border: 6px solid #4c9085;
+  background-position: center;
+  background-repeat: no-repeat;
 
-  
+  background-color: rgb(255, 255, 255);
+  border: 6px solid #4c9085;
 }
 
 .card-back {
   background-color: #4c9085;
   transform: rotateY(180deg);
 }
-.row{
+.row {
   align-items: center;
   font-size: 1.2rem;
   gap: 80px;
@@ -236,13 +232,13 @@ body {
   border-radius: 10px;
   overflow: hidden;
   position: relative;
-  margin:  20px;
+  margin: 20px;
   border: 4px solid #f2f2f3;
 }
 
 .progress-bar {
   height: 100%;
-  background-color:  #4c9085;
+  background-color: #4c9085;
   transition: width 1s linear, background-color 0.3s;
 }
 
@@ -312,14 +308,26 @@ body {
 }
 
 @keyframes highlight {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-3px); }
-  75% { transform: translateX(3px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
 }
 
 .back-arrow {
@@ -342,11 +350,9 @@ body {
 
 .data-type-selection {
   justify-content: center;
-  margin-bottom: 40px ;
+  margin-bottom: 40px;
   margin-top: 20px;
-  
 }
-
 
 .data-type-selection button {
   margin: 0px 10px 50px 10px;
@@ -354,45 +360,42 @@ body {
   border-radius: 5px;
   background-color: #ffffff;
   color: #4c9085;
-  border:  #ffffff;
+  border: #ffffff;
   border-radius: 15px;
   cursor: pointer;
   transition: border 0.3s ease;
   font-size: 1.5rem;
   width: 200px;
-
 }
 .data-type-selection button img {
   width: 50px;
-  height: 50px; 
+  height: 50px;
 }
 
-
-.data-type-selection button.selected  {
-  border: 2px solid #0f2837; 
+.data-type-selection button.selected {
+  border: 2px solid #0f2837;
 }
 
 .data-type-selection button:hover {
-  border: 2px solid #0f2837; 
+  border: 2px solid #0f2837;
 }
- 
- 
+
 .label {
   font-weight: bold;
   color: #0f2837;
 }
- 
+
 .value {
   font-size: 1.5rem;
   color: #0f2837;
 }
- 
+
 .separator {
   width: 1px;
   height: 5rem;
-  background-color: #95A5A6;
+  background-color: #95a5a6;
 }
- 
+
 .buttons-container button {
   background-color: #0f2837 !important;
   color: #ffffff !important;
@@ -401,9 +404,9 @@ body {
   border-radius: 15%;
 }
 .filled-star {
-  fill: #4c9085; 
+  fill: #4c9085;
 }
- 
+
 .empty-star {
   fill: lightgray;
 }
@@ -414,7 +417,6 @@ body {
   margin-top: 60px;
 }
 
-
 .buttons-container button {
   background-color: #0f2837 !important;
   color: #ffffff !important;
@@ -423,20 +425,22 @@ body {
   border-radius: 15%;
 }
 
-
 /* شاشة الهاتف المحمول */
 @media (max-width: 768px) {
   .container {
-width: 100%;
-height:100vh;
-}
-.data-type-selection, .level-buttons {
-  display: flex;
-}
-.data-type-button, .level-button {
-  flex: 1 1 45%; /* تجعل الأزرار تأخذ 45% من العرض في الشاشات الأصغر */
-}
-  .points, .attempts {
+    width: 100%;
+    height: 100vh;
+  }
+  .data-type-selection,
+  .level-buttons {
+    display: flex;
+  }
+  .data-type-button,
+  .level-button {
+    flex: 1 1 45%; /* تجعل الأزرار تأخذ 45% من العرض في الشاشات الأصغر */
+  }
+  .points,
+  .attempts {
     font-size: 0.9rem;
     text-align: center;
   }
@@ -454,11 +458,10 @@ height:100vh;
   p-dialog {
     max-width: 90vw; /* يخلي الحوار ما يخرج عن العرض */
     max-height: 80vh;
-  overflow-y: auto;
-  justify-content: center;
-align-items: center;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: center;
   }
-  
 }
 
 /* الأجهزة اللوحية */
@@ -468,38 +471,42 @@ align-items: center;
   }
 
   .level-buttons {
-    gap:0px;
+    gap: 0px;
   }
-  .data-type-button, .level-button {
+  .data-type-button,
+  .level-button {
     width: 100%;
   }
   .container {
     width: 100%;
-    height:100vh;
+    height: 100vh;
     padding: 0px;
     flex-direction: column;
-    display:flex;
+    display: flex;
     font-size: 1.4rem;
     font-weight: bold;
     border: none;
     margin-left: 10px;
-    }
-    .data-type-selection button {
-      width: 100%;
-
-    }
- 
-    .cards-grid.level-1 { gap: 0px; }
-    .cards-grid.level-2 { gap: 0px; }
-    .cards-grid.level-3 { gap: 0px; }
-
-
-    .timer-container {
-      width: 100%;
-      height: 40px;
-    
   }
-  
+  .data-type-selection button {
+    width: 100%;
+  }
+
+  .cards-grid.level-1 {
+    gap: 0px;
+  }
+  .cards-grid.level-2 {
+    gap: 0px;
+  }
+  .cards-grid.level-3 {
+    gap: 0px;
+  }
+
+  .timer-container {
+    width: 100%;
+    height: 40px;
+  }
+
   .cards-grid[_ngcontent-ng-c3773314731] {
     grid-template-columns: auto auto auto auto;
     background-color: #f2f2f3;
@@ -507,30 +514,30 @@ align-items: center;
     padding: inherit;
     align-content: center;
     width: 100%;
-}
-.card{
-  width: 90px;
-  height: 90px;
-  margin: 10px;
-  perspective: 1000px;
-  position: relative;
-  font-size: 20px;
-  border: none;
-  background-color: transparent;
-}
-.row{
-  gap: 30px;
-  align-items: stretch;
+  }
+  .card {
+    width: 90px;
+    height: 90px;
+    margin: 10px;
+    perspective: 1000px;
+    position: relative;
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
+  }
+  .row {
+    gap: 30px;
+    align-items: stretch;
+  }
+  .custom-card {
+    display: flex;
+    flex-direction: column;
+  }
 
-}
-.custom-card{
-  display: flex; flex-direction: column;
-}
-
-.cardGap{
-  margin-bottom: 20px;
-}
-p-dialog {
-  width: 90%; /* عرض الحوارات صغير */
-}
+  .cardGap {
+    margin-bottom: 20px;
+  }
+  p-dialog {
+    width: 90%; /* عرض الحوارات صغير */
+  }
 }

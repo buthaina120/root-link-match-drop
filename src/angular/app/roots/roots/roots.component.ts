@@ -10,7 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { DragDropModule } from 'primeng/dragdrop';
-import { ApiService } from '../../services/api.service';
+// import { ApiService } from '../../services/api.service';
 import { firstValueFrom } from 'rxjs';
 import { TooltipModule } from 'primeng/tooltip';
 import { Howl } from 'howler';
@@ -52,12 +52,12 @@ export interface CardState {
   styleUrls: ['./roots.component.css'],
 })
 export class RootsComponent implements OnInit {
-  constructor(private rest: ApiService) {}
+  constructor() {}
   root: string | undefined;
 
-  async getRoot(query: string): Promise<string> {
-    return await firstValueFrom(this.rest.getRoot(query));
-  }
+  // async getRoot(query: string): Promise<string> {
+  //   return await firstValueFrom(this.rest.getRoot(query));
+  // }
 
   flag = true;
 
