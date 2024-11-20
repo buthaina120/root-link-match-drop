@@ -179,8 +179,9 @@ body {
   font-size: 25px;
 }
 
+
 .card-front {
-  background-size: 80%;
+  background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
 
@@ -195,7 +196,6 @@ body {
 .row {
   align-items: center;
   font-size: 1.2rem;
-  gap: 80px;
 }
 .restart-button {
   padding: 10px 10px;
@@ -415,6 +415,11 @@ body {
   border-radius: 15%;
 }
 
+
+.headerGap{
+  column-gap: 80px
+}
+
 @media (max-width: 768px) {
   .container {
     width: 100%;
@@ -422,6 +427,9 @@ body {
     max-width: 100%;
     box-sizing: border-box;
   }
+
+
+
   .data-type-selection,
   .level-buttons {
     display: flex;
@@ -459,6 +467,10 @@ body {
 @media (max-width: 480px) {
   .buttons-container {
     width: 100%; 
+  }
+
+  .headerGap{
+    column-gap: 35px
   }
 
   .level-buttons {

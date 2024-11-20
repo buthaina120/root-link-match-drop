@@ -36,3 +36,8 @@
 a {
   text-decoration: none;
 }
+
+.logo {
+  height: auto;
+  width: 200px;
+}
