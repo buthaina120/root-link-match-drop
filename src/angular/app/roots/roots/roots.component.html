@@ -22,8 +22,8 @@
       </div>
 
       <!-- زر ابدأ -->
-      <div (click)="setflag(); startGame()" class="col-12 my-3">
-        <button pButton type="button" class="text-2xl bg-sec-theme px-4">
+      <div (click)="setflag(); startGame()" class="col-12 ">
+        <button pButton type="button" class="text-2xl bg-sec-theme px-4 mt-3">
           ابدأ
         </button>
       </div>
@@ -109,7 +109,7 @@
   </div>
 
   <div *ngIf="!flag" class="container text-center">
-    <div class="row" style="column-gap: 35px">
+    <div class="row headerGap" >
       <div class="col">
         <div class="d-inline-block px-2 py-1 rounded mt-3 font-bold">
           <p class="m-0">النقاط:</p>
@@ -188,7 +188,7 @@
         <button
           type="p-button"
           (click)="restartGame()"
-          class="p-2 m-2 p-button p-component bg-custom-green"
+          class="p-2 m-2 p-button p-component bg-sec-theme"
           pTooltip="إعادة اللعبة"
           tooltipPosition="bottom"
         >

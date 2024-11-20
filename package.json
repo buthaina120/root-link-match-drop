@@ -19,10 +19,9 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.8",
-    "bootstrap": "^5.3.3",
-
     "@types/howler": "^2.2.12",
     "animate.css": "^4.1.1",
+    "bootstrap": "^5.3.3",
     "howler": "^2.2.4",
     "leaflet": "^1.9.4",
     "leaflet-control-geocoder": "^1.8.3",

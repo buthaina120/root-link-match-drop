@@ -63,7 +63,7 @@ interface Card {
 export class SynonymsComponent implements OnInit {
   correctSound = new Howl({ src: ['../../../angular/assets/correct.wav'] });
   wrongSound = new Howl({ src: ['../../../angular/assets/wrong.mp3'] });
-  warningSound = new Howl({ src: ['../../../angular/assets/ticktick 1.mp3'] });
+  warningSound = new Howl({ src: ['../../../angular/assets/ticktick.mp3'] });
 
   homeflag = true;
   levelflag = false;
@@ -81,7 +81,7 @@ export class SynonymsComponent implements OnInit {
   gameStarted: boolean = false;
   intervalId: any;
   difficulty: number = 1;
-  maxTime: number = 60;
+  maxTime: number = 0;
   timeLeft: number = this.maxTime;
   selectedDataType: string = '';
   gameType: string = 'مترادفات';
@@ -118,7 +118,7 @@ export class SynonymsComponent implements OnInit {
   }
 
   setTimerBasedOnLevel() {
-    this.maxTime = [40, 60, 80][this.difficulty - 1] || 60;
+    this.maxTime = [35, 55, 75][this.difficulty - 1] || 60;
     this.timeLeft = this.maxTime;
   }
 
@@ -223,7 +223,7 @@ export class SynonymsComponent implements OnInit {
         }
       }
       this.checkForWin();
-    }, 2000);
+    }, 1000);
   }
 
   checkForWin() {
