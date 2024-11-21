@@ -1,7 +1,8 @@
 <html lang="ar">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>لعبة ذاكرة</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
@@ -10,13 +11,13 @@
   </head>
 
   <div *ngIf="homeflag" class="container" style="background-color: #f8f8f8">
-    <div class="row justify-content-center text-center">
+    <div class=" justify-content-center text-center">
       <div class="col-12">
         <img
-          src="../../../angular/assets/tabiqgame.png"
+          src="../../../angular/assets/matchLogo.png"
           alt="شعار اللعبة"
           class="logo"
-          style="width: 200px; height: auto"
+          style="width: 300px; height: auto"
         />
       </div>
       <div (click)="setflag()" class="">
@@ -53,9 +54,7 @@
           class="row"
           style="
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0rem;
+            flex-wrap: wrap;
           "
         >
           <!-- البطاقة الأولى -->
@@ -195,7 +194,7 @@
     </div>
 
     <!-- معلومات النقاط والمحاولات -->
-    <div class="row">
+    <div class="row headerGap">
       <!-- النقاط -->
       <div class="col">
         <div class="d-inline-block px-2 py-1 rounded mt-3 font-bold">
@@ -217,7 +216,7 @@
     </div>
 
     <!-- مؤقت اللعبة -->
-    <div class="timer-container">
+    <div class="timer-container row">
       <div
         class="progress-bar"
         [ngClass]="{ warning: timeLeft <= 10 }"
@@ -247,10 +246,10 @@
       >
         <div class="card-inner">
           <div
-            class="card-face card-front"
-            style="background-image: url(../../../angular/assets/tabiqgame.png)"
+            class=" card-front"
+            style="background-image: url(../../../angular/assets/matchLogo.png)"
           ></div>
-          <div class="card-face card-back">{{ card.word1 }}</div>
+          <div class=" card-back">{{ card.word1 }}</div>
         </div>
       </div>
     </div>
@@ -289,7 +288,7 @@
       <button
         type="button"
         (click)="restartGame()"
-        class="p-2 m-2 p-button p-component bg-custom-green"
+        class="p-2 m-2 p-button p-component bg-sec-theme"
         pTooltip="إعادة اللعبة"
         tooltipPosition="bottom"
       >
