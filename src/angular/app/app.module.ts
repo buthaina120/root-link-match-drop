@@ -8,6 +8,7 @@ import { RootsComponent } from './roots/roots/roots.component';
 import { AppComponent } from './app.component';
 import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
+import { ApiService } from './services/api.service';
 
 @NgModule({
   declarations: [],

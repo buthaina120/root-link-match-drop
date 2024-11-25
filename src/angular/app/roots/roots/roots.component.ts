@@ -10,7 +10,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { DragDropModule } from 'primeng/dragdrop';
-// import { ApiService } from '../../services/api.service';
+import { ApiService } from '../../services/api.service';
+
 import { firstValueFrom } from 'rxjs';
 import { TooltipModule } from 'primeng/tooltip';
 import { Howl } from 'howler';
@@ -50,14 +51,15 @@ export interface CardState {
   ],
   templateUrl: './roots.component.html',
   styleUrls: ['./roots.component.css'],
+
 })
 export class RootsComponent implements OnInit {
-  constructor() {}
+  constructor(private rest: ApiService) {}
   root: string | undefined;
 
-  // async getRoot(query: string): Promise<string> {
-  //   return await firstValueFrom(this.rest.getRoot(query));
-  // }
+ async getRoot(query: string): Promise<string> {
+   return await firstValueFrom(this.rest.getRoot(query));
+}
 
   flag = true;
 
@@ -116,12 +118,21 @@ export class RootsComponent implements OnInit {
 
   // استخدام الواجهة هنا
   cards: Card[] = [
-    { originalWord: 'مستشفى', targetWord: 'شفى' },
+    { originalWord: 'مستشفى', targetWord: 'شفي' },
     { originalWord: 'كتاب', targetWord: 'كتب' },
     { originalWord: 'مدرسة', targetWord: 'درس' },
   ];
 
   ngOnInit() {
+    // يمكنك استخدام ApiService هنا
+    //this.getRoot('مستشفى').then(data => {
+      //console.log(data);
+    //});
+
+    const root2 = this.getRoot('مستشفى')
+
+    console.log(root2)
+
     this.cardStates = this.cards.map(() => ({
       availableLetters: [],
       selectedLetters: [],
