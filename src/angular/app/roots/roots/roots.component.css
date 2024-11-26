@@ -194,3 +194,9 @@ costum-card {
 }
 
 
+.p-inputtext:enabled:hover {
+  border-color: #52a39d;
+}
+.p-inputtext:enabled {
+  border-color: rgba(15, 40, 55, 0.1);  /* 50% شفافية */
+}
