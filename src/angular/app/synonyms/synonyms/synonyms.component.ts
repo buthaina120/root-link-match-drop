@@ -13,6 +13,7 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
 import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
 
 interface Card {
   id: number;
@@ -34,6 +35,7 @@ interface Card {
     CardModule,
     TooltipModule,
     FormsModule,
+    InputTextModule,
   ],
   animations: [
     trigger('flipState', [
@@ -102,7 +104,6 @@ export class SynonymsComponent implements OnInit {
   savePlayerName() {
     this.showPlayerNameDialog = false; // إغلاق الحوار بعد حفظ اسم اللاعب
     console.log('اسم اللاعب:', this.playerName); // استخدم الاسم كما تريد (طباعة أو حفظ)
-    this.setflag(); // الانتقال إلى شاشة اختيار المستوى أو أي منطق آخر
   }
 
 

@@ -20,52 +20,20 @@
           style="width: 300px; height: auto"
         />
       </div>
-      <p-dialog
-  [(visible)]="showPlayerNameDialog"
-  [modal]="true"
-  [closable]="false"
-  class="bg-sec-theme"
-  [style]="{ width: '22rem' }"
->
-  <div class="mb-4 text-center">
-    <p class="text-2xl font-bold">لنتعرف عليك</p>
-  </div>
-  <div class="p-fluid text-center mb-4">
-    <div class="p-field" style="margin-bottom: 1.5rem;">
-      <label
-        for="playerName"
-        class="text-lg font-semibold"
-        style="display: block; margin-bottom: 0.5rem;"
-      >
-
-      </label>
-      <input
-        id="playerName"
-        type="text"
-        pInputText
-        [(ngModel)]="playerName"
-        placeholder="أدخل اسمك هنا"
-        class="text-center"
-        style="background-color: #ffffff;border: 2px solid #9c9c9c; border-radius: 5px;height: 2.5rem; width: 90%;"
-      />
-    </div>
-  </div>
-  <div
-    style="
-  
-      align-items: center;
-    "
-  >
-  <button
-  pButton
-  type="button"
-  class="text-2xl bg-sec-theme px-4 mt-3"
-  (click)="savePlayerName()"
->
-  حفظ
-</button>
-  </div>
-</p-dialog>
+      <p-dialog [(visible)]="showPlayerNameDialog" [style]="{ width: '25rem' }">
+        <p class="text-2xl font-bold">لنتعرف عليك</p>
+        <div class="flex align-items-center gap-3 mb-4 mt-4">
+            <input pInputText [(ngModel)]="playerName" id="username" class="flex-auto py-2" autocomplete="off" placeholder="أدخل اسمك هنا" />
+        </div>
+ 
+        <div class="flex justify-content-center gap-2">
+            <button
+            type="p-button" (click)="setflag();  openPlayerNameDialog()"
+            class="px-4 m-2 p-button p-component text-xl bg-sec-theme"
+            >حفظ
+          </button>
+        </div>
+    </p-dialog>
 
       <div  (click)="openPlayerNameDialog()"  style="
         margin-bottom: 40px;" class="col-12 ">
