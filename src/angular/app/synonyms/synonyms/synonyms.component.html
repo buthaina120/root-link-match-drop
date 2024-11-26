@@ -20,10 +20,59 @@
           style="width: 300px; height: auto"
         />
       </div>
-      <div (click)="setflag()" class="">
-        <button class="start-button">ابدأ</button>
-      </div>
+      <p-dialog
+  [(visible)]="showPlayerNameDialog"
+  [modal]="true"
+  [closable]="false"
+  class="bg-sec-theme"
+  [style]="{ width: '22rem' }"
+>
+  <div class="mb-4 text-center">
+    <p class="text-2xl font-bold">لنتعرف عليك</p>
+  </div>
+  <div class="p-fluid text-center mb-4">
+    <div class="p-field" style="margin-bottom: 1.5rem;">
+      <label
+        for="playerName"
+        class="text-lg font-semibold"
+        style="display: block; margin-bottom: 0.5rem;"
+      >
 
+      </label>
+      <input
+        id="playerName"
+        type="text"
+        pInputText
+        [(ngModel)]="playerName"
+        placeholder="أدخل اسمك هنا"
+        class="text-center"
+        style="background-color: #ffffff;border: 2px solid #9c9c9c; border-radius: 5px;height: 2.5rem; width: 90%;"
+      />
+    </div>
+  </div>
+  <div
+    style="
+  
+      align-items: center;
+    "
+  >
+  <button
+  pButton
+  type="button"
+  class="text-2xl bg-sec-theme px-4 mt-3"
+  (click)="savePlayerName()"
+>
+  حفظ
+</button>
+  </div>
+</p-dialog>
+
+      <div  (click)="openPlayerNameDialog()"  style="
+        margin-bottom: 40px;" class="col-12 ">
+        <button pButton type="button" class="text-2xl bg-sec-theme px-4 mt-3">
+          ابدأ
+        </button>
+      </div>
       <div class="col-12">
         <div class="d-flex justify-content-center">
           <button
@@ -33,6 +82,7 @@
             tooltipPosition="bottom"
             class="bg-sec-theme p-2 m-2"
             (click)="showInstructions()"
+
           >
             <i class="pi pi-question-circle"></i>
           </button>
@@ -304,7 +354,7 @@
     [style]="{ width: '22rem' }"
   >
     <div class="win-content text-center">
-      <h2 class="title">أحسنت</h2>
+      <h2 class="title">أحسنت يا {{playerName}}</h2>
       <!-- <p class="text-2xl font-bold text-center">تهانينا!</p> -->
       <div class="stars mb-4">
         <ng-container *ngFor="let star of stars; let i = index">
