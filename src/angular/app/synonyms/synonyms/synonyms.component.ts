@@ -12,6 +12,9 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
+import { ApiService } from '../../services/api.service';
+import { firstValueFrom } from 'rxjs';
+
 
 interface Card {
   id: number;
@@ -101,7 +104,7 @@ export class SynonymsComponent implements OnInit {
         : 'ترجمات';
     this.startGame();
   }
-  constructor() {}
+
   setflag() {
     this.homeflag = false;
     this.levelflag = true;
@@ -329,7 +332,21 @@ export class SynonymsComponent implements OnInit {
     this.restartGame();
   }
 
-  ngOnInit() {}
+  constructor(private rest: ApiService) {}
+  root: string | undefined;
+
+ async getSynonyms(query: string): Promise<string> {
+   return await firstValueFrom(this.rest.getSynonyms(query));
+}
+  ngOnInit() {
+    // ApiService هنا
+  /*  this.getSynonyms('ضرب').then(data => {
+      console.log(data);
+    });*/
+
+    const Synonyms = this.getSynonyms('ضرب')
+    console.log(Synonyms)
+  }
 
   restartGame() {
     clearInterval(this.intervalId);

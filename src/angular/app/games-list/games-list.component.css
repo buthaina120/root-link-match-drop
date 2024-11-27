@@ -41,3 +41,7 @@ a {
   height: auto;
   width: 200px;
 }
+
+.soon {
+  opacity: 0.5; 
+}
