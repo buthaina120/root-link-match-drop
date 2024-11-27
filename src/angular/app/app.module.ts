@@ -8,6 +8,7 @@ import { RootsComponent } from './roots/roots/roots.component';
 import { AppComponent } from './app.component';
 import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
+import { FormsModule } from '@angular/forms';
 import { ApiService } from './services/api.service';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ApiService } from './services/api.service';
     AppComponent,
     CardModule,
     TooltipModule,
+    FormsModule,
   ],
   providers: [],
 })

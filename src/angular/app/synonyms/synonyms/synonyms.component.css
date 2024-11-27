@@ -98,9 +98,7 @@ body {
   font-size: 1.5rem;
   min-width: 100px;
   border: #82bbb7;
-  margin: 30px;
 }
-
 .score-panel {
   display: flex;
   justify-content: center;
@@ -108,7 +106,6 @@ body {
   width: 100%;
   margin-bottom: 20px;
 }
-
 .score-box,
 .attempts-box {
   background-color: #4c9085;
@@ -541,7 +538,11 @@ body {
     font-size: 20px;
   }
 
-
-
+}
+.p-inputtext:enabled:hover {
+  border-color: #52a39d;
+}
+.p-inputtext:enabled {
+  border-color: rgba(15, 40, 55, 0.1);  /* 50% شفافية */
 }
  

@@ -12,6 +12,8 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
 import { ApiService } from '../../services/api.service';
 import { firstValueFrom } from 'rxjs';
 
@@ -35,6 +37,8 @@ interface Card {
     DialogModule,
     CardModule,
     TooltipModule,
+    FormsModule,
+    InputTextModule,
   ],
   animations: [
     trigger('flipState', [
@@ -93,8 +97,21 @@ export class SynonymsComponent implements OnInit {
   selectedLevel: number = 0;
   currentLevel: number = 1; // 1 = سهل، 2 = متوسط، 3 = صعب
   showLevelUpDialog: boolean = false;
+  playerName: string = ''; // متغير لتخزين اسم اللاعب
+  showPlayerNameDialog: boolean = false; // للتحكم في عرض الحوار
 
-  setDataType(type: string) {
+  openPlayerNameDialog() {
+    this.showPlayerNameDialog = true; // فتح الحوار عند النقر على زر ابدأ
+  }
+
+  savePlayerName() {
+    this.showPlayerNameDialog = false; // إغلاق الحوار بعد حفظ اسم اللاعب
+    console.log('اسم اللاعب:', this.playerName); // استخدم الاسم كما تريد (طباعة أو حفظ)
+  }
+
+
+  
+setDataType(type: string) {
     this.selectedDataType = type;
     this.gameType =
       type === 'synonyms'
@@ -121,7 +138,7 @@ export class SynonymsComponent implements OnInit {
   }
 
   setTimerBasedOnLevel() {
-    this.maxTime = [35, 55, 75][this.difficulty - 1] || 60;
+    this.maxTime = [50, 70, 90][this.difficulty - 1] || 60;
     this.timeLeft = this.maxTime;
   }
 
