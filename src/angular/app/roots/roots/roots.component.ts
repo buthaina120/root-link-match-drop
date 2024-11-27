@@ -10,10 +10,12 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { DragDropModule } from 'primeng/dragdrop';
-// import { ApiService } from '../../services/api.service';
+import { ApiService } from '../../services/api.service';
 import { firstValueFrom } from 'rxjs';
 import { TooltipModule } from 'primeng/tooltip';
 import { Howl } from 'howler';
+import { FormsModule } from '@angular/forms';
+ 
 
 export interface Card {
   originalWord: string;
@@ -38,6 +40,7 @@ export interface CardState {
     InputTextModule,
     CardModule,
     TooltipModule,
+    FormsModule
   ],
   styles: [
     `
@@ -50,14 +53,15 @@ export interface CardState {
   ],
   templateUrl: './roots.component.html',
   styleUrls: ['./roots.component.css'],
+
 })
 export class RootsComponent implements OnInit {
-  constructor() {}
+  constructor(private rest: ApiService) {}
   root: string | undefined;
 
-  // async getRoot(query: string): Promise<string> {
-  //   return await firstValueFrom(this.rest.getRoot(query));
-  // }
+ async getRoot(query: string): Promise<string> {
+   return await firstValueFrom(this.rest.getRoot(query));
+}
 
   flag = true;
 
@@ -113,15 +117,31 @@ export class RootsComponent implements OnInit {
   starsCount: number = 0; // عدد النجوم
   stars: number[] = [1, 2, 3]; // عدد النجوم الممكنة (مثلاً، 3 نجوم)
   currentIndex: number = 0;
+  username: string = ''; // متغير لتخزين اسم اللاعب
+  isPlayerNameDialogVisible: boolean = false; // للتحكم في عرض الحوار
+
+  
+  savePlayerName() {
+    this.isPlayerNameDialogVisible = true; // فتح الحوار عند النقر على زر ابدأ    
+  }
+
 
   // استخدام الواجهة هنا
   cards: Card[] = [
-    { originalWord: 'مستشفى', targetWord: 'شفى' },
+    { originalWord: 'مستشفى', targetWord: 'شفي' },
     { originalWord: 'كتاب', targetWord: 'كتب' },
     { originalWord: 'مدرسة', targetWord: 'درس' },
   ];
 
   ngOnInit() {
+    // ApiService هنا
+    /*this.getRoot('مستشفى').then(data => {
+      console.log(data);
+    });*/
+
+    const root2 = this.getRoot('مستشفى')
+    console.log(root2)
+
     this.cardStates = this.cards.map(() => ({
       availableLetters: [],
       selectedLetters: [],

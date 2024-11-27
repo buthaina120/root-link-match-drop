@@ -14,6 +14,9 @@ import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
+import { ApiService } from '../../services/api.service';
+import { firstValueFrom } from 'rxjs';
+
 
 interface Card {
   id: number;
@@ -118,7 +121,7 @@ setDataType(type: string) {
         : 'ترجمات';
     this.startGame();
   }
-  constructor() {}
+
   setflag() {
     this.homeflag = false;
     this.levelflag = true;
@@ -346,7 +349,21 @@ setDataType(type: string) {
     this.restartGame();
   }
 
-  ngOnInit() {}
+  constructor(private rest: ApiService) {}
+  root: string | undefined;
+
+ async getSynonyms(query: string): Promise<string> {
+   return await firstValueFrom(this.rest.getSynonyms(query));
+}
+  ngOnInit() {
+    // ApiService هنا
+  /*  this.getSynonyms('ضرب').then(data => {
+      console.log(data);
+    });*/
+
+    const Synonyms = this.getSynonyms('ضرب')
+    console.log(Synonyms)
+  }
 
   restartGame() {
     clearInterval(this.intervalId);
