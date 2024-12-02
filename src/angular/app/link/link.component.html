@@ -1,1 +1,27 @@
 <p>link works!</p>
+
+<div style="text-align: center;" class="game-container">
+  <h1>لعبة شبكة السداسيات</h1>
+  <div class="current-player">
+    الدور الحالي: <span [style.color]="currentPlayer">{{ currentPlayer === green ? 'الأخضر' : 'الكحلي' }}</span>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" [attr.viewBox]="'-40 -40 400 320'" id="hex-grid">
+    <!-- الشبكة السداسية -->
+    <ng-container *ngFor="let cell of grid; let index = index">
+        <polygon
+          [attr.id]="cell.id"
+          [attr.points]="cell.points"
+          stroke="black"
+          [attr.fill]="cell.color || 'white'"
+          (click)="handleCellClick(cell, index)"
+          style="cursor: pointer;"
+        ></polygon>
+     </ng-container>
+    </svg>
+
+  <!-- عرض الفائز -->
+  <div *ngIf="winner" class="winner">
+    الفائز: <span [style.color]="winner">{{ winner === green ? 'الأخضر' : 'الكحلي' }}</span>
+  </div>
+
+    </div>
