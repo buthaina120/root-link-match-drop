@@ -1,27 +1,70 @@
 <p>link works!</p>
 
-<div style="text-align: center;" class="game-container">
-  <h1>لعبة شبكة السداسيات</h1>
-  <div class="current-player">
-    الدور الحالي: <span [style.color]="currentPlayer">{{ currentPlayer === green ? 'الأخضر' : 'الكحلي' }}</span>
+<div style="text-align: center;" class="game-container"     [ngStyle]="{ 'border': currentPlayer === green ? '5px solid #52a39d' : '5px solid rgba(15, 40, 55, 0.8)' }">
+  <h1>تحدي صِـــــل</h1>
+  <div class="players-container">
+    <div 
+      class="player-box" 
+      [style.opacity]="currentPlayer === green ? '1' : '0.5'" 
+      [style.background-color]="green">
+      اللاعب الأخضر
+    </div>
+    <div class="divider">-</div>
+    <div 
+      class="player-box" 
+      [style.opacity]="currentPlayer === navy ? '1' : '0.5'" 
+      [style.background-color]="navy">
+      اللاعب الكحلي
+    </div>
   </div>
-  <svg xmlns="http://www.w3.org/2000/svg" [attr.viewBox]="'-40 -40 400 320'" id="hex-grid">
+  <svg xmlns="http://www.w3.org/2000/svg" [attr.viewBox]="'-45 -43 400 325'" id="hex-grid">
     <!-- الشبكة السداسية -->
     <ng-container *ngFor="let cell of grid; let index = index">
-        <polygon
-          [attr.id]="cell.id"
-          [attr.points]="cell.points"
-          stroke="black"
-          [attr.fill]="cell.color || 'white'"
-          (click)="handleCellClick(cell, index)"
-          style="cursor: pointer;"
-        ></polygon>
-     </ng-container>
-    </svg>
+      <polygon
+        tabindex="0"
+        [attr.id]="cell.id"
+        [attr.points]="cell.points"
+        stroke="lightgray"
+        [attr.fill]="cell.color || 'white'"
+        (click)="handleCellClick(cell, index)"
+        style="cursor: pointer;"
+      ></polygon>
+      <text
+        [attr.x]="getTextPosition(cell.points).x"
+        [attr.y]="getTextPosition(cell.points).y"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-size="16"
+        [attr.fill]="cell.color ? 'white' : 'black'">
+        {{ cell.letter }}
+      </text>
+    </ng-container>
+  </svg>
+
+
 
   <!-- عرض الفائز -->
-  <div *ngIf="winner" class="winner">
+  <div *ngIf="winner" class="auto-text">
     الفائز: <span [style.color]="winner">{{ winner === green ? 'الأخضر' : 'الكحلي' }}</span>
   </div>
 
+</div>
+    <!-- عرض السؤال -->
+    <div *ngIf="currentQuestion" class="question-modal">
+      <div class="auto-text">{{ currentQuestion.question }}</div>
+      <div *ngIf="wrongAnswer" class="error-message">
+        {{ wrongAnswer }}
+      </div>
+      <div class="options">
+        <button
+          *ngFor="let option of currentQuestion.options"
+          (click)="checkAnswer(option)"
+        >
+          {{ option }}
+        </button>
+      </div>
     </div>
+  
+
+
+
