@@ -113,20 +113,22 @@ allowDrop(event: Event): void {
   }
   availableWords: Word[] = [
     { name: 'قرأ', weight: 'فعل' },
+    { name: 'شعر', weight: 'فعل' },
+    { name: 'طلب', weight: 'فعل' },
+    { name: 'شرب', weight: 'فعل' },
+    { name: 'كتب', weight: 'فعل' },
+
     { name: 'قارئ', weight: 'فاعل' },
     { name: 'طالب', weight: 'فاعل' },
-    { name: 'مكتب', weight: 'مفعل' },
-    { name: 'شعر', weight: 'فعل' },
+    { name: 'قادر', weight: 'فاعل' },
+    { name: 'عالم', weight: 'فاعل' },
     { name: 'شاعر', weight: 'فاعل' },
-    { name: 'طلب', weight: 'فعل' },
+
     { name: 'مجلس', weight: 'مفعل' },
     { name: 'مصنع', weight: 'مفعل' },
     { name: 'معلم', weight: 'مفعل' },
-    { name: 'عالم', weight: 'فاعل' },
     { name: 'مجمع', weight: 'مفعل' },
-    { name: 'قادر', weight: 'فاعل' },
-    { name: 'شرب', weight: 'فعل' },
-    { name: 'كتب', weight: 'فعل' },
+    { name: 'مكتب', weight: 'مفعل' },
   ];
   // تعديل نوع lists ليقبل فهرسة بواسطة string
 lists: { [key: string]: Word[] } = {
@@ -136,7 +138,7 @@ lists: { [key: string]: Word[] } = {
 };
 
   matchedCards: Word[] = [];
-  cards: any[] = [...this.availableWords]; // جميع الكلمات
+  wordList: any[] = [...this.availableWords]; // جميع الكلمات
 
 // إضافة متغيرات لتخزين الكلمات المسحوبة
 draggedItem: Word | null = null;
@@ -180,7 +182,7 @@ dragEnd(): void {
     if (
       this.lists['فعل'].length + 
       this.lists['فاعل'].length + 
-      this.lists['مفعل'].length === this.cards.length
+      this.lists['مفعل'].length === this.wordList.length
     ) {
       clearInterval(this.timerInterval); // إيقاف المؤقت
       this.displayWinMessage(); // عرض حوار الفوز
@@ -213,11 +215,11 @@ getProgressPercentage(): number {
 }
 
   checkForWin() {
-    if (this.matchedCards.length === this.cards.length) {
+    if (this.matchedCards.length === this.wordList.length) {
       clearInterval(this.intervalId); // توقف المؤقت عند الفوز
       this.showWinDialog = true; // إظهار حوار الفوز    
       this.displayWinMessage();
-    } else if (this.timeLeft === 0 && this.matchedCards.length < this.cards.length) {
+    } else if (this.timeLeft === 0 && this.matchedCards.length < this.wordList.length) {
       this.showDialog = true; // عرض نافذة الفشل عند انتهاء الوقت بدون إكمال
     }
   }
@@ -240,20 +242,9 @@ getProgressPercentage(): number {
   
   restartGame() {
     clearInterval(this.intervalId);
-    this.availableWords= [
-      { name: 'قرأ', weight: 'فعل' },
-      { name: 'قارئ', weight: 'فاعل' },
-      { name: 'مكتب', weight: 'مفعل' },
-      { name: 'شعر', weight: 'فعل' },
-      { name: 'مجلس', weight: 'مفعل' },
-      { name: 'مصنع', weight: 'مفعل' },
-      { name: 'معلم', weight: 'مفعل' },
-      { name: 'عالم', weight: 'فاعل' },
-      { name: 'مجمع', weight: 'مفعل' },
-      { name: 'قادر', weight: 'فاعل' },
-      { name: 'مشغل', weight: 'مفعل' },
-      { name: 'كتب', weight: 'فعل' },
-    ];
+    this.availableWords = [...this.wordList]; 
+    this.lists = { فعل: [], فاعل: [], مفعل: [] }; // إعادة تعيين القوائم
+
     this.points = 0;
     this.attempts = 0;
     this.matchedCards = [];

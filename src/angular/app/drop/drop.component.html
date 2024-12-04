@@ -170,9 +170,9 @@
   ></div>
   <div class="timer-text">{{ timeLeft }} ثواني</div>
 </div>
-<div class="game-container">
+
     <!-- قائمة الكلمات المتاحة -->
-    <p-panel header="الكلمات " class="word-list">
+    <div class="word-list row">
       <div class="available-words">
         <button
           *ngFor="let word of availableWords"
@@ -184,41 +184,44 @@
           {{ word.name }}
         </button>
       </div>
-    </p-panel>
-  
+    </div>
+    <div class="game-container row">
     <!-- مناطق السحب والإفلات -->
     <div class="drop-zone">
-      <div class="columns row">
+      <div class=" row gap-4">
         <!-- منطقة "فعل" -->
-        <p-card header="فعل" class="col drop-container" pDroppable (onDrop)="checkMatch('فعل')" (onDragOver)="allowDrop($event)">
+        <div header="فعل" class="col drop-container" pDroppable (onDrop)="checkMatch('فعل')" (onDragOver)="allowDrop($event)">
           <div class="drop-list">
+            <p>فعل</p>
             <button *ngFor="let word of lists['فعل']" class="word-button">
               {{ word.name }}
             </button>
           </div>
-        </p-card>
+        </div>
   
         <!-- منطقة "فاعل" -->
-        <p-card header="فاعل" class="col drop-container" pDroppable (onDrop)="checkMatch('فاعل')" (onDragOver)="allowDrop($event)">
+        <div header="فاعل" class="col drop-container" pDroppable (onDrop)="checkMatch('فاعل')" (onDragOver)="allowDrop($event)">
           <div class="drop-list">
+            <p>فاعل</p>
             <button *ngFor="let word of lists['فاعل']" class="word-button">
               {{ word.name }}
             </button>
           </div>
-        </p-card>
+        </div>
   
         <!-- منطقة "مفعل" -->
-        <p-card header="مفعل" class="col drop-container" pDroppable (onDrop)="checkMatch('مفعل')" (onDragOver)="allowDrop($event)">
+        <div header="مفعل" class="col drop-container" pDroppable (onDrop)="checkMatch('مفعل')" (onDragOver)="allowDrop($event)">
           <div class="drop-list">
+            <p>مفعل</p>
             <button *ngFor="let word of lists['مفعل']" class="word-button">
               {{ word.name }}
             </button>
           </div>
-        </p-card>
+        </div>
       </div>
-    </div>
-  </div>
- <!-- حوار "انتهى الوقت" -->
+  
+</div>
+<!-- حوار "انتهى الوقت" -->
  <p-dialog
  [(visible)]="showDialog"
  [modal]="true"
