@@ -387,7 +387,6 @@ setDataType(type: string) {
     else if (matchedCardsCount > 0) return 1;
     else return 0;
   }
-
   goBack() {
     this.gameflag = false;
     this.levelflag = true;
