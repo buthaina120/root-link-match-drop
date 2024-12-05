@@ -18,10 +18,10 @@ import { TooltipModule } from 'primeng/tooltip';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 //import { ApiService } from '../../services/api.service';
-import { firstValueFrom } from 'rxjs';
 import { ChipsModule } from 'primeng/chips';
 import { PanelModule } from 'primeng/panel'; // استيراد الوحدة الخاصة بـ p-panel
 import { ProgressBarModule } from 'primeng/progressbar';
+import 'animate.css';
 
 
 
@@ -69,12 +69,10 @@ export class DropComponent implements OnInit {
   selectedDataType: string = '';
   playerName: string = ''; // متغير لتخزين اسم اللاعب
   showPlayerNameDialog: boolean = false; // للتحكم في عرض الحوار
-  // تعريف الكلمات على الجهة اليسرى
-  leftWords: string[] = ['مُعلم', 'عالم', 'لاعب', 'مُجمع', 'قادر', 'مشغل'];
+  showFeedback: boolean = false; // للتحكم في ظهور الرسالة
+isFailureAnimation: boolean = false; // يحدد إذا كانت الإجابة خاطئة
 
-  // تعريف الكلمات على الجهة اليمنى
-  rightWords: string[] = ['قرأ', 'قارئ', 'مكتب', 'شَعر', 'تحدث', 'مجلس'];
-
+  
 allowDrop(event: Event): void {
   event.preventDefault(); // منع السلوك الافتراضي
 
@@ -84,16 +82,19 @@ allowDrop(event: Event): void {
   }
 }
 
-  openPlayerNameDialog() {
+  openPlayerNameD() {
     this.showPlayerNameDialog = true; // فتح الحوار عند النقر على زر ابدأ
   }
-  savePlayerName() {
-    this.showPlayerNameDialog = false;
-    localStorage.setItem('playerName', this.playerName);
-  
-    // بدء المؤقت بعد حفظ اسم اللاعب
-    this.startTimer();
+  openPlayerName() {
+    if (!this.playerName) { // تحقق إذا لم يتم تعيين اسم اللاعب
+      this.showPlayerNameDialog = true; // فتح الحوار
+    } else {
+      this.startTimer(); // إذا كان الاسم موجودًا، ابدأ المؤقت مباشرة
+    }
   }
+  
+
+  
   setDataType(type: string) {
     this.selectedDataType = type;
     this.gameType =
@@ -142,15 +143,15 @@ lists: { [key: string]: Word[] } = {
 
 // إضافة متغيرات لتخزين الكلمات المسحوبة
 draggedItem: Word | null = null;
-draggedFrom: 'left' | 'right' | '' = '';
+draggedFrom= '';
 
-  ngOnInit(): void {
-    this.startTimer();
-    const savedName = localStorage.getItem('playerName');
-    if (savedName) {
-      this.playerName = savedName;
-    }
+ngOnInit(): void {
+  const savedName = localStorage.getItem('playerName');
+  if (savedName) {
+    this.playerName = savedName;
+    this.openPlayerName(); // فتح الحوار إذا كان الاسم محفوظًا مسبقًا
   }
+}
   
 
  // تحديث dragStart ليحفظ العنصر (الزر والكلمة)
@@ -165,32 +166,41 @@ dragEnd(): void {
 }
  // تحديث checkMatch لتثبيت الزر نفسه
  checkMatch(targetWeight: 'فعل' | 'فاعل' | 'مفعل'): void {
-  // زيادة عدد المحاولات عند كل محاولة إسقاط
   this.attempts++;
-
   if (this.draggedItem && this.draggedItem.weight === targetWeight) {
-    // إضافة الكلمة إلى القائمة المناسبة
+    // إجابة صحيحة
     this.lists[targetWeight].push(this.draggedItem);
-    // إزالة الكلمة من القائمة الأصلية
-    this.availableWords = this.availableWords.filter(word => word !== this.draggedItem);
-    this.draggedItem = null;  // إعادة تعيين الكلمة المسحوبة
-    this.draggedFrom = '';    // إعادة تعيين مكان السحب
-    this.points++; // زيادة النقاط عند الإجابة الصحيحة
+    this.matchedCards.push(this.draggedItem);
+    this.availableWords = this.availableWords.filter(
+      (word) => word !== this.draggedItem
+    );
+    this.points++;
     this.correctSound.play();
 
-    // تحقق إذا تم تصنيف كل الكلمات
-    if (
-      this.lists['فعل'].length + 
-      this.lists['فاعل'].length + 
-      this.lists['مفعل'].length === this.wordList.length
-    ) {
-      clearInterval(this.timerInterval); // إيقاف المؤقت
-      this.displayWinMessage(); // عرض حوار الفوز
+    // عرض علامة الصح
+    this.isFailureAnimation = false;
+    this.showFeedback = true;
+    setTimeout(() => (this.showFeedback = false), 1000); // إخفاء الرسالة بعد ثانية
+
+    if (this.matchedCards.length === this.wordList.length) {
+      this.displayWinMessage();
     }
   } else {
-    this.wrongSound.play(); // تشغيل صوت الخطأ
+    // إجابة خاطئة
+    this.wrongSound.play();
+
+    // عرض علامة الخطأ
+    this.isFailureAnimation = true;
+    this.showFeedback = true;
+    setTimeout(() => (this.showFeedback = false), 1000); // إخفاء الرسالة بعد ثانية
   }
+
+  // إعادة تعيين العنصر المسحوب
+  this.draggedItem = null;
+  this.draggedFrom = '';
 }
+
+
 startTimer() {
   this.timeLeft = this.maxTime; // تعيين الوقت المتبقي عند بدء المؤقت
   clearInterval(this.timerInterval); // مسح أي مؤقت سابق
@@ -225,12 +235,12 @@ getProgressPercentage(): number {
   }
 
   displayWinMessage() {
-    this.warningSound.stop();
-    this.correctSound.play();
+    this.warningSound.stop(); // إيقاف صوت التحذير
+    this.correctSound.play(); // تشغيل صوت النجاح
     this.starsCount = this.getStarsCount(); // حساب عدد النجوم
     this.showWinDialog = true; // عرض نافذة الفوز
-    console.log(`Congratulations! You matched all the cards!`);
   }
+  
   
   startGame() {
     this.points = 0;

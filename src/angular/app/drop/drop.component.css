@@ -159,9 +159,6 @@ body {
 .card.flipped .card-inner {
   transform: rotateY(180deg);
 }
-
-
-
 .card-front,
 .card-back {
   position: absolute;
@@ -574,13 +571,11 @@ body {
 .drop-container {
   min-height: 300px;
   width: 120px;
-  border: 2px dashed #ccc;
   border-radius: 10px;
   padding: 10px;
-  display: flex
-;
+  display: flex;
+  justify-content: flex-end;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 10px;
   background-color: #f9f9f9;
@@ -588,6 +583,12 @@ body {
 
 .drop-container:hover {
   border-color: #4c9085;
+}
+
+.dash{
+  border-right: dashed 2px #ccc;
+  border-left: dashed 2px #ccc;
+  border-radius: 0px;
 }
 
 .word-button:active {
@@ -600,5 +601,11 @@ border: 1px solid rgb(172, 172, 172);
 border-radius: 15px;
 width: 600px;
 padding: 20px;
-
 }
+.pepe {
+  animation-name: pepe;
+  animation-iteration-count: 3; /* عدد التكرارات */
+  animation-duration: 0.3s; /* مدة كل تكرار */
+}
+
+

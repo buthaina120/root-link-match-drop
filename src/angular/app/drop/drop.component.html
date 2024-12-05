@@ -28,14 +28,14 @@
 
       <div class="flex justify-content-center gap-2">
           <button
-          type="p-button" (click)="setflag();  openPlayerNameDialog()"
+          type="p-button" (click)="setflag();  openPlayerName()"
           class="px-4 m-2 p-button p-component text-xl bg-sec-theme"
           >حفظ
         </button>
       </div>
   </p-dialog>
 
-    <div  (click)="openPlayerNameDialog()"  style="
+    <div  (click)="openPlayerName()"  style="
       margin-bottom: 40px;" class="col-12 ">
       <button pButton type="button" class="text-2xl bg-sec-theme px-4 mt-3">
         ابدأ
@@ -84,6 +84,7 @@
               height: 'auto',
               border: '2px',
               borderRadius: '15px',
+              alignitems: 'flex-start',
               backgroundColor: '#f8f8f8',
               color: 'black',
               boxShadow:
@@ -103,7 +104,7 @@
           <p-card
             styleClass="custom-card"
             [style]="{
-              minHeight: '250px',
+              minHeight: '265px',
               height: 'auto',
               border: '2px',
               borderRadius: '15px',
@@ -173,25 +174,27 @@
 
     <!-- قائمة الكلمات المتاحة -->
     <div class="word-list row">
-      <div class="available-words">
+      <div class="available-words animate__animated animate__shakeX">
         <button
-          *ngFor="let word of availableWords"
-          class="word-button"
-          pDraggable
-          (onDragStart)="dragStart(word, 'left')"
-          (onDragEnd)="dragEnd()"
-        >
-          {{ word.name }}
-        </button>
+        *ngFor="let word of availableWords"
+        class="word-button"
+        draggable="true"
+        [attr.data-word]="word.name"
+        (dragstart)="dragStart(word, 'left')"
+        (dragend)="dragEnd()"
+      >
+        {{ word.name }}
+      </button>
+      
       </div>
     </div>
     <div class="game-container row">
     <!-- مناطق السحب والإفلات -->
     <div class="drop-zone">
-      <div class=" row gap-4">
+      <div class=" row ">
         <!-- منطقة "فعل" -->
-        <div header="فعل" class="col drop-container" pDroppable (onDrop)="checkMatch('فعل')" (onDragOver)="allowDrop($event)">
-          <div class="drop-list">
+        <div header="فعل" class="col drop-container " pDroppable (onDrop)="checkMatch('فعل')" (onDragOver)="allowDrop($event)" >
+          <div class="drop-list ">
             <p>فعل</p>
             <button *ngFor="let word of lists['فعل']" class="word-button">
               {{ word.name }}
@@ -200,7 +203,7 @@
         </div>
   
         <!-- منطقة "فاعل" -->
-        <div header="فاعل" class="col drop-container" pDroppable (onDrop)="checkMatch('فاعل')" (onDragOver)="allowDrop($event)">
+        <div header="فاعل" class="col drop-container dash" pDroppable (onDrop)="checkMatch('فاعل')" (onDragOver)="allowDrop($event)">
           <div class="drop-list">
             <p>فاعل</p>
             <button *ngFor="let word of lists['فاعل']" class="word-button">
@@ -265,56 +268,81 @@
 </p-dialog>
 <!-- حوار "أحسنت" عند الفوز -->
 <p-dialog
- [(visible)]="showWinDialog"
- [modal]="true"
- [closable]="false"
- [style]="{ width: '22rem' }"
->
- <div class="win-content text-center">
-   <h2 class="title pt-2">أحسنت يا {{playerName}}</h2>
-   <!-- <p class="text-2xl font-bold text-center">تهانينا!</p> -->
-   <div class="stars mb-4">
-     <ng-container *ngFor="let star of stars; let i = index">
-       <svg
-         xmlns="http://www.w3.org/2000/svg"
-         [ngClass]="{
-           'filled-star': i < getStarsCount(),
-           'empty-star': i >= getStarsCount()
-         }"
-         viewBox="0 0 24 24"
-         width="50px"
-         height="50px"
-         class="m-2"
-       >
-         <path
-           d="M12 .587l3.668 7.571 8.314 1.184-6.004 5.831 1.417 8.268L12 18.896l-7.395 3.892 1.417-8.268-6.004-5.831 8.314-1.184z"
-         />
-       </svg>
-     </ng-container>
-   </div>
-   <div class="stats d-flex justify-content-around mb-4">
-     <div class="points">
-       <p class="label">النقاط</p>
-       <p class="value">{{ points }}</p>
-     </div>
-     <div class="separator"></div>
-     <div class="time">
-       <p class="label">المحاولات</p>
-       <p class="value">{{ attempts }}</p>
-     </div>
-   </div>
-   <div class="buttons-container d-flex justify-content-center">
-     <!-- زر إعادة اللعبة -->
-     <button
-       pButton
-       class="pi pi-replay p-button-secondary m-2"
-       (click)="
-         restartGame();
-         showWinDialog = false
-       "
-       pTooltip="إعادة اللعبة"
-       tooltipPosition="right"
-     ></button>
-   </div>
- </div>
-</p-dialog>
+        [(visible)]="showWinDialog"
+        [modal]="true"
+        [closable]="false"
+        [style]="{ width: '22rem' }"
+      >
+        <div class="win-content text-center">
+          <h2 class="title pt-2">أحسنت يا  {{ playerName }}</h2>
+
+          <div class="stars mb-4">
+            <ng-container *ngFor="let star of stars; let i = index">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                [ngClass]="{
+                  'filled-star': i < getStarsCount(),
+                  'empty-star': i >= getStarsCount()
+                }"
+                viewBox="0 0 24 24"
+                width="50px"
+                height="50px"
+                class="m-2"
+              >
+                <path
+                  d="M12 .587l3.668 7.571 8.314 1.184-6.004 5.831 1.417 8.268L12 18.896l-7.395 3.892 1.417-8.268-6.004-5.831 8.314-1.184z"
+                />
+              </svg>
+            </ng-container>
+          </div>
+
+          <div class="stats d-flex justify-content-around mb-4">
+            <div class="points">
+              <p class="label">النقاط</p>
+              <p class="value">{{ points }}</p>
+            </div>
+            <div class="separator"></div>
+            <div class="time">
+              <p class="label">المحاولات</p>
+              <p class="value">{{ attempts }}</p>
+            </div>
+          </div>
+
+          <div class="buttons-container d-flex justify-content-center">
+            <button
+              pButton
+              icon="pi pi-replay"
+              class="p-button-secondary m-2"
+              (click)="restartGame()"
+              pTooltip="إعادة اللعبة"
+              tooltipPosition="left"
+            ></button>
+          </div>
+        </div>
+      </p-dialog>
+    </div>
+    <div *ngIf="showFeedback" class="animation-container text-center">
+      <!-- عرض إشارة الصح أو الخطأ مع الرسالة -->
+      <span
+        class="animate__animated"
+        [ngClass]="{
+          'animate__shakeX': isFailureAnimation,
+          'animate__bounceIn': !isFailureAnimation
+        }"
+      >
+        <!-- عرض العلامة بناءً على حالة الإجابة -->
+        <ng-container *ngIf="isFailureAnimation; else successTemplate">
+          ❌
+          <p class="font-bold">حاول مرة أخرى</p>
+        </ng-container>
+        <ng-template #successTemplate>
+          ✅
+          <p class="font-bold">إجابة صحيحة</p>
+        </ng-template>
+      </span>
+    </div>
+    
+   
+         
+    </div>
+    
