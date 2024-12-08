@@ -1,14 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DragDropModule } from 'primeng/dragdrop';
-
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
-
 import { CommonModule } from '@angular/common';    // استيراد CommonModule
 import { Howl } from 'howler';
 import { DialogModule } from 'primeng/dialog';
@@ -23,23 +14,16 @@ import { PanelModule } from 'primeng/panel'; // استيراد الوحدة ال
 import { ProgressBarModule } from 'primeng/progressbar';
 import 'animate.css';
 
-
-
 interface Word {
   name: string; // اسم الكلمة
-  weight: 'فعل' | 'فاعل' | 'مفعل'; // نوع التصنيف
+  weight: 'فَعَلَ' | 'فَاعَلَ' | 'مَفْعَل'; // نوع التصنيف
 }
-
 
 @Component({
   selector: 'app-drop',
   standalone: true,
-  imports: [CommonModule, DragDropModule,DialogModule,
-    CardModule,
-    TooltipModule,
-    FormsModule,
-    ButtonModule,
-    InputTextModule,ChipsModule,PanelModule,ProgressBarModule], // تأكد من تضمين CommonModule و DragDropModule هنا
+  imports: [CommonModule, DragDropModule,DialogModule,CardModule,TooltipModule,FormsModule,ButtonModule,
+InputTextModule,ChipsModule,PanelModule,ProgressBarModule], // تأكد من تضمين CommonModule و DragDropModule هنا
   templateUrl: './drop.component.html',
   styleUrls: ['./drop.component.css'], // تصحيح الكلمة من styleUrl إلى styleUrls
 })
@@ -93,8 +77,6 @@ allowDrop(event: Event): void {
     }
   }
   
-
-  
   setDataType(type: string) {
     this.selectedDataType = type;
     this.gameType =
@@ -112,30 +94,40 @@ allowDrop(event: Event): void {
   showInstructions() {
     this.display = true;
   }
-  availableWords: Word[] = [
-    { name: 'قرأ', weight: 'فعل' },
-    { name: 'شعر', weight: 'فعل' },
-    { name: 'طلب', weight: 'فعل' },
-    { name: 'شرب', weight: 'فعل' },
-    { name: 'كتب', weight: 'فعل' },
+  private getShuffledWords(): Word[] {
+    const words: Word[] = [
+      { name: 'قَرَأَ', weight: 'فَعَلَ' },
+      { name: 'شَعَرَ', weight: 'فَعَلَ' },
+      { name: 'فَاقَ', weight: 'فَعَلَ' },
+      { name: 'سَكَنَ', weight: 'فَعَلَ' },
+      { name: 'كَتَبَ', weight: 'فَعَلَ' },
+      { name: 'نَاوَرَ', weight: 'فَاعَلَ' },
+      { name: 'نَاضَلَ', weight: 'فَاعَلَ' },
+      { name: 'وَاصَلَ', weight: 'فَاعَلَ' },
+      { name: 'سَاوَمَ', weight: 'فَاعَلَ' },
+      { name: 'هَاجَرَ', weight: 'فَاعَلَ' },
+      { name: 'مَلْعَب', weight: 'مَفْعَل' },
+      { name: 'مَصْنَع', weight: 'مَفْعَل' },
+      { name: 'مَعْلَم', weight: 'مَفْعَل' },
+      { name: 'مَجْمَع', weight: 'مَفْعَل' },
+      { name: 'مَكْتَب', weight: 'مَفْعَل' },
+    ];
+  
+    // تطبيق خوارزمية الخلط
+    for (let i = words.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [words[i], words[j]] = [words[j], words[i]];
+    }
+  
+    return words;
+  }
+  availableWords: Word[] = this.getShuffledWords();
 
-    { name: 'قارئ', weight: 'فاعل' },
-    { name: 'طالب', weight: 'فاعل' },
-    { name: 'قادر', weight: 'فاعل' },
-    { name: 'عالم', weight: 'فاعل' },
-    { name: 'شاعر', weight: 'فاعل' },
-
-    { name: 'مجلس', weight: 'مفعل' },
-    { name: 'مصنع', weight: 'مفعل' },
-    { name: 'معلم', weight: 'مفعل' },
-    { name: 'مجمع', weight: 'مفعل' },
-    { name: 'مكتب', weight: 'مفعل' },
-  ];
   // تعديل نوع lists ليقبل فهرسة بواسطة string
 lists: { [key: string]: Word[] } = {
-  فعل: [],
-  فاعل: [],
-  مفعل: []
+  فَعَلَ: [],
+  فَاعَلَ: [],
+  مَفْعَل: []
 };
 
   matchedCards: Word[] = [];
@@ -152,7 +144,6 @@ ngOnInit(): void {
     this.openPlayerName(); // فتح الحوار إذا كان الاسم محفوظًا مسبقًا
   }
 }
-  
 
  // تحديث dragStart ليحفظ العنصر (الزر والكلمة)
 dragStart(item: Word, from: 'left' | 'right'): void {
@@ -165,42 +156,35 @@ dragEnd(): void {
   this.draggedFrom = '';
 }
  // تحديث checkMatch لتثبيت الزر نفسه
- checkMatch(targetWeight: 'فعل' | 'فاعل' | 'مفعل'): void {
+ checkMatch(targetWeight: 'فَعَلَ' | 'فَاعَلَ' | 'مَفْعَل'): void {
   this.attempts++;
   if (this.draggedItem && this.draggedItem.weight === targetWeight) {
-    // إجابة صحيحة
     this.lists[targetWeight].push(this.draggedItem);
-    this.matchedCards.push(this.draggedItem);
+
+    // إزالة العنصر من الكلمات المتوفرة
     this.availableWords = this.availableWords.filter(
       (word) => word !== this.draggedItem
     );
+
+    this.matchedCards.push(this.draggedItem);
     this.points++;
     this.correctSound.play();
 
-    // عرض علامة الصح
     this.isFailureAnimation = false;
     this.showFeedback = true;
-    setTimeout(() => (this.showFeedback = false), 1000); // إخفاء الرسالة بعد ثانية
+    setTimeout(() => (this.showFeedback = false), 1000);
 
-    if (this.matchedCards.length === this.wordList.length) {
-      this.displayWinMessage();
-    }
+    // التحقق من الفوز بعد إضافة الكلمة
+    this.checkForWin();
   } else {
-    // إجابة خاطئة
     this.wrongSound.play();
-
-    // عرض علامة الخطأ
     this.isFailureAnimation = true;
     this.showFeedback = true;
-    setTimeout(() => (this.showFeedback = false), 1000); // إخفاء الرسالة بعد ثانية
+    setTimeout(() => (this.showFeedback = false), 1000);
   }
-
-  // إعادة تعيين العنصر المسحوب
   this.draggedItem = null;
   this.draggedFrom = '';
 }
-
-
 startTimer() {
   this.timeLeft = this.maxTime; // تعيين الوقت المتبقي عند بدء المؤقت
   clearInterval(this.timerInterval); // مسح أي مؤقت سابق
@@ -224,37 +208,36 @@ getProgressPercentage(): number {
   return (this.timeLeft / this.maxTime) * 100;
 }
 
-  checkForWin() {
-    if (this.matchedCards.length === this.wordList.length) {
-      clearInterval(this.intervalId); // توقف المؤقت عند الفوز
-      this.showWinDialog = true; // إظهار حوار الفوز    
-      this.displayWinMessage();
-    } else if (this.timeLeft === 0 && this.matchedCards.length < this.wordList.length) {
-      this.showDialog = true; // عرض نافذة الفشل عند انتهاء الوقت بدون إكمال
-    }
+checkForWin() {
+  // تحقق إذا كانت جميع الكلمات قد تمت مطابقتها
+  if (this.matchedCards.length === this.wordList.length) {
+    clearInterval(this.timerInterval); // إيقاف المؤقت
+    this.showWinDialog = true; // إظهار نافذة الفوز
+    this.displayWinMessage(); // عرض رسالة الفوز
   }
-
-  displayWinMessage() {
-    this.warningSound.stop(); // إيقاف صوت التحذير
-    this.correctSound.play(); // تشغيل صوت النجاح
-    this.starsCount = this.getStarsCount(); // حساب عدد النجوم
-    this.showWinDialog = true; // عرض نافذة الفوز
-  }
-  
-  
+}
+displayWinMessage() {
+  this.warningSound.stop(); // إيقاف صوت التحذير إذا كان يعمل
+  this.correctSound.play(); // تشغيل صوت الفوز
+  this.starsCount = this.getStarsCount(); // حساب عدد النجوم بناءً على النقاط
+  this.showWinDialog = true; // عرض نافذة الفوز
+}
   startGame() {
     this.points = 0;
     this.attempts = 0;
     this.matchedCards = [];
-    this.lists = { فعل: [], فاعل: [], مفعل: [] }; // إعادة تعيين القوائم
-    this.startTimer(); // بدء المؤقت
-  }
+    this.lists = { فَعَلَ: [], فَاعَلَ: [], مَفْعَل: [] };
   
+    // إعادة ملء availableWords بالكلمات المختلطة
+    this.availableWords = this.getShuffledWords();
+  
+    this.startTimer();
+  }
+
   restartGame() {
     clearInterval(this.intervalId);
-    this.availableWords = [...this.wordList]; 
-    this.lists = { فعل: [], فاعل: [], مفعل: [] }; // إعادة تعيين القوائم
-
+    this.availableWords = this.getShuffledWords(); // إعادة تعيين الكلمات المختلطة
+    this.lists = { فَعَلَ: [], فَاعَلَ: [], مَفْعَل: [] }; // إعادة تعيين القوائم
     this.points = 0;
     this.attempts = 0;
     this.matchedCards = [];

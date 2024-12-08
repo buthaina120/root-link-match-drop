@@ -141,7 +141,7 @@
 </div>
 
 <!-- معلومات النقاط والمحاولات -->
-<div class="row headerGap">
+<div class="row headerGap d-flex justify-content-center align-items-center text-center">
   <!-- النقاط -->
   <div class="col">
     <div class="d-inline-block px-2 py-1 rounded mt-3 font-bold">
@@ -192,31 +192,31 @@
     <!-- مناطق السحب والإفلات -->
     <div class="drop-zone">
       <div class=" row ">
-        <!-- منطقة "فعل" -->
-        <div header="فعل" class="col drop-container " pDroppable (onDrop)="checkMatch('فعل')" (onDragOver)="allowDrop($event)" >
+        <!-- منطقة "فَعَلَ" -->
+        <div header="فَعَلَ" class="col drop-container " pDroppable (onDrop)="checkMatch('فَعَلَ')" (onDragOver)="allowDrop($event)" >
           <div class="drop-list ">
-            <p>فعل</p>
-            <button *ngFor="let word of lists['فعل']" class="word-button">
+            <p>فَعَلَ</p>
+            <button *ngFor="let word of lists['فَعَلَ']" class="word-button">
               {{ word.name }}
             </button>
           </div>
         </div>
   
-        <!-- منطقة "فاعل" -->
-        <div header="فاعل" class="col drop-container dash" pDroppable (onDrop)="checkMatch('فاعل')" (onDragOver)="allowDrop($event)">
+        <!-- منطقة "فَاعَلَ" -->
+        <div header="فَاعَلَ" class="col drop-container dash" pDroppable (onDrop)="checkMatch('فَاعَلَ')" (onDragOver)="allowDrop($event)">
           <div class="drop-list">
-            <p>فاعل</p>
-            <button *ngFor="let word of lists['فاعل']" class="word-button">
+            <p>فَاعَلَ</p>
+            <button *ngFor="let word of lists['فَاعَلَ']" class="word-button">
               {{ word.name }}
             </button>
           </div>
         </div>
   
-        <!-- منطقة "مفعل" -->
-        <div header="مفعل" class="col drop-container" pDroppable (onDrop)="checkMatch('مفعل')" (onDragOver)="allowDrop($event)">
+        <!-- منطقة "مَفْعَل" -->
+        <div header="مَفْعَل" class="col drop-container" pDroppable (onDrop)="checkMatch('مَفْعَل')" (onDragOver)="allowDrop($event)">
           <div class="drop-list">
-            <p>مفعل</p>
-            <button *ngFor="let word of lists['مفعل']" class="word-button">
+            <p>مَفْعَل</p>
+            <button *ngFor="let word of lists['مَفْعَل']" class="word-button">
               {{ word.name }}
             </button>
           </div>
@@ -341,8 +341,6 @@
         </ng-template>
       </span>
     </div>
-    
-   
-         
     </div>
+    
     

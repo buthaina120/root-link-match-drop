@@ -1,22 +1,10 @@
-.card {
-  width: 150px;
-  height: 150px;
-  margin: 10px;
-}
+
 .game-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   width: 600px;
-}
-.card {
-  flex: 1 1 100px;
-  margin: 10px;
-  max-width: 150px;
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  width: 100%;
-  max-width: 150px;
 }
 * {
   margin: 0;
@@ -122,72 +110,6 @@ body {
   font-weight: bold;
 }
 
-.cards-grid {
-  display: inline-grid;
-  grid-template-columns: auto auto auto auto;
-  background-color: #f2f2f3;
-  border-radius: inherit;
-  padding: inherit;
-  align-content: center;
-}
-
-.card {
-  width: 100px;
-  height: 100px;
-  margin: 10px;
-  perspective: 1000px;
-  position: relative;
-  font-size: 20px;
-  border: none;
-  background-color: transparent;
-}
-
-.card.matched {
-  opacity: 0;
-  transition: opacity 1.3s ease-in;
-}
-
-.card-inner {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.5s ease-in-out;
-  transform-style: preserve-3d;
-  color: #4c9085;
-  font-size: 20px;
-}
-.card.flipped .card-inner {
-  transform: rotateY(180deg);
-}
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-  color: rgb(255, 255, 255);
-  border-radius: 20px;
-  font-size: 25px;
-}
-
-
-.card-front {
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  background-color: rgb(255, 255, 255);
-  border: 6px solid #4c9085;
-}
-
-.card-back {
-  background-color: #4c9085;
-  transform: rotateY(180deg);
-}
 .row {
   align-items: center;
   font-size: 1.2rem;
@@ -410,7 +332,6 @@ body {
   border-radius: 15%;
 }
 
-
 .headerGap{
   column-gap: 80px
 }
@@ -445,10 +366,7 @@ body {
     margin-bottom: 1rem;
   }
 
-  .cards-grid {
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 8px;
-  }
+ 
   p-dialog {
     max-width: 90vw;
     max-height: 80vh;
@@ -493,26 +411,9 @@ body {
     width: 100%;
   }
 
-
-
   .timer-container {
     width: 100%;
     height: 40px;
-  }
-
-  .cards-grid {
-    grid-template-columns: repeat(4, 1fr); 
-}
-
-  .card {
-    width: 80px;
-    height: 80px;
-    margin: 0px;
-    perspective: 1000px;
-    position: relative;
-    font-size: 15px;
-    border: none;
-    background-color: transparent;
   }
   .row {
     gap: 10px;
@@ -520,21 +421,11 @@ body {
     flex-wrap: nowrap;
 
   }
-  .custom-card {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .cardGap {
-    margin-bottom: 20px;
-  }
+ 
   p-dialog {
     width: 90%; 
   }
 
-  .card-back {
-    font-size: 20px;
-  }
 }
 .container {
   display: flex;
@@ -543,8 +434,7 @@ body {
   gap: 20px;
 }
 
-.available-words,
-.drop-list {
+.available-words {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -552,12 +442,13 @@ body {
 }
 
 .word-button {
-  padding: 10px 15px;
+  padding: 12px 15px;
+  justify-content: center;
+  margin: 30;
   background-color: #4c9085;
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: grab;
   font-size: 14px;
   font-weight: bold;
   transition: all 0.3s ease;
@@ -572,12 +463,11 @@ body {
   min-height: 300px;
   width: 120px;
   border-radius: 10px;
-  padding: 10px;
+  padding: 0px;
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
   background-color: #f9f9f9;
 }
 
@@ -601,11 +491,20 @@ border: 1px solid rgb(172, 172, 172);
 border-radius: 15px;
 width: 600px;
 padding: 20px;
+
 }
 .pepe {
   animation-name: pepe;
   animation-iteration-count: 3; /* عدد التكرارات */
   animation-duration: 0.3s; /* مدة كل تكرار */
 }
-
-
+.drop-list {
+  display: flex;
+  flex-direction: column; /* ترتيب العناصر عموديًا */
+  align-items: center; /* توسيط العناصر أفقياً */
+  gap: 10px; /* مسافة بين الكلمات */
+  padding: 10px;
+  height: 100%; /* لضمان ملء المنطقة بالكامل */
+  overflow-y: auto; /* إضافة شريط تمرير عند الحاجة */
+  border-radius: 8px; /* زوايا دائرية للمظهر الجمالي */
+}
