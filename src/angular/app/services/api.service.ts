@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 
 export class ApiService {
   private apiUrl = 'https://siwar.ksaa.gov.sa/api/v1/external/public';
-  private apiKey = 'd9cfaf7-8e92-4f62-908a-5074dc82a4c6'
+  private apiKey = '5a0b8a82-f82e-47ab-b8f7-b102435053f9'
  
   constructor(private http: HttpClient) {}
  
