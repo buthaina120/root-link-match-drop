@@ -110,7 +110,6 @@ export class SynonymsComponent implements OnInit {
   }
 
 
-  
 setDataType(type: string) {
     this.selectedDataType = type;
     this.gameType =
@@ -350,19 +349,29 @@ setDataType(type: string) {
   }
 
   constructor(private rest: ApiService) {}
-  root: string | undefined;
 
- async getSynonyms(query: string): Promise<string> {
+
+
+ async getLemma(): Promise<any[]> {
+   return await firstValueFrom(this.rest.getLemma());
+}
+
+ async getSynonyms(query: string): Promise<any[]> {
    return await firstValueFrom(this.rest.getSynonyms(query));
 }
-  ngOnInit() {
+  async ngOnInit() {
     // ApiService هنا
   /*  this.getSynonyms('ضرب').then(data => {
       console.log(data);
     });*/
 
-    const Synonyms = this.getSynonyms('ضرب')
-    console.log(Synonyms)
+
+    const lemmaTemp = await this.getLemma()
+    console.log(lemmaTemp)
+
+
+    const Synonyms1 = await this.getSynonyms('محرك')
+    console.log( Synonyms1[0].synonyms)
   }
 
   restartGame() {
