@@ -20,9 +20,21 @@ export class ApiService {
  
     return this.http.get(this.apiUrl+'v1/external/public/synonyms' + `?query=${query}`, { headers });
   }
-  
+  getTransulation(query: string): Observable<any> {
+    const headers = new HttpHeaders({
+      apikey: this.apiKey,
+    });
  
+    return this.http.get(this.apiUrl+'v1/external/public/senses' + `?query=${query}`, { headers });
+  }
+  getAntonyms(query: string): Observable<any> {
+    const headers = new HttpHeaders({
+      apikey: this.apiKey,
+    });
  
+    return this.http.get(this.apiUrl+'v1/external/public/opposites' + `?query=${query}`, { headers });
+  }
+
   getRoot(query: string): Observable<any> {
     const headers = new HttpHeaders({
       apikey: this.apiKey,

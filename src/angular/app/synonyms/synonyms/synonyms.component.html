@@ -2,14 +2,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>لعبة ذاكرة</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
   </head>
-
   <div *ngIf="homeflag" class="container" style="background-color: #f8f8f8">
     <div class=" justify-content-center text-center">
       <div class="col-12">
@@ -25,7 +23,6 @@
         <div class="flex align-items-center gap-3 mb-4 mt-4">
             <input pInputText [(ngModel)]="playerName" id="username" class="flex-auto py-2" autocomplete="off" placeholder="أدخل اسمك هنا" />
         </div>
- 
         <div class="flex justify-content-center gap-2">
             <button
             type="p-button" (click)="setflag();  openPlayerNameDialog()"
@@ -131,7 +128,6 @@
       </p-dialog>
     </div>
   </div>
-
   <div *ngIf="levelflag" class="container" style="background-color: #f2f2f3">
     <p>نوع التحدي</p>
     <div class="data-type-selection">
@@ -146,7 +142,6 @@
         />
         <p>مترادفات</p>
       </button>
-
       <button
         (click)="selectedDataType = 'antonyms'"
         class="data-type-button"
@@ -158,7 +153,6 @@
         />
         <p>متضادات</p>
       </button>
-
       <button
         (click)="selectedDataType = 'translations'"
         class="data-type-button"
@@ -171,7 +165,6 @@
         <p>ترجمات</p>
       </button>
     </div>
-
     <p>مستوى الصعوبة</p>
     <div class="level-buttons">
       <button
@@ -286,7 +279,7 @@
     <div class="stars text-center mb-4">
       <ng-container *ngFor="let star of stars; let i = index">
         <svg
-          class="m-2"
+          class="m-2  animate__animated  animate__zoomIn"
           [ngClass]="{
             'filled-star': i < getStarsCount(),
             'empty-star': i >= getStarsCount()
@@ -321,10 +314,10 @@
     [closable]="false"
     [style]="{ width: '22rem' }"
   >
-    <div class="win-content text-center">
+    <div class="win-content text-center p-2">
       <h2 class="title">أحسنت يا {{playerName}}</h2>
       <!-- <p class="text-2xl font-bold text-center">تهانينا!</p> -->
-      <div class="stars mb-4">
+      <div class="stars mb-4  animate__animated  animate__zoomIn">
         <ng-container *ngFor="let star of stars; let i = index">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -346,12 +339,12 @@
       <div class="stats d-flex justify-content-around mb-4">
         <div class="points">
           <p class="label">النقاط</p>
-          <p class="value">{{ points }}</p>
+          <p class="value  animate__animated  animate__zoomIn">{{ points }}</p>
         </div>
         <div class="separator"></div>
         <div class="time">
           <p class="label">المحاولات</p>
-          <p class="value">{{ attempts }}</p>
+          <p class="value  animate__animated  animate__zoomIn">{{ attempts }}</p>
         </div>
       </div>
       <div class="buttons-container d-flex justify-content-center">
