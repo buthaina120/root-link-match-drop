@@ -1,8 +1,8 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.cards-grid *{
+  padding: 0px;
+  
 }
+
 .highlight {
   background-color: #f8f8f8;
   width: 80px;
@@ -36,22 +36,22 @@
   margin: 0 10px;
   padding: 10px 20px;
   color: #ffffff;
-  background-color: #82bbb7;
+  background-color: #52a39d;
   border-radius: 15px;
   cursor: pointer;
   transition: border 0.3s ease;
   font-size: 1.5rem;
   width: 200px;
-  border: #82bbb7;
+  border: #52a39d;
   height: 120px;
 }
 .level-button:hover {
   background-color: #0f2837;
-  color: #82bbb7;
+  color: #52a39d;
 }
 .level-button.selected {
   background-color: #0f2837;
-  color: #82bbb7;
+  color: #52a39d;
 }
 .start-button {
   padding: 5px;
@@ -62,7 +62,7 @@
   transition: border 0.3s ease;
   font-size: 1.5rem;
   min-width: 100px;
-  border: #82bbb7;
+  border: #52a39d;
 }
 .score-panel {
   display: flex;
@@ -73,7 +73,7 @@
 }
 .score-box,
 .attempts-box {
-  background-color: #4c9085;
+  background-color: #52a39d;
   color: white;
   font-size: 20px;
   padding: 10px 20px;
@@ -87,9 +87,9 @@
 .cards-grid {
   display: inline-grid;
   grid-template-columns: auto auto auto auto;
-  background-color: #f2f2f3;
+  background-color: #f8f8f8;
   border-radius: inherit;
-  padding: inherit;
+  padding: 25px;
   align-content: center;
 }
 .card {
@@ -112,7 +112,7 @@
   height: 100%;
   transition: transform 0.5s ease-in-out;
   transform-style: preserve-3d;
-  color: #4c9085;
+  color: #52a39d;
   font-size: 20px;
 }
 .card.flipped .card-inner {
@@ -138,10 +138,10 @@
   background-repeat: no-repeat;
 
   background-color: rgb(255, 255, 255);
-  border: 6px solid #4c9085;
+  border: 6px solid #52a39d;
 }
 .card-back {
-  background-color: #4c9085;
+  background-color: #52a39d;
   transform: rotateY(180deg);
 }
 .row {
@@ -150,7 +150,7 @@
 }
 .restart-button {
   padding: 10px 10px;
-  background-color: #4c9085;
+  background-color: #52a39d;
   color: white;
   border: none;
   border-radius: 8px;
@@ -166,17 +166,16 @@
   transform: scale(0.95);
 }
 .timer-container {
-  width: 510px;
+  width: 85%;
   height: 40px;
   border-radius: 10px;
   overflow: hidden;
   position: relative;
-  margin: 20px;
   border: 4px solid #f2f2f3;
 }
 .progress-bar {
   height: 100%;
-  background-color: #4c9085;
+  background-color: #52a39d;
   transition: width 1s linear, background-color 0.3s;
 }
 .timer-text {
@@ -193,12 +192,12 @@
   top: 15px;
   right: 15px;
   font-size: 1.8rem;
-  color: #4c9085;
+  color: #52a39d;
   cursor: pointer;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 .back-arrow:hover {
-  color: #2d6658;
+  color: #52a39d;
 }
 .back-arrow:active {
   transform: scale(0.9);
@@ -213,7 +212,7 @@
   padding: 20px 10px;
   border-radius: 5px;
   background-color: #ffffff;
-  color: #4c9085;
+  color: #52a39d;
   border: #ffffff;
   border-radius: 15px;
   cursor: pointer;
@@ -244,13 +243,7 @@
   height: 5rem;
   background-color: #95a5a6;
 }
-.buttons-container button {
-  background-color: #0f2837 !important;
-  color: #ffffff !important;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 15%;
-}
+
 .filled-star {
   fill: gold;
 }
@@ -258,7 +251,7 @@
   fill: lightgray;
 }
 .progress-bar.warning {
-  background-color: rgb(170, 25, 25);
+  background-color:#ca3836;
 }
 .start-button-container {
   margin-top: 60px;

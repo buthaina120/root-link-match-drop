@@ -27,14 +27,14 @@
             <button
             type="p-button" (click)="setflag();  openPlayerNameDialog()"
             class="px-4 m-2 p-button p-component text-xl bg-sec-theme"
-            >حفظ
+            >استمر
           </button>
         </div>
     </p-dialog>
 
       <div  (click)="openPlayerNameDialog()"  style="
         margin-bottom: 40px;" class="col-12 ">
-        <button pButton type="button" class="text-2xl bg-sec-theme px-4 mt-3">
+        <button pButton type="button" class="text-2xl bg-sec-theme px-4 mt-3 ">
           ابدأ
         </button>
       </div>
@@ -43,13 +43,13 @@
           <button
             pButton
             type="button"
-            pTooltip="تعليمات اللعبة"
+            pTooltip="تعليمات التحدي"
             tooltipPosition="bottom"
             class="bg-sec-theme p-2 m-2"
             (click)="showInstructions()"
 
           >
-            <i class="pi pi-question-circle"></i>
+            <i class="pi pi-info-circle"></i>
           </button>
         </div>
       </div>
@@ -60,11 +60,10 @@
         [responsive]="true"
         [style]="{ width: '700px', color: 'black' }"
       >
-        <p class="text-2xl font-bold text-center">تعليمات لعبة طابق</p>
-        <p class="mb-4 text-center">
-          هدف اللعبة: مطابقة جميع البطاقات بأقل وقت ممكن!
-        </p>
-
+      <p class="text-2xl font-bold text-center">تعليمات تحدي طابق</p>
+      <p class="mb-4 text-center">
+        هدف التحدي: مطابقة جميع البطاقات بأقل وقت ممكن!
+      </p>
         <div
           class="row"
           style="
@@ -192,32 +191,32 @@
     <button
       (click)="selectLevel()"
       *ngIf="selectedDataType && selectedLevel"
-      class="mt-5 start-button"
+      class="text-2xl bg-sec-theme px-4 mt-3 start-button animate__animated animate__fadeIn"
     >
       ابدأ
     </button>
   </div>
-  <!-- الكود الخاص بواجهة اللعبة -->
+  
   <div *ngIf="gameflag" class="container text-center">
-    <!-- زر الرجوع -->
+    
     <div class="back-arrow" (click)="goBack()">
-      <i class="pi pi-arrow-right"></i>
+      <i class="pi pi-chevron-right"></i>
     </div>
 
-    <!-- معلومات النقاط والمحاولات -->
+  
     <div class="row headerGap">
-      <!-- النقاط -->
+      
       <div class="col">
         <div class="d-inline-block px-2 py-1 rounded mt-3 font-bold">
           <p class="m-0">النقاط:</p>
           <p class="border highlight rounded">{{ points }}</p>
         </div>
       </div>
-      <!-- نوع التحدي -->
+    
       <div class="col">
         <p>{{ gameType }}</p>
       </div>
-      <!-- المحاولات -->
+    
       <div class="col">
         <div class="d-inline-block px-2 py-1 rounded mt-3 font-bold">
           <p class="m-0">المحاولات:</p>
@@ -226,7 +225,7 @@
       </div>
     </div>
 
-    <!-- مؤقت اللعبة -->
+  
     <div class="timer-container row">
       <div
         class="progress-bar"
@@ -236,9 +235,8 @@
       <div class="timer-text">{{ timeLeft }} ثواني</div>
     </div>
 
-    <!-- شبكة البطاقات -->
     <div
-      class="cards-grid"
+      class="cards-grid border"
       [ngClass]="{
         'level-1': difficulty === 1,
         'level-2': difficulty === 2,
@@ -265,7 +263,7 @@
       </div>
     </div>
   </div>
-  <!-- حوار "انتهى الوقت" -->
+  
   <p-dialog
     [(visible)]="showDialog"
     [modal]="true"
@@ -300,14 +298,14 @@
         type="button"
         (click)="restartGame()"
         class="p-2 m-2 p-button p-component bg-sec-theme"
-        pTooltip="إعادة اللعبة"
+        pTooltip="إعادة التحدي"
         tooltipPosition="bottom"
       >
         <i class="m-2 pi pi-replay" style="font-size: 1rem"></i>
       </button>
     </div>
   </p-dialog>
-  <!-- حوار "أحسنت" عند الفوز -->
+  
   <p-dialog
     [(visible)]="showWinDialog"
     [modal]="true"
@@ -315,8 +313,8 @@
     [style]="{ width: '22rem' }"
   >
     <div class="win-content text-center p-2">
-      <h2 class="title">أحسنت يا {{playerName}}</h2>
-      <!-- <p class="text-2xl font-bold text-center">تهانينا!</p> -->
+      <h2 class="title">أحسنت  {{playerName}}</h2>
+      
       <div class="stars mb-4  animate__animated  animate__zoomIn">
         <ng-container *ngFor="let star of stars; let i = index">
           <svg
@@ -346,28 +344,50 @@
           <p class="label">المحاولات</p>
           <p class="value  animate__animated  animate__zoomIn">{{ attempts }}</p>
         </div>
+        <div class="separator"></div>
+        <div class="time">
+          <p class="label">الوقت</p>
+          <p class="value  animate__animated  animate__zoomIn">{{maxTime-timeLeft}}</p>
+        </div>
       </div>
       <div class="buttons-container d-flex justify-content-center">
-        <!-- زر إعادة اللعبة -->
+        <button
+        *ngIf="selectedLevel == 3"
+        type="button"
+        (click)="restartToLevelFlag()"
+        class="p-2 m-2 p-button p-component bg-sec-theme"
+        pTooltip=" العودة الى المستويات "
+        tooltipPosition="right"
+      >
+        <i class="m-2 pi pi-chevron-right" style="font-size: 1rem"></i>
+      </button>
+
         <button
           pButton
           class="pi pi-replay p-button-secondary m-2"
-          (click)="
-            currentLevel === 3 ? restartFromFirstLevel() : restartGame();
+          (click)=" restartGame();
             showWinDialog = false
           "
-          pTooltip="إعادة اللعبة"
+          pTooltip="إعادة التحدي"
           tooltipPosition="right"
         ></button>
-        <!-- زر المستوى التالي -->
+    
         <button
           *ngIf="currentLevel < 3"
           pButton
           class="pi pi-backward p-button-rounded p-button-secondary m-2"
-          pTooltip="المستوى التالي"
+          pTooltip="الانتقال الى المستوى التالي"
           tooltipPosition="left"
           (click)="nextLevel(); showWinDialog = false"
         ></button>
+        <button
+        *ngIf="currentLevel == 3"
+        pButton
+        class="pi pi-list p-button-rounded p-button-secondary m-2"
+        pTooltip="العودة الى قائمة التحديات "
+        tooltipPosition="left"
+        [routerLink]="['']" 
+      ></button>
       </div>
     </div>
   </p-dialog>
