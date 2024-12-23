@@ -2,7 +2,6 @@
   padding: 0px;
   
 }
-
 .highlight {
   background-color: #f8f8f8;
   width: 80px;
@@ -110,7 +109,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.4s ease-in-out;
   transform-style: preserve-3d;
   color: #52a39d;
   font-size: 20px;
@@ -146,7 +145,7 @@
 }
 .row {
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 .restart-button {
   padding: 10px 10px;
@@ -265,6 +264,22 @@
 }
 .headerGap{
   column-gap: 80px
+}
+
+.custom-card{
+  min-Height: 250px;
+  height: auto;
+  border: 2px;
+  border-Radius: 15px;
+  background-Color: #f8f8f8;
+  color: black;
+  padding: 10px;
+  gap: 50px;
+}
+.custom-card img{
+  width: 200px;
+  height: auto ;
+  margin-bottom: 20px;
 }
 @media (max-width: 768px) {
   .container {
@@ -393,3 +408,4 @@
 .p-inputtext:enabled {
   border-color: rgba(15, 40, 55, 0.1);  /* 50% شفافية */
 }
+

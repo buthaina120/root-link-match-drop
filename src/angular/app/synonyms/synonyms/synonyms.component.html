@@ -55,76 +55,57 @@
       </div>
 
       <p-dialog
-        [(visible)]="display"
-        modal="modal"
-        [responsive]="true"
-        [style]="{ width: '700px', color: 'black' }"
-      >
-      <p class="text-2xl font-bold text-center">تعليمات تحدي طابق</p>
-      <p class="mb-4 text-center">
-        هدف التحدي: مطابقة جميع البطاقات بأقل وقت ممكن!
-      </p>
-        <div
-          class="row"
-          style="
-            display: flex;
-            flex-wrap: wrap;
-          "
-        >
-          <!-- البطاقة الأولى -->
-          <div class="col-md-6 cardGap">
-            <p-card
-              styleClass="custom-card"
-              [style]="{
-                minHeight: '265px',
-                height: 'auto',
-                border: '2px',
-                borderRadius: '15px',
-                backgroundColor: '#f8f8f8',
-                color: 'black',
-                boxShadow:
-                  '0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0)'
-              }"
-            >
-              <p class="text-2xl font-bold">1</p>
-              <p>اختر مستوى الصعوبة:</p>
-              <p>سهل: 4×3 بطاقات</p>
-              <p>متوسط: 4×4 بطاقات</p>
-              <p>صعب: 4×5 بطاقات</p>
-            </p-card>
-          </div>
-
-          <!-- البطاقة الثانية -->
-          <div class="col-md-6">
-            <p-card
-              styleClass="custom-card"
-              [style]="{
-                minHeight: '250px',
-                height: 'auto',
-                border: '2px',
-                borderRadius: '15px',
-                alignitems: 'flex-start',
-                backgroundColor: '#f8f8f8',
-                color: 'black',
-                boxShadow:
-                  '0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0)'
-              }"
-            >
-              <p class="text-2xl font-bold">2</p>
-              <p>اختر نوع التحدي:</p>
-              <p>مترادفات: طابق الكلمات المتشابهة.</p>
-              <p>متضادات: اكتشف الكلمات المعاكسة.</p>
-              <p>ترجمات: صِل الكلمات بلغات مختلفة.</p>
-            </p-card>
+      class=""
+      [(visible)]="display"
+      modal="modal"
+      [responsive]="true"
+      [style]="{ width: '90%', maxWidth: '800px', color: 'black' }"
+      [styleClass]="'custom-dialog'"
+    >
+      <p class="text-2xl font-bold">تعليمات تحدي طابق</p>
+      <p>هدف التحدي:مطابقة جميع البطاقات في أقل وقت ممكن 
+      <div class="row">
+        <div class="col-md-4">
+          <div class="custom-card">
+          <img
+          src="../../../angular/assets/tabiqTip1.png"
+          alt="معلومة1"
+        />  <p>
+              اختر نوع التحدي و مستوى الصعوبة
+            </p>
           </div>
         </div>
+        <div class="col-md-4">
+          <div class="custom-card pb-2">
 
-        <div class="text-center m-4">
+          <img
+          src="../../../angular/assets/tabiqTip2.png"
+          alt="معلومة2"
+        />
           <p>
-            استمتع باللعب، واستعد لتحسين مهاراتك اللغوية بطريقة ممتعة ومشوقة!
-          </p>
+            ستظهر لك بطاقات مقلوبة تحتوي على كلمات و مرادفاتها
+            </p>
+          </div>
         </div>
-      </p-dialog>
+        <div class="col-md-4">
+          <div class="custom-card pb-2">
+
+          <img
+          src="../../../angular/assets/tabiqTip3.png"
+          alt="معلومة3"
+        />
+          <p>
+            طابق البطاقات التي تحتوي على الكلمة و مرادفها لتنجح
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="m-4">
+        <p>
+          استمتع باللعب، واستعد لتحسين مهاراتك اللغوية بطريقة ممتعة ومشوقة!
+        </p>
+      </div>
+    </p-dialog>
     </div>
   </div>
   <div *ngIf="levelflag" class="container" style="background-color: #f2f2f3">
