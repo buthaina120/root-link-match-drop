@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ApiService } from '../../services/api.service';
 import { firstValueFrom } from 'rxjs';
+import { RouterModule } from '@angular/router'; 
 
 
 interface Card {
@@ -39,38 +40,14 @@ interface Card {
     TooltipModule,
     FormsModule,
     InputTextModule,
-  ],
-  animations: [
-    trigger('flipState', [
-      state('active', style({ transform: 'rotateY(200deg)' })),
-      state('inactive', style({ transform: 'rotateY(100)' })),
-      state('matched', style({ opacity: 0, transform: 'scale(0.8)' })), // اجعل البطاقات تتلاشى وتختفي
-      transition('active => inactive', animate('500ms ease-out')),
-      transition('inactive => active', animate('500ms ease-in')),
-      transition('* => matched', animate('100ms ease-in')), // تعديل عند الانتقال إلى حالة المطابقة
-    ]),
-    trigger('cardMatchState', [
-      state('win', style({ transform: 'scale(1.2)', backgroundColor: 'gold' })),
-      transition('* => win', animate('600ms ease-in-out')),
-    ]),
-    trigger('cardErrorState', [
-      state(
-        'error',
-        style({ transform: 'translateX(0)', backgroundColor: '#e57373' })
-      ),
-      transition('* => error', [
-        animate('100ms', style({ transform: 'translateX(-5px)' })),
-        animate('100ms', style({ transform: 'translateX(5px)' })),
-        animate('100ms', style({ transform: 'translateX(-5px)' })),
-        animate('100ms', style({ transform: 'translateX(0)' })),
-      ]),
-    ]),
+    RouterModule
   ],
 })
 export class SynonymsComponent implements OnInit {
   correctSound = new Howl({ src: ['../../../angular/assets/correct.wav'] });
   wrongSound = new Howl({ src: ['../../../angular/assets/wrong.mp3'] });
   warningSound = new Howl({ src: ['../../../angular/assets/ticktick.mp3'] });
+  tadaSound = new Howl({src: ['../../../angular/assets/tada.mp3'],});
 
   homeflag = true;
   levelflag = false;
@@ -99,11 +76,21 @@ export class SynonymsComponent implements OnInit {
   showLevelUpDialog: boolean = false;
   playerName: string = ''; // متغير لتخزين اسم اللاعب
   showPlayerNameDialog: boolean = false; // للتحكم في عرض الحوار
+  playerNameRequired: boolean =false;
 
   openPlayerNameDialog() {
     this.showPlayerNameDialog = true; // فتح الحوار عند النقر على زر ابدأ
   }
-
+  requiredMsg() {
+    // التحقق من إدخال الاسم
+    if (!this.playerName.trim()) {
+     this.playerNameRequired = true; // إظهار رسالة الخطأ
+   } else {
+     this.playerNameRequired = false; // إخفاء رسالة الخطأ
+     this.showPlayerNameDialog = false; // إغلاق الـ dialog
+     this.setflag(); // تنفيذ الإجراء المطلوب
+   }
+ }
   savePlayerName() {
     this.showPlayerNameDialog = false; // إغلاق الحوار بعد حفظ اسم اللاعب
     console.log('اسم اللاعب:', this.playerName); // استخدم الاسم كما تريد (طباعة أو حفظ)
@@ -253,38 +240,18 @@ setDataType(type: string) {
       this.displayWinMessage();
     }
   }
-
   displayWinMessage() {
-    this.warningSound.stop();
-    this.correctSound.play();
-    this.showWinDialog = true;
-    if (this.currentLevel < 3) {
-      this.showLevelUpDialog = true; // إظهار حوار الترقية إذا لم يكن في المستوى الأخير
-    } else {
-      this.showLevelUpDialog = false; // إخفاء حوار الترقية إذا كان في المستوى الأخير
-    }
+    this.tadaSound.play();
+    this.showWinDialog = true; // عرض حوار الفوز
   }
-
   nextLevel() {
     if (this.currentLevel < 3) {
       this.currentLevel += 1; // الترقية للمستوى التالي
       this.selectedLevel = this.currentLevel; // تحديث المستوى المختار
       this.setDataType(this.selectedDataType); // تأكيد نوع التحدي
       this.selectLevel(); // بدء اللعبة بالمستوى الجديد
-    } else {
-      // إذا كان المستوى الحالي هو الثالث، إظهار زر الإعادة فقط
-      this.restartFromFirstLevel(); // إعادة اللعبة من المستوى الأول
     }
-    this.showWinDialog = false; // إغلاق حوار الفوز
-    this.showLevelUpDialog = false; // إغلاق حوار الترقية
   }
-  restartFromFirstLevel() {
-    this.currentLevel = 1; // إعادة المستوى إلى الأول
-    this.selectedLevel = this.currentLevel; // تحديث المستوى المختار
-    this.setDataType(this.selectedDataType); // تأكيد نوع التحدي
-    this.selectLevel(); // بدء اللعبة بالمستوى الأول
-  }
-
   shuffleCards() {
     this.cards.sort(() => Math.random() - 0.5);
   }
@@ -301,12 +268,17 @@ setDataType(type: string) {
       card.flipped = true;
       this.flippedCards.push(card);
       if (this.flippedCards.length === 2) {
-        this.attempts += 1;
+        if (
+          this.flippedCards[0].matchingWord !== this.flippedCards[1].word1 &&
+          this.flippedCards[0].word1 !== this.flippedCards[1].matchingWord
+        ) {
+          this.attempts += 1; // زيادة عدد المحاولات فقط إذا كانت غير صحيحة
+        }
         this.checkMatch();
       }
     }
   }
-
+  
   checkMatch() {
     const [firstCard, secondCard] = this.flippedCards;
     if (
@@ -364,7 +336,6 @@ setDataType(type: string) {
     const Synonyms = this.getSynonyms('ضرب')
     console.log(Synonyms)
   }
-
   restartGame() {
     clearInterval(this.intervalId);
     this.timeLeft = this.maxTime;
@@ -395,4 +366,13 @@ setDataType(type: string) {
     clearInterval(this.intervalId);
     this.timeLeft = this.maxTime;
   }
+  restartToLevelFlag() {
+    this.showWinDialog=false;
+    this.gameflag = false; // إخفاء واجهة اللعبة
+    this.levelflag = true; // عرض صفحة اختيار المستوى
+    this.homeflag = false; // تأكيد أن صفحة البداية مخفية
+    clearInterval(this.intervalId); // إيقاف المؤقت
+    this.timeLeft = this.maxTime; // إعادة ضبط الوقت
+  }
+
 }
