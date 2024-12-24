@@ -60,7 +60,9 @@ flag = true;
 display: boolean = false;
 greenPlayerNameRequired: boolean = false;
 navePlayerNameRequired: boolean = false;
-
+maxTime: number = 20;
+timeLeft: number = this.maxTime;
+intervalId: ReturnType<typeof setInterval> | undefined;
 
 successSound = new Howl({
   src: ['../../../angular/assets/correct.wav'],
@@ -78,6 +80,8 @@ tadaSound = new Howl({
 popSound = new Howl({
   src: ['../../../angular/assets/pop.mp3'],
 });
+
+warningSound = new Howl({ src: ['../../../angular/assets/ticktick.mp3'] });
 
 playerEnteranceSound = new Howl({
   src: ['../../../angular/assets/swoosh1.mp3'],
@@ -242,11 +246,16 @@ handleCellClick(cell: HexCell, index: number): void {
    correctAnswer: this.questionsMap[cell.letter].correctAnswer,
  };
 
+ if (this.isQuestionActive) {
+    clearInterval(this.intervalId); // إيقاف المؤقت عند اختيار الخلية
+    this.startTimer(); // إعادة بدء المؤقت عند اختيار الخلية
+  }
 
 }
 
 checkAnswer(answer: string): void {
   if (!this.currentQuestion || this.isAnswered) return;
+  clearInterval(this.intervalId);
 
   this.isAnswered = true; // لا يمكن اختيار خيار آخر بعد الإجابة الأولى
   const isCorrect = answer === this.currentQuestion.correctAnswer;
@@ -283,9 +292,11 @@ checkAnswer(answer: string): void {
       this.isQuestionActive = false; // يمكن فتح سؤال جديد
     }, 2000);
 
-    if (!this.winner) {
-      this.currentPlayer = this.currentPlayer === this.green ? this.navy : this.green;
-    }
+      if (!this.winner) {
+        setTimeout(() => {
+        this.currentPlayer = this.currentPlayer === this.green ? this.navy : this.green;
+        }, 2000);
+      }
   } else {
     this.wrongAnswerOption = answer;
     this.failureSound.play();
@@ -560,5 +571,47 @@ questionsMap: { [key: string]: Omit<Question, 'letter'>  } = {
     correctAnswer: 'يراع'
  },
  };
+
+ startTimer(): void {
+  this.timeLeft = this.maxTime;
+  this.intervalId = setInterval(() => {
+    this.timeLeft--;
+
+    if (this.timeLeft <= 0) {
+      this.stopTimer();
+      this.handleTimeUp();
+    }
+  }, 1000);
+  if (this.timeLeft <= 10) {
+    this.warningSound.play();
+  }
+}
+
+stopTimer(): void {
+  if (this.intervalId) {
+    clearInterval(this.intervalId);
+    this.intervalId = undefined;
+  }
+}
+
+handleTimeUp(): void {
+  if (!this.currentQuestion) return;
+
+  // إعادة لون الخلية إلى الأبيض
+  const index = this.grid.findIndex(cell => cell.letter === this.currentQuestion?.letter);
+  if (index !== -1) {
+    this.grid[index].color = null;
+  }
+  clearInterval(this.intervalId);
+  this.intervalId = undefined;
+
+  // إعادة الإعدادات
+  this.timeLeft = this.maxTime;
+  this.currentPlayer = this.currentPlayer === this.green ? this.navy : this.green;
+  this.currentQuestion = null;
+  this.isAnswered = false; // إعادة التمكين للإجابة
+  this.isQuestionActive = false; // يمكن فتح سؤال جديد
+}
+
 
 }

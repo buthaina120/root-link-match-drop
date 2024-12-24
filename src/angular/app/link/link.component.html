@@ -112,7 +112,6 @@
 
 <div *ngIf="!flag" class="container">
 <div style="text-align: center;" class="game-container" [ngStyle]="{ 'border': currentPlayer === green ? '5px solid #52a39d' : '5px solid rgba(15, 40, 55, 0.8)' }">
-  <h1>تحدي صِـــــل</h1>
 
   
   <div class="players-container animate__animated animate__bounceInRight" *ngIf="playersSet" >
@@ -131,6 +130,20 @@
     </div>
   </div>
   
+  <div *ngIf="isQuestionActive" class="timer-container row  animate__animated animate__fadeIn">
+    <div
+      class="progress-bar"
+      [ngClass]="{
+        'warning': timeLeft <= 10,
+        'green-bar': currentPlayer === green && timeLeft > 10,
+        'navy-bar': currentPlayer === navy && timeLeft > 10
+      }"
+      [style.width.%]="(timeLeft / maxTime) * 100"
+    ></div>
+    <div class="timer-text">{{ timeLeft }} ثواني</div>
+  </div>
+  
+
   
   
   <svg xmlns="http://www.w3.org/2000/svg" [attr.viewBox]="'-45 -43 400 325'" id="hex-grid">
@@ -140,19 +153,13 @@
         [attr.id]="cell.id"
         [attr.points]="cell.points"
         stroke="lightgray"
-        [attr.fill]="cell.color || 'white'"
+        [attr.fill]="cell.color || '#f9f9f9'"
         (click)="handleCellClick(cell, index)"
         style="cursor: pointer;"
       ></polygon>
-      <text
-        [attr.x]="getTextPosition(cell.points).x"
-        [attr.y]="getTextPosition(cell.points).y"
-        text-anchor="middle"
-        dominant-baseline="middle"
-        font-size="16"
-        [attr.fill]="cell.color ? 'white' : 'black'">
-        {{ cell.letter }}
-      </text>
+
+   
+
     </ng-container>
   </svg>
 
@@ -165,7 +172,7 @@
 
 </div>
     <!-- عرض السؤال -->
-    <div *ngIf="currentQuestion" class="question-modal">
+    <div *ngIf="currentQuestion" class="question-modal animate__animated animate__zoomIn ">
       <div class="auto-text">{{ currentQuestion.question }}</div>
       <div class="options" >
         <button

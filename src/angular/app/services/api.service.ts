@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 
 export class ApiService {
-  private apiUrl = 'https://siwar.ksaa.gov.sa/api/v1/external/public';
+  private apiUrl = 'https://siwar.ksaa.gov.sa/api/';
   private apiKey = '5a0b8a82-f82e-47ab-b8f7-b102435053f9'
  
   constructor(private http: HttpClient) {}
@@ -18,7 +18,7 @@ export class ApiService {
       apikey: this.apiKey,
     });
  
-    return this.http.get(this.apiUrl+'/synonyms' + `?query=${query}`, { headers });
+    return this.http.get(this.apiUrl+'v1/external/public/synonyms' + `?query=${query}`, { headers });
   }
  
  
@@ -27,6 +27,15 @@ export class ApiService {
       apikey: this.apiKey,
     });
  
-    return this.http.get(this.apiUrl+'/root' + `?query=${query}`, { headers });
+    return this.http.get(this.apiUrl+'v1/external/public/root' + `?query=${query}`, { headers });
+  }
+
+
+  getLemma(): Observable<any> {
+    const headers = new HttpHeaders({
+      apikey: this.apiKey,
+    });
+ 
+    return this.http.get(this.apiUrl + `lexicalentries/findAll`, { headers });
   }
 }

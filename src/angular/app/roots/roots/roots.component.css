@@ -9,9 +9,7 @@ body {
   margin: 0;
 }
 
-.d-flex {
-  margin-top: 20px;
-}
+
 
 .container {
   background-color: #fff; /* لون رمادي فاتح */
@@ -25,16 +23,53 @@ body {
   justify-content: center; /* مركزية عمودية */
   align-items: center; /* مركزية أفقية */
   /*justify-content: space-evenly;*/
-  gap: 20px;
+  gap: 15px;
   margin-top: 3%;
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
-.headerGap{
-  column-gap: 35px
+.gameHeader{
+  column-gap: 70px; 
+  font-size: 1.2rem;
 }
 .cardWidth {
-  width: 30rem !important;
+  min-width: 30rem !important;
 }
+
+.timer-container {
+  width: 98%;
+  height: 40px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  border: 4px solid #f2f2f3;
+}
+
+
+
+.progress-bar {
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+  background-color: #4c9085;
+  transition: width 1s linear, background-color 0.3s;
+}
+
+.timer-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+}
+.warning{
+  background-color: #CA3836;
+}
+
 
 /* إعدادات الشاشة الصغيرة */
 @media (max-width: 768px) {
@@ -61,6 +96,12 @@ body {
     width: 100%;
   }
 
+  .level-button {
+    width: 100%; 
+  }
+  .level-buttons {
+    gap: 0px;
+  }
 }
 
 /* إعدادات الشاشة الأصغر، مثل الهواتف */
@@ -91,6 +132,11 @@ body {
   .headerGap{
     column-gap: 20px
   }
+
+  .level-button {
+    width: 100%; 
+    margin: 0 10px;
+  }
 }
 .drag-element {
   touch-action: none;
@@ -102,6 +148,14 @@ costum-card {
 
 .highlight {
   background-color: #f8f8f8;
+  width: 80px;
+}
+
+.requiredMSG {
+  color: red;
+  text-align: right;
+  font-size: 12px;
+  margin-top: -22px;
 }
 
 /*******************************************/
@@ -122,7 +176,7 @@ costum-card {
   background-color: #6fb3af; /* تغيير لون الخلفية */
   color: #fff;
   border-radius: 10px; /* زوايا دائرية */
-  border: 4px solid #52a39d; /* حدود بيضاء */
+  border: 4px solid #52a39d; 
 }
 
 .card {
@@ -130,6 +184,34 @@ costum-card {
   margin-bottom: 0%;
 }
 
+
+
+.back-arrow {
+  align-self: self-start;
+}
+
+.custom-card{
+  min-Height: 250px;
+  height: auto;
+  border: 2px;
+  border-Radius: 15px;
+  background-Color: #f8f8f8;
+  color: black;
+  padding: 10px;
+  gap: 50px;
+}
+.custom-card img{
+  width: 200px;
+  height: auto ;
+  margin-bottom: 20px;
+}
+
+.tooltip{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px; /* العرض الأقصى للتولتيب */
+}
 /******************ANIMATION**********************/
 .animation-container {
   display: flex;
@@ -200,3 +282,50 @@ costum-card {
 .p-inputtext:enabled {
   border-color: rgba(15, 40, 55, 0.1);  /* 50% شفافية */
 }
+
+
+.level-buttons {
+  align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+
+}
+
+.level-button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  color: #ffffff;
+  background-color: #52a39d;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: border 0.3s ease;
+  font-size: 1.5rem;
+  width: 200px;
+  border: #52a39d;
+  height: 120px;
+}
+
+.level-button:hover {
+  background-color: #0f2837;
+  color: #52a39d;
+}
+.level-button.selected {
+  background-color: #0f2837;
+  color: #52a39d;
+}
+
+.start-button {
+  padding: 5px;
+  color: #fff;
+  background-color: #0f2837;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border 0.3s ease;
+  font-size: 1.5rem;
+  min-width: 100px;
+  border: #52a39d;
+}
+
+
