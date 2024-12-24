@@ -1,0 +1,158 @@
+[{
+  "sample1": [
+    {
+      "_id": "bfea1538-9090-4dc9-81ad-c2eae00f8781",
+      "lexiconId": "Riyadh",
+      "lemma": "عارِك",
+      "root": "ع ر ك",
+      "trimmdRoot": "عرك",
+      "rootLength": 3,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    },
+    {
+      "_id": "224f7efd-4035-4c8f-8d6f-7aef29e1f4cd",
+      "lexiconId": "Riyadh",
+      "lemma": "الْتِجاج",
+      "root": "ل ج ج",
+      "trimmdRoot": "لجج",
+      "rootLength": 3,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    },
+    {
+      "_id": "b5a7ba14-ba2d-41c6-a426-b0c324e671c3",
+      "lexiconId": "Riyadh",
+      "lemma": "تَفَقُّع",
+      "root": "ف ق ع",
+      "trimmdRoot": "فقع",
+      "rootLength": 3,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    }
+  ],
+  "sample2": [
+    {
+      "_id": "1ef9a8f7-9003-4d0d-983b-5d0150c0e24b",
+      "lexiconId": "Riyadh",
+      "lemma": "زِنْزَانَة",
+      "root": "ز ن ز ن",
+      "trimmdRoot": "زنزن",
+      "rootLength": 4,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    },
+    {
+      "_id": "e0dfc45b-8598-4b17-a8e7-0a250e74fccd",
+      "lexiconId": "Riyadh",
+      "lemma": "مُتَخَلْخَل",
+      "root": "خ ل خ ل",
+      "trimmdRoot": "خلخل",
+      "rootLength": 4,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    },
+    {
+      "_id": "ae42a1b3-a5b7-4ca4-9004-d5afc8884753",
+      "lexiconId": "Riyadh",
+      "lemma": "مُتَمَطْمِط",
+      "root": "م ط م ط",
+      "trimmdRoot": "مطمط",
+      "rootLength": 4,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    },
+    {
+      "_id": "131b042f-b42b-4441-9961-9613286c22cb",
+      "lexiconId": "Riyadh",
+      "lemma": "مُجَدْوِل",
+      "root": "ج د و ل",
+      "trimmdRoot": "جدول",
+      "rootLength": 4,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    },
+    {
+      "_id": "38b97b5f-2e27-41e1-b0c0-5c6afb56248f",
+      "lexiconId": "Riyadh",
+      "lemma": "مُتَمَلْمِل",
+      "root": "م ل م ل",
+      "trimmdRoot": "ململ",
+      "rootLength": 4,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    }
+  ],
+  "sample3": [
+    {
+      "_id": "1ba59b85-4b28-41fd-a51b-fccbc704d9d4",
+      "lexiconId": "Riyadh",
+      "lemma": "قَلَّصَ",
+      "root": "ق ل ص",
+      "trimmdRoot": "قلص",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "s"
+    },
+    {
+      "_id": "ba461dc7-f23a-44f6-b4e2-6e183c4b5982",
+      "lexiconId": "Riyadh",
+      "lemma": "غُذِّيَ",
+      "root": "غ ذ و",
+      "trimmdRoot": "غذو",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "n"
+    },
+    {
+      "_id": "ece55be9-7600-4f07-bf00-910e5067433a",
+      "lexiconId": "Riyadh",
+      "lemma": "نَقَّرَ",
+      "root": "ن ق ر",
+      "trimmdRoot": "نقر",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "s"
+    },
+    {
+      "_id": "7274f074-0d25-4d37-9758-6f41669ac6b2",
+      "lexiconId": "Riyadh",
+      "lemma": "نَصَعَ",
+      "root": "ن ص ع",
+      "trimmdRoot": "نصع",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "s"
+    },
+    {
+      "_id": "66dbcef3-d5e1-4507-9498-db405b94889f",
+      "lexiconId": "Riyadh",
+      "lemma": "جَمِّرْ",
+      "root": "ج م ر",
+      "trimmdRoot": "جمر",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "s"
+    },
+    {
+      "_id": "bae3b548-f4b0-4c11-a2f3-47dbb8299701",
+      "lexiconId": "Riyadh",
+      "lemma": "أخْوَلَ",
+      "root": "خ و ل",
+      "trimmdRoot": "خول",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "a"
+    },
+    {
+      "_id": "75453ca2-ee22-4014-8496-6aa6d74c386d",
+      "lexiconId": "Riyadh",
+      "lemma": "اسْتَوْشَم",
+      "root": "و ش م",
+      "trimmdRoot": "وشم",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "m"
+    }
+  ]
+}]

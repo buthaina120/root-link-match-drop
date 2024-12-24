@@ -15,7 +15,9 @@ import { firstValueFrom } from 'rxjs';
 import { TooltipModule } from 'primeng/tooltip';
 import { Howl } from 'howler';
 import { FormsModule } from '@angular/forms';
- 
+import 'animate.css';
+import { RouterModule } from '@angular/router';
+
 
 export interface Card {
   originalWord: string;
@@ -40,7 +42,8 @@ export interface CardState {
     InputTextModule,
     CardModule,
     TooltipModule,
-    FormsModule
+    FormsModule,
+    RouterModule,
   ],
   styles: [
     `
@@ -56,14 +59,63 @@ export interface CardState {
 
 })
 export class RootsComponent implements OnInit {
-  constructor(private rest: ApiService) {}
-  root: string | undefined;
+  attempts: number = 0; // المحاولات
+  points: number = 0; // النقاط
+  cardPoints: number[] = []; // لتخزين النقاط لكل بطاقة
+  timerInterval: ReturnType<typeof setInterval> | undefined;
+  isDialogVisible: boolean = false; // لإظهار الحوار
+  isWinDialogVisible: boolean = false; // حوار الفوز
+  isCorrectAnimation: boolean = false; // متغير للتحكم في عرض الأنميشن
+  isFailureAnimation: boolean = false; // متغير للتحكم في عرض الأنميشن
+  hintUsed: boolean = false; // متغير لتتبع استخدام الهنت
+  cardStates: CardState[] = [];
+  availableLetters: string[] = [];
+  selectedLetters: string[] = [];
+  draggedProduct: string | undefined | null;
+  correctAnswerLetters: string[] = []; 
+  starsCount: number = 0; 
+  stars: number[] = [1, 2, 3]; 
+  currentIndex: number = 0;
+  playerName: string = ''; 
+  isPlayerNameDialogVisible: boolean = false; 
+  i: number = 0;
+  selectedDifficulty: string = '';
+  maxTime: number = 0;
+  timeLeft: number = this.maxTime;
+  cardNumber: number = 0;
+  gameStatus:  string = ''; 
+  data: string | undefined;
+  homeFlag: boolean =true;
+  levelFlag: boolean =false;
+  gameFlag: boolean =false;
+  currentCards: Card[] = [];
+  playerNameRequired: boolean = false;
 
- async getRoot(query: string): Promise<string> {
+
+
+  requiredMsg() {
+     // التحقق من إدخال الاسم
+     if (!this.playerName.trim()) {
+      this.playerNameRequired = true; // إظهار رسالة الخطأ
+    } else {
+      this.playerNameRequired = false; // إخفاء رسالة الخطأ
+      this.isPlayerNameDialogVisible = false; // إغلاق الـ dialog
+      this.setLevelFlag(); // تنفيذ الإجراء المطلوب
+    }
+  }
+
+  constructor(private rest: ApiService) {}
+  // root: [{}] | undefined;
+ 
+
+  async getLemma() {
+   // return await firstValueFrom(this.rest.getLemma());
+ }
+
+ async getRoot(query: string) {
    return await firstValueFrom(this.rest.getRoot(query));
 }
 
-  flag = true;
 
   display: boolean = false;
 
@@ -75,9 +127,17 @@ export class RootsComponent implements OnInit {
     this.display = false; // يخفي الحوار
   }
 
-  setflag() {
-    this.flag = !this.flag;
-  }
+  setLevelFlag() {
+    this.homeFlag =false;
+    this.levelFlag =true;
+    this.gameFlag =false;
+    }
+
+  setGameFlag() {
+      this.homeFlag =false;
+      this.levelFlag =false;
+      this.gameFlag =true;
+      }
 
   successSound = new Howl({
     src: ['../../../angular/assets/correct.wav'],
@@ -99,26 +159,11 @@ export class RootsComponent implements OnInit {
     src: ['../../../angular/assets/ticktick.mp3'],
   });
 
-  points: number = 0; // النقاط
-  cardPoints: number[] = []; // لتخزين النقاط لكل بطاقة
-  time: number = 30; // الوقت بالثواني
-  timerInterval: any;
-  timeWhenWon: number = 0; // لتخزين الوقت عند الفوز
-  isDialogVisible: boolean = false; // لإظهار الحوار
-  isWinDialogVisible: boolean = false; // حوار الفوز
-  isCorrectAnimation: boolean = false; // متغير للتحكم في عرض الأنميشن
-  isFailureAnimation: boolean = false; // متغير للتحكم في عرض الأنميشن
-  hintUsed: boolean = false; // متغير لتتبع استخدام الهنت
-  cardStates: CardState[] = [];
-  availableLetters: string[] = [];
-  selectedLetters: string[] = [];
-  draggedProduct: string | undefined | null;
-  correctAnswerLetters: string[] = []; // تعريف مصفوفة الحروف الصحيحة
-  starsCount: number = 0; // عدد النجوم
-  stars: number[] = [1, 2, 3]; // عدد النجوم الممكنة (مثلاً، 3 نجوم)
-  currentIndex: number = 0;
-  username: string = ''; // متغير لتخزين اسم اللاعب
-  isPlayerNameDialogVisible: boolean = false; // للتحكم في عرض الحوار
+  tadaSound = new Howl({
+    src: ['../../../angular/assets/tada.mp3'],
+  });
+
+
 
   
   savePlayerName() {
@@ -127,51 +172,183 @@ export class RootsComponent implements OnInit {
 
 
   // استخدام الواجهة هنا
-  cards: Card[] = [
+ /*cards: Card[] = [
     { originalWord: 'مستشفى', targetWord: 'شفي' },
     { originalWord: 'كتاب', targetWord: 'كتب' },
     { originalWord: 'مدرسة', targetWord: 'درس' },
-  ];
+  ];*/
 
-  ngOnInit() {
-    // ApiService هنا
-    /*this.getRoot('مستشفى').then(data => {
-      console.log(data);
-    });*/
+  cards: Card[] = [];
 
-    const root2 = this.getRoot('مستشفى')
-    console.log(root2)
+  async ngOnInit() {
+    if (!this.selectedDifficulty) {
+      console.error('Difficulty level not selected!');
+      return;
+    }
 
-    this.cardStates = this.cards.map(() => ({
-      availableLetters: [],
-      selectedLetters: [],
-      points: 0,
-      isCardSolved: false, // تعيين القيمة المبدئية
-    }));
-    /*
-    this.getRoot('مستشفى').then((root) => {
-      this.root = root;
-    });*/
+    // بدء اللعبة
+    this.startGame();
+  
+    console.log(this.cards); // عرض المصفوفة للتأكد
   }
+  
+  
+   selectedLevel(level: string): number {
+    switch (level) {
+      case 'easy':
+        this.maxTime =30;
+        this.cardNumber = 3;
+        return this.cardNumber;
+      case 'medium':
+        this.maxTime =50;
+        this.cardNumber = 5;
+        return this.cardNumber;
+      case 'hard':
+        this.hintUsed = true;
+        this.maxTime =60;
+        this.cardNumber = 7;
+        return this.cardNumber;
+      default: // 'easy' أو أي قيمة افتراضية
+        return 3;
+    }
+  }
+ 
+
+  /*
+  async prepareCards() {
+    const loadWords = async () => {
+      const response = await fetch('../../angular/assets/roots_sample_15.json');
+      return await response.json();
+    };
+  
+    let word = await loadWords();
+    this.cardNumber = this.selectedLevel(this.selectedDifficulty);
+    
+    if (this.isDialogVisible && this.currentCards.length > 0) {
+      // عند الخسارة، استرجع الكلمات المحفوظة
+      this.cards = [...this.currentCards];
+    } else {
+      // عند الفوز، تحميل كلمات جديدة
+      this.cards.length = 0;
+      this.currentCards = []; // إعادة تعيين الكلمات المحفوظة
+  
+      while (this.cards.length < this.cardNumber) {
+        if (this.i >= word.length) {
+          word = await loadWords();
+          this.i = 0;
+        }
+  
+        const randomWord = word[this.i]?.lemma;
+        if (!randomWord) {
+          this.i++;
+          continue;
+        }
+  
+        const tempRoot = word[this.i].root;
+        const root = (tempRoot ?? '').replace(/\s+/g, '');
+        const wordjson = word[this.i].lemma;
+  
+        if (!root) {
+          this.i++;
+          continue;
+        }
+  
+        this.i++;
+  
+        this.cards.push({
+          originalWord: wordjson,
+          targetWord: root,
+        });
+      }
+  
+      // حفظ الكلمات الحالية
+      this.currentCards = [...this.cards];
+    }
+  }
+  */
+  async prepareCards() {
+    const loadWords = async () => {
+      const response = await fetch('../../angular/assets/Roots_sample3.json');
+      return await response.json();
+    };
+  
+    let word = await loadWords();
+    console.log(word[0]);
+    this.cardNumber = this.selectedLevel(this.selectedDifficulty);
+   
+
+    if (this.isDialogVisible && this.currentCards.length > 0) {
+      // عند الخسارة، استرجع الكلمات المحفوظة
+      this.cards = [...this.currentCards];
+    } else {
+      // عند الفوز، تحميل كلمات جديدة
+      this.cards.length = 0;
+      this.currentCards = []; // إعادة تعيين الكلمات المحفوظة
+  
+      while (this.cards.length < this.cardNumber) {
+       // if (this.i >= word.length) {
+       //  word = await loadWords();
+       //  this.i = 0;
+       //}
+
+        let  wordjson =[];
+        let tempRoot = [];
+        let wordBOL = [];
+        let rootBOL = [];
+
+        if(this.cardNumber<=3){
+          wordBOL = word[0].sample1
+          rootBOL = word[0].sample1
+        } else if (this.cardNumber<=5){
+          wordBOL = word[0].sample2
+          rootBOL = word[0].sample2
+        }else if (this.cardNumber<=7){
+          wordBOL = word[0].sample3;
+          rootBOL = word[0].sample3;
+        }
+       wordjson = wordBOL[this.i]?.lemma;
+       tempRoot = rootBOL[this.i]?.root;
+         
+        const root = (tempRoot ?? '').replace(/\s+/g, '');
+  
+        if (!root) {
+          this.i++;
+          continue;
+        }
+  
+        this.i++;
+        
+        if (this.i >= wordBOL.length) {
+          this.i = 0; // إعادة ضبط المؤشر إذا تجاوز عدد الكلمات
+        }
+        
+        this.cards.push({
+          originalWord: wordjson,
+          targetWord: root,
+        });
+      }
+  
+      // حفظ الكلمات الحالية
+      this.currentCards = [...this.cards];
+    }
+  }
+
 
   ngOnDestroy() {
     clearInterval(this.timerInterval); // إيقاف المؤقت عند تدمير المكون
   }
 
   startTimer() {
-    this.time = 30; // تعيين الوقت إلى 30 ثانية عند بدء اللعبة
+    this.timeLeft = this.maxTime;
     clearInterval(this.timerInterval); // تأكد من إيقاف المؤقت القديم إذا كان موجودًا
-
-    // بدء العد التنازلي
     this.timerInterval = setInterval(() => {
-      if (!this.isWinDialogVisible) {
-        // تحقق من عدم ظهور ديلوق الفوز
-        this.time--; // تقليل الوقت بمقدار ثانية واحدة
+      if (!this.isWinDialogVisible || this.timeLeft > 0) {
+        this.timeLeft -= 1;
         // تشغيل صوت التحذير عند تبقي 10 ثوانٍ
-        if (this.time === 10) {
+        if (this.timeLeft === 10) {
           this.warningSound.play();
         }
-        if (this.time <= 0) {
+        if (this.timeLeft <= 0) {
           clearInterval(this.timerInterval); // إيقاف المؤقت عند وصول الوقت إلى 0
           this.isDialogVisible = true; // عرض الحوار عند انتهاء الوقت
         }
@@ -181,35 +358,6 @@ export class RootsComponent implements OnInit {
 
   get currentCard(): Card {
     return this.cards[this.currentIndex];
-  }
-
-  resetGame() {
-    // إعادة تعيين الحروف المختارة
-    this.selectedLetters = [];
-
-    // إعادة تعيين حالة كل بطاقة
-    this.cardStates = this.cards.map(() => ({
-      availableLetters: [],
-      selectedLetters: [],
-      points: 0,
-      isCardSolved: false, // تعيين القيمة المبدئية
-    }));
-
-    // إعادة تعيين الفهرس إلى البطاقة الأولى
-    this.currentIndex = 0;
-
-    // تحميل حالة البطاقة الأولى
-    this.loadCardState();
-
-    // توليد الحروف المتاحة
-    this.generateAvailableLetters();
-
-    // بدء المؤقت
-    this.startTimer();
-
-    this.hintUsed = false;
-
-    this.isDialogVisible = false;
   }
 
   loadCardState() {
@@ -262,7 +410,7 @@ export class RootsComponent implements OnInit {
     }
   }
 
-  // دالة تولد عدد معين من الحروف العشوائية بالعربية
+  // دالة الحروف العشوائية
   generateRandomLetters(count: number): string[] {
     const arabicLetters = [
       'ء',
@@ -372,8 +520,8 @@ export class RootsComponent implements OnInit {
   }
 
   moveToSelected(letter: string): void {
-    if (this.availableLetters.length === this.currentCard.targetWord.length) {
-      return; // منع إضافة الحروف إذا كانت قائمة السحب مليئة
+    if (this.isFailureAnimation) {
+    return; // منع إضافة الحروف إذا كانت قائمة السحب مليئة
     }
 
     const index = this.availableLetters.indexOf(letter);
@@ -429,7 +577,6 @@ export class RootsComponent implements OnInit {
       const currentState = this.cardStates[this.currentIndex];
       currentState.points += 5;
       this.points += 5;
-      this.timeWhenWon = 30 - this.time;
 
       this.availableLetters = []; // مسح الحروف المتاحة
       this.showFeedback(true); // إظهار ملاحظات النجاح
@@ -448,6 +595,7 @@ export class RootsComponent implements OnInit {
 
             // الانتظار لمدة 2 ثانية قبل عرض مربع الحوار
             setTimeout(() => {
+              this.tadaSound.play();
               this.isWinDialogVisible = true; // إظهار مربع الفوز
               this.warningSound.pause();
             }, 2000); // الانتظار لمدة 2 ثانية
@@ -461,9 +609,9 @@ export class RootsComponent implements OnInit {
         },
         this.currentIndex === this.cards.length - 1 ? 0 : 2000
       ); // إذا كانت البطاقة الأخيرة، لا يتم التأخير
-    } else if (
-      this.selectedLetters.length === this.currentCard.targetWord.length
-    ) {
+    } else if (this.selectedLetters.length === this.currentCard.targetWord.length)
+       {
+        this.attempts ++;
       // إذا كانت المربعات مليئة ولكن الإجابة غير صحيحة
       this.showFeedback(false); // إظهار ملاحظات الخطأ
       setTimeout(() => {
@@ -504,9 +652,42 @@ export class RootsComponent implements OnInit {
     }
   }
 
-  clearLetters() {
+
+  async startGame() {
+       // استدعاء الدالة لإعداد البطاقات
+    await this.prepareCards();
+    this.hintUsed = false;
+    this.resetGame();
+    this.startTimer(); // بدء الوقت
+    this.loadCardState(); // تحميل حالة البطاقة الأولى عند بدء اللعبة
+  }
+
+  resetGame(shouldRestart: boolean = false) {
+    
+    this.cardStates = this.cards.map(() => ({
+      availableLetters: [],
+      selectedLetters: [],
+      points: 0,
+      isCardSolved: false,
+    }));
+    this.points =0;
+    this.attempts = 0;
+    this.selectedLetters = [];
+    this.currentIndex = 0;
+    this.points = shouldRestart ? 0 : this.points;
+    this.selectedLevel(this.selectedDifficulty);
+    this.isDialogVisible = false;
+    this.isWinDialogVisible = false;
+  }
+
+  
+    clearLetters() {
+
+    // نقل الحروف المختارة المملوءة فقط إلى قائمة السحب
+   const filledLetters = this.selectedLetters.filter(letter => letter && letter.trim() !== '');
+
     // نقل الحروف المختارة إلى قائمة السحب
-    this.availableLetters = [...this.availableLetters, ...this.selectedLetters];
+    this.availableLetters = [...this.availableLetters, ...filledLetters];
 
     // إعادة ترتيب قائمة السحب
     this.availableLetters.sort(() => Math.random() - 0.5);
@@ -514,97 +695,85 @@ export class RootsComponent implements OnInit {
     // إعادة تعيين الحروف المختارة وتحديث حالة البطاقة
     this.selectedLetters = [];
     this.cardStates[this.currentIndex].selectedLetters = [];
-    this.cardStates[this.currentIndex].availableLetters = [
-      ...this.availableLetters,
-    ];
+    this.cardStates[this.currentIndex].availableLetters = [...this.availableLetters,];
   }
 
-  startGame() {
-    this.resetGame(); // إعادة تعيين اللعبة
-    this.startTimer(); // بدء الوقت
-  }
-
-  // دالة لإعادة اللعبة
-  restartGame() {
-    this.isDialogVisible = false; // إغلاق الحوار
-    this.isWinDialogVisible = false;
-    this.currentIndex = 0; // إعادة تعيين الفهرس إلى 0
-    this.availableLetters = []; // تفريغ قائمة الحروف المتاحة
-    this.resetGame(); // إعادة تعيين اللعبة
-    this.points = 0;
-  }
-
-  // دالة لإعادة تعيين اللعبة عند الفوز
-  restartAfterWin() {
-    this.isWinDialogVisible = false; // إغلاق حوار الفوز
-    this.points = 0; // إعادة تعيين النقاط الإجمالية
-    this.cardPoints = []; // إعادة تعيين قائمة النقاط لكل بطاقة
-    this.cardStates = this.cards.map(() => ({
-      availableLetters: [],
-      selectedLetters: [],
-      points: 0,
-      isCardSolved: false, // تعيين القيمة المبدئية
-    }));
-    this.currentIndex = 0; // إعادة تعيين الفهرس إلى البطاقة الأولى
-    this.time = 30; // إعادة تعيين الوقت
-    this.resetGame(); // إعادة تعيين اللعبة
-  }
 
   hint() {
     this.hintSound.play();
-
+  
     const state = this.cardStates[this.currentIndex];
     const correctLetters = this.currentCard.targetWord.split('');
-
-    // الحالة 1: قائمة الحروف المختارة فارغة
-    if (this.selectedLetters.length === 0) {
-      const firstUnusedLetter = correctLetters[0];
-      this.selectedLetters.push(firstUnusedLetter);
-      this.availableLetters = this.availableLetters.filter(
-        (letter) => letter !== firstUnusedLetter
-      );
-      state.selectedLetters = [...this.selectedLetters];
-      this.hintUsed = true; // جعل الزر معطلاً بعد استخدام الهنت
-      return;
+  
+    // تحقق من الحروف الموجودة في قائمة الإفلات
+    for (let i = 0; i < this.selectedLetters.length; i++) {
+      if (this.selectedLetters[i] !== correctLetters[i]) {
+        // إذا كان الحرف خاطئ، إرجاعه إلى قائمة السحب
+        if (this.selectedLetters[i]) {
+          this.availableLetters.push(this.selectedLetters[i]);
+        }
+        this.selectedLetters[i] = ''; // إزالة الحرف الخاطئ
+      }
     }
-
-    // الحالة 2: قائمة الحروف المختارة تحتوي على حروف، لكن الحرف الأول غير صحيح
+  
+    // إضافة الحرف الأول الصحيح إذا لم يكن موجودًا في مكانه
     if (this.selectedLetters[0] !== correctLetters[0]) {
-      // إعادة جميع الحروف إلى قائمة السحب
-      this.availableLetters = [
-        ...this.availableLetters,
-        ...this.selectedLetters,
-      ].sort(() => Math.random() - 0.5);
-      this.selectedLetters = [];
-
-      // إضافة الحرف الأول الصحيح فقط
-      const firstUnusedLetter = correctLetters[0];
-      this.selectedLetters.push(firstUnusedLetter);
-      this.availableLetters = this.availableLetters.filter(
-        (letter) => letter !== firstUnusedLetter
-      );
-      state.selectedLetters = [...this.selectedLetters];
-      this.hintUsed = true; // جعل الزر معطلاً بعد استخدام الهنت
-      return;
+      // إزالة الحرف من قائمة السحب إذا كان موجودًا
+      const firstLetterIndex = this.availableLetters.indexOf(correctLetters[0]);
+      if (firstLetterIndex !== -1) {
+        this.availableLetters.splice(firstLetterIndex, 1);
+      }
+  
+      // وضع الحرف الأول في مكانه الصحيح
+      this.selectedLetters[0] = correctLetters[0];
     }
-
-    // الحالة 3: قائمة الحروف المختارة تحتوي على حروف والحرف الأول صحيح
-    if (this.selectedLetters[0] === correctLetters[0]) {
-      return;
-    }
+  
+    // تحديث الحالة
+    state.selectedLetters = [...this.selectedLetters];
+    state.availableLetters = [...this.availableLetters];
+  
+    this.hintUsed = true; // جعل زر الهنت معطلاً بعد استخدامه
   }
+  
+  
 
   getStarsCount(): number {
-    // قم بتعديل هذا الشرط بناءً على النقاط المطلوبة لكل نجمة
-
-    if (this.points >= 15) {
-      return 3; // 3 نجوم
-    } else if (this.points >= 10) {
-      return 2; // 2 نجوم
-    } else if (this.points >= 5) {
-      return 1; // نجمة واحدة
+    // حساب عدد البطاقات المحلولة
+    const solvedCards = this.cardStates.filter(card => card.isCardSolved).length;
+  
+    // حساب نسبة البطاقات المحلولة
+    const totalCards = this.cardStates.length;
+    const solvedPercentage = (solvedCards / totalCards) * 100;
+  
+    // تحديد عدد النجوم بناءً على نسبة البطاقات المحلولة
+    if (solvedPercentage === 100) {
+      return 3; // 3 نجوم إذا كانت كل البطاقات محلولة
+    } else if (solvedPercentage > 50) {
+      return 2; // نجمتين إذا كانت النسبة فوق 50%
+    } else if (solvedPercentage > 0) {
+      return 1; // نجمة واحدة إذا كانت النسبة 50% أو أقل
     } else {
-      return 0; // لا نجوم
+      return 0; // لا نجوم إذا لم يتم حل أي بطاقة
     }
   }
+
+  goBack() {
+    this.setLevelFlag();
+    this.warningSound.pause();
+    clearInterval(this.timerInterval);
+  }
+
+  nextLevel() {
+    if (this.selectedDifficulty === 'easy') {
+      this.selectedDifficulty = 'medium';
+      this.selectedLevel(this.selectedDifficulty);
+    } else if (this.selectedDifficulty === 'medium') {
+      this.selectedDifficulty = 'hard';
+      this.selectedLevel(this.selectedDifficulty);
+    } else if (this.selectedDifficulty === 'hard') {
+      // إذا كان قد أكمل جميع المستويات
+    }
+   // this.startGame();
+  }
+
 }
