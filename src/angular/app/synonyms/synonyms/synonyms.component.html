@@ -112,7 +112,7 @@
     </div>
   </div>
   <div *ngIf="levelflag" class="container" style="background-color: #f2f2f3">
-    <p>نوع التحدي</p>
+    <p>اختر نوع التحدي </p>
     <div class="data-type-selection">
       <button
         (click)="selectedDataType = 'synonyms'"
@@ -273,6 +273,17 @@
         </svg>
       </ng-container>
     </div>
+    <div class="stats d-flex justify-content-around mb-4">
+      <div class="points">
+        <p class="label">النقاط</p>
+        <p class="value animate__animated animate__zoomIn">{{ points }}</p>
+      </div>
+      <div class="separator"></div>
+      <div class="time">
+        <p class="label">المحاولات</p>
+        <p class="value animate__animated animate__zoomIn">{{ attempts }}</p>
+      </div>
+    </div>
     <div style="display: flex; justify-content: center; align-items: center">
       <button
         type="button"
@@ -283,6 +294,15 @@
       >
         <i class="m-2 pi pi-replay" style="font-size: 1rem"></i>
       </button>
+      <button
+      type="button"
+      (click)="resumeGame()"
+      class="p-2 m-2 p-button p-component bg-sec-theme"
+      pTooltip="إكمال التحدي"
+      tooltipPosition="bottom"
+    >
+      <i class="m-2 pi pi-play" style="font-size: 1rem"></i>
+    </button>
     </div>
   </p-dialog>
 
@@ -328,7 +348,7 @@
         <div class="time">
           <p class="label">الوقت</p>
           <p class="value animate__animated animate__zoomIn">
-            {{ maxTime - timeLeft }}
+            {{ totalTimeSpent }}
           </p>
         </div>
       </div>
