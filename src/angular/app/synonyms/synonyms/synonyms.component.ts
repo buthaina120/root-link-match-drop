@@ -70,6 +70,8 @@ export class SynonymsComponent implements OnInit {
   playerNameRequired: boolean =false;
   lockBoard: boolean = false;
   totalTimeSpent: number = 0;  
+  attemptedAfterResume: boolean = false;
+
 
 
   openPlayerNameDialog() {
@@ -111,7 +113,7 @@ setDataType(type: string) {
     this.startGame();
   }
   setTimerBasedOnLevel() {
-    this.maxTime = [50,60,70][this.difficulty - 1];
+    this.maxTime = [30,40,50][this.difficulty - 1];
     this.timeLeft = this.maxTime;
   }
   startGame() {
@@ -200,7 +202,7 @@ setDataType(type: string) {
   private getPairsBasedOnDifficulty(
     cardPairs: { word1: string; matchingWord: string }[]
   ) {
-    return cardPairs.slice(0, this.difficulty * 2 + 4);
+    return cardPairs.slice(0, this.difficulty * 2 + 2);
   }
   startTimer() {
     clearInterval(this.intervalId);
@@ -217,6 +219,10 @@ setDataType(type: string) {
         clearInterval(this.intervalId);
         if (this.matchedCards.length !== this.cards.length) {
           this.showDialog = true;
+          this.cards.forEach(card => {
+            card.flipped = false; 
+          });
+          
         }
       }
       this.checkForWin();
@@ -227,8 +233,12 @@ setDataType(type: string) {
       clearInterval(this.intervalId);
       this.showDialog = false;
       this.displayWinMessage();
+      this.attemptedAfterResume = false; // إعادة التتبع عند الفوز
+    } else if (this.timeLeft === 0 && this.attemptedAfterResume) {
+      this.showDialog = true; // إظهار الحوار إذا انتهى الوقت في المحاولة الثانية
+      clearInterval(this.intervalId);
     }
-  }
+  }  
   displayWinMessage() {
     this.warningSound.stop(); 
     this.tadaSound.play();
@@ -339,14 +349,22 @@ setDataType(type: string) {
     this.showDialog = false;
     this.showWinDialog = false;
     this.showLevelUpDialog = false;
+    this.attemptedAfterResume = false; // إعادة تعيين
   }
+  
   resumeGame() {
+    if (this.attemptedAfterResume) {
+      this.showDialog = true; // إظهار الحوار عند المحاولة الثانية وعدم الفوز
+      return;
+    }
+    this.attemptedAfterResume = true; // تتبع المحاولة الأولى بعد الإكمال
     const extraTime = 30;     
     this.timeLeft += extraTime;  
     this.showDialog = false; 
     this.warningSound.stop();  
     this.startTimer();  
   }
+  
   
   getStarsCount(): number {
     const totalCards = this.cards.length;

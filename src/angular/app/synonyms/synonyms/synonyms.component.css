@@ -270,7 +270,7 @@
 }
 .headerGap{
   column-gap: 80px;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 .custom-card{
   min-Height: 250px;
@@ -425,4 +425,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 300px; /* العرض الأقصى للتولتيب */
+}
+.level-text div{
+  font-size: 18px;
+  color: #b7b7b7;
+  font-weight: lighter;
+  margin-left: 12px;
+  display: contents;
 }
