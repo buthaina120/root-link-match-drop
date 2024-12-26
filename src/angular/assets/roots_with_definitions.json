@@ -1,0 +1,173 @@
+[{
+  "sample1": [
+    {
+      "_id": "bfc577d3-17fb-4cc0-b6f2-0e3d5a339e1b",
+      "lexiconId": "Riyadh",
+      "lemma": "مُدَجَّجَة",
+      "root": "د ج ج",
+      "definition": "مؤنث (مُدَجَّج)",
+      "trimmdRoot": "دجج",
+      "rootLength": 3,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    },
+    {
+      "_id": "224f7efd-4035-4c8f-8d6f-7aef29e1f4cd",
+      "lexiconId": "Riyadh",
+      "lemma": "الْتِجاج",
+      "root": "ل ج ج",
+      "definition": "اضطِرابٌ في الشَّيءِ واختِلاطٌ فيهِ",
+      "trimmdRoot": "لجج",
+      "rootLength": 3,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    },
+    {
+      "_id": "38732684-8d0e-4f70-8dd0-ca6cae76d5dd",
+      "lexiconId": "Riyadh",
+      "lemma": "تَصَبِّي",
+      "root": "ص ب ي",
+      "definition": "مَيلٌ إلى اللَّهْوِ وتَكَلُّفُ الصِّبا، واسْتِمالَةُ الطَّرَفِ الآخَرِ وفَتْنُهُ ليَنْجَذِبَ إلَيْهِ.",
+      "trimmdRoot": "صبي",
+      "rootLength": 3,
+      "nounOrigin": "mn",
+      "verbOrigin": null
+    }
+  ],
+  "sample2": [
+    {
+      "_id": "59510d18-ab4c-49ca-9680-3b5caf7e8d79",
+      "lexiconId": "Riyadh",
+      "lemma": "تَمَضْمُض",
+      "root": "م ض م ض",
+      "definition": "تحريك الماء في الفم.",
+      "trimmdRoot": "مضمض",
+      "rootLength": 4,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    },
+    {
+      "_id": "31f78752-a784-4861-8999-0fb1d019dbf4",
+      "lexiconId": "Riyadh",
+      "lemma": "مُفَلْفَل",
+      "root": "ف ل ف ل",
+      "definition": "المُجَعَّدُ مِن الشَّعْرِ",
+      "trimmdRoot": "فلفل",
+      "rootLength": 4,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    },
+    {
+      "_id": "0bbccf16-315d-4ad6-8796-efac86a476d9",
+      "lexiconId": "Riyadh",
+      "lemma": "مُحَبْحِب",
+      "root": "ح ب ح ب ",
+      "definition": "جارٍ ماؤُهُ قليلاً قليلاً",
+      "trimmdRoot": "حبحب",
+      "rootLength": 4,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    },
+    {
+      "_id": "84633338-61ab-49d5-b404-087aff0e9925",
+      "lexiconId": "Riyadh",
+      "lemma": "مُرَصْرَص",
+      "root": "ر ص ر ص",
+      "definition": "مَخْلُوطَةٌ فِي صُنْعِهِ مَادَّةُ الرَّصَاصِ ",
+      "trimmdRoot": "رصرص",
+      "rootLength": 4,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    },
+    {
+      "_id": "abf17514-45f3-4462-a6c4-df4b6f540b26",
+      "lexiconId": "Riyadh",
+      "lemma": "حَمْحَمَة",
+      "root": "ح م ح م",
+      "definition": "إصدار صوت صهيل‏.",
+      "trimmdRoot": "حمحم",
+      "rootLength": 4,
+      "nounOrigin": "s",
+      "verbOrigin": null
+    }
+  ],
+  "sample3": [
+    {
+      "_id": "28088a2c-055c-4630-965d-296bad84c466",
+      "lexiconId": "Riyadh",
+      "lemma": "رُبِطَ",
+      "root": "ر ب ط",
+      "definition": "",
+      "trimmdRoot": "ربط",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "s"
+    },
+    {
+      "_id": "65e62e8a-2271-4a3b-80ed-ec7172d967f2",
+      "lexiconId": "Riyadh",
+      "lemma": "تَرَكَّبَ",
+      "root": "ر ك ب",
+      "definition": "تَرَكَّبَ الشيءُ من كذا وكذا: تألَّف وتكوَّن منه.",
+      "trimmdRoot": "ركب",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "s"
+    },
+    {
+      "_id": "a02cc038-47de-4a5d-a3c3-9beb7224be98",
+      "lexiconId": "Riyadh",
+      "lemma": "صُودِمَ",
+      "root": "ص د م",
+      "definition": "",
+      "trimmdRoot": "صدم",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "s"
+    },
+    {
+      "_id": "407252c2-9f33-42b2-9605-44b38405f3ed",
+      "lexiconId": "Riyadh",
+      "lemma": "صُحِبَ",
+      "root": "ص ح ب",
+      "definition": "",
+      "trimmdRoot": "صحب",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "s"
+    },
+    {
+      "_id": "61fea6d7-702e-4350-9da3-bd825622a857",
+      "lexiconId": "Riyadh",
+      "lemma": "صُوحِبَ",
+      "root": "ص ح ب",
+      "definition": "",
+      "trimmdRoot": "صحب",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "s"
+    },
+    {
+      "_id": "19763d5c-3182-47a6-8c9e-166f0725026d",
+      "lexiconId": "Riyadh",
+      "lemma": "أَخَذَ",
+      "root": "ء خ ذ",
+      "definition": "أَخَذَ فلانٌ رأيَ فلان: استشاره.",
+      "trimmdRoot": "ءخذ",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "s"
+    },
+    {
+      "_id": "5a1e94b9-bcd0-474f-81a3-889f6e3218f4",
+      "lexiconId": "Riyadh",
+      "lemma": "أَقْمَحَ",
+      "root": "ق م ح",
+      "definition": " امْتَلَأَ  قَمْحََا",
+      "trimmdRoot": "قمح",
+      "rootLength": 3,
+      "nounOrigin": null,
+      "verbOrigin": "s"
+    }
+  ]
+}]

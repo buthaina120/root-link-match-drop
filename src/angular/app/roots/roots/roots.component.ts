@@ -22,6 +22,7 @@ import { RouterModule } from '@angular/router';
 export interface Card {
   originalWord: string;
   targetWord: string;
+  definition: string;
 }
 
 export interface CardState {
@@ -80,7 +81,8 @@ export class RootsComponent implements OnInit {
   isPlayerNameDialogVisible: boolean = false; 
   i: number = 0;
   selectedDifficulty: string = '';
-  maxTime: number = 0;
+  selectedDifficultyText: string = '';
+  maxTime: number = 60;
   timeLeft: number = this.maxTime;
   cardNumber: number = 0;
   gameStatus:  string = ''; 
@@ -90,6 +92,7 @@ export class RootsComponent implements OnInit {
   gameFlag: boolean =false;
   currentCards: Card[] = [];
   playerNameRequired: boolean = false;
+  currentDefinition: string = '';
 
 
 
@@ -181,6 +184,8 @@ export class RootsComponent implements OnInit {
   cards: Card[] = [];
 
   async ngOnInit() {
+    this.timeLeft = this.maxTime;
+
     if (!this.selectedDifficulty) {
       console.error('Difficulty level not selected!');
       return;
@@ -198,15 +203,18 @@ export class RootsComponent implements OnInit {
       case 'easy':
         this.maxTime =30;
         this.cardNumber = 3;
+        this.selectedDifficultyText = "سهل";
         return this.cardNumber;
       case 'medium':
         this.maxTime =50;
         this.cardNumber = 5;
+        this.selectedDifficultyText = "متوسط";
         return this.cardNumber;
       case 'hard':
         this.hintUsed = true;
         this.maxTime =60;
         this.cardNumber = 7;
+        this.selectedDifficultyText = "صعب";
         return this.cardNumber;
       default: // 'easy' أو أي قيمة افتراضية
         return 3;
@@ -268,15 +276,14 @@ export class RootsComponent implements OnInit {
   */
   async prepareCards() {
     const loadWords = async () => {
-      const response = await fetch('../../angular/assets/Roots_sample3.json');
+      const response = await fetch('../../angular/assets/roots_with_definitions.json');
       return await response.json();
     };
   
     let word = await loadWords();
     console.log(word[0]);
     this.cardNumber = this.selectedLevel(this.selectedDifficulty);
-   
-
+  
     if (this.isDialogVisible && this.currentCards.length > 0) {
       // عند الخسارة، استرجع الكلمات المحفوظة
       this.cards = [...this.currentCards];
@@ -286,29 +293,31 @@ export class RootsComponent implements OnInit {
       this.currentCards = []; // إعادة تعيين الكلمات المحفوظة
   
       while (this.cards.length < this.cardNumber) {
-       // if (this.i >= word.length) {
-       //  word = await loadWords();
-       //  this.i = 0;
-       //}
-
-        let  wordjson =[];
+        let wordjson = [];
         let tempRoot = [];
+        let definition = '';
         let wordBOL = [];
         let rootBOL = [];
-
-        if(this.cardNumber<=3){
-          wordBOL = word[0].sample1
-          rootBOL = word[0].sample1
-        } else if (this.cardNumber<=5){
-          wordBOL = word[0].sample2
-          rootBOL = word[0].sample2
-        }else if (this.cardNumber<=7){
+        let definitionBOL = [];
+  
+        if (this.cardNumber <= 3) {
+          wordBOL = word[0].sample1;
+          rootBOL = word[0].sample1;
+          definitionBOL = word[0].sample1;
+        } else if (this.cardNumber <= 5) {
+          wordBOL = word[0].sample2;
+          rootBOL = word[0].sample2;
+          definitionBOL = word[0].sample2;
+        } else if (this.cardNumber <= 7) {
           wordBOL = word[0].sample3;
           rootBOL = word[0].sample3;
+          definitionBOL = word[0].sample3;
         }
-       wordjson = wordBOL[this.i]?.lemma;
-       tempRoot = rootBOL[this.i]?.root;
-         
+  
+        wordjson = wordBOL[this.i]?.lemma;
+        tempRoot = rootBOL[this.i]?.root;
+        definition = definitionBOL[this.i]?.definition;
+  
         const root = (tempRoot ?? '').replace(/\s+/g, '');
   
         if (!root) {
@@ -317,14 +326,16 @@ export class RootsComponent implements OnInit {
         }
   
         this.i++;
-        
+  
         if (this.i >= wordBOL.length) {
           this.i = 0; // إعادة ضبط المؤشر إذا تجاوز عدد الكلمات
         }
-        
+  
+        // أضف التعريف كجزء من البطاقة
         this.cards.push({
           originalWord: wordjson,
           targetWord: root,
+          definition: definition, // إضافة التعريف
         });
       }
   
@@ -332,9 +343,11 @@ export class RootsComponent implements OnInit {
       this.currentCards = [...this.cards];
     }
   }
-
+  
+  
 
   ngOnDestroy() {
+    this.warningSound.stop();
     clearInterval(this.timerInterval); // إيقاف المؤقت عند تدمير المكون
   }
 
@@ -654,7 +667,6 @@ export class RootsComponent implements OnInit {
 
 
   async startGame() {
-       // استدعاء الدالة لإعداد البطاقات
     await this.prepareCards();
     this.hintUsed = false;
     this.resetGame();
@@ -726,13 +738,18 @@ export class RootsComponent implements OnInit {
   
       // وضع الحرف الأول في مكانه الصحيح
       this.selectedLetters[0] = correctLetters[0];
+      this.hintUsed = true; // جعل زر الهنت معطلاً بعد استخدامه
     }
+      //  قائمة الحروف المختارة تحتوي على حروف والحرف الأول صحيح
+    if (this.selectedLetters[0] === correctLetters[0]) {
+      return;
+    }
+  
   
     // تحديث الحالة
     state.selectedLetters = [...this.selectedLetters];
     state.availableLetters = [...this.availableLetters];
   
-    this.hintUsed = true; // جعل زر الهنت معطلاً بعد استخدامه
   }
   
   
@@ -761,7 +778,8 @@ export class RootsComponent implements OnInit {
     this.setLevelFlag();
     this.warningSound.pause();
     clearInterval(this.timerInterval);
-  }
+    this.selectedDifficulty = '';
+    }
 
   nextLevel() {
     if (this.selectedDifficulty === 'easy') {

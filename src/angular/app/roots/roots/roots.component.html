@@ -140,21 +140,27 @@
         (click)="selectedDifficulty = 'easy'"
         class="level-button"
         [class.selected]="selectedDifficulty === 'easy'"
-      >
-        سهل
+      ><div>
+      <img src="../../../angular/assets/easyIcon.svg " >
+    </div>
+       سهل
       </button>
       <button
         (click)="selectedDifficulty = 'medium'"
         class="level-button"
         [class.selected]="selectedDifficulty === 'medium'"
-      >
-        متوسط
+      ><div>
+      <img src="../../../angular/assets/mediumIcon.svg " >
+       </div>
+      متوسط
       </button>
       <button
         (click)="selectedDifficulty = 'hard'"
         class="level-button"
         [class.selected]="selectedDifficulty === 'hard'"
-      >
+      ><div>
+      <img src="../../../angular/assets/hardIcon.svg " >
+       </div>
         صعب
       </button>
     </div>
@@ -170,9 +176,11 @@
 
   <div *ngIf="gameFlag" class="container text-center">
         <!-- زر الرجوع -->
+         
         <div class="back-arrow"  (click)="goBack()">
           <i class="pi pi-chevron-right"></i>
         </div>
+
     <div class="row align-items-center gameHeader" >
       <div class="col">
         <div class="d-inline-block px-2 py-1 rounded mt-3 font-bold">
@@ -182,7 +190,14 @@
       </div>
 
       <div class="col font-bold">
-        <div class="d-flex justify-content-center">
+        <div  class="level-text">
+          <img  *ngIf="selectedDifficulty == 'easy'" src="../../../angular/assets/easyIconGray.svg " >
+          <img  *ngIf="selectedDifficulty == 'medium'" src="../../../angular/assets/mediumIconGray.svg " >
+          <img  *ngIf="selectedDifficulty == 'hard'" src="../../../angular/assets/hardIconGray.svg " >
+          {{selectedDifficultyText}}
+        </div>
+
+        <div class="d-flex mt-2 justify-content-center">
           <button
             (click)="back()"
             pButton
@@ -254,8 +269,19 @@
               />
             </svg>
           </ng-container>
+          
         </div>
-
+        <div class="stats d-flex justify-content-around mb-4">
+          <div class="points">
+            <p class="label">النقاط</p>
+            <p class="value  animate__animated  animate__zoomIn">{{ points }}</p>
+          </div>
+          <div class="separator"></div>
+          <div class="time">
+            <p class="label">المحاولات</p>
+            <p class="value animate__animated  animate__zoomIn">{{attempts}}</p>
+          </div>
+        </div>
         <button
           type="p-button"
           (click)="startGame()"
@@ -320,7 +346,7 @@
             pButton
             icon="pi pi-chevron-right"
             class="p-button-secondary m-2"
-            (click) = "setLevelFlag()"
+            (click) = "goBack()"
             pTooltip="العودة الى المستويات"
             tooltipPosition="right"
            
@@ -358,8 +384,8 @@
       </p-dialog>
 
 
-    <div class="card row gap-3 ">
-      <div class="text-2xl font-bold">جذر: {{ currentCard.originalWord }}</div>
+    <div class="card col-12 gap-3 ">
+      <div class="text-2xl font-bold" [pTooltip]="cards[currentIndex].definition" tooltipPosition = "top">جذر: {{ currentCard.originalWord }}</div>
 
       <div *ngIf="isCorrectAnimation" class="animation-container">
         <span class="animate__animated animate__tada"

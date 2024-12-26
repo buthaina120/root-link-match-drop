@@ -30,11 +30,12 @@ body {
 }
 
 .gameHeader{
+  display: flex;
   column-gap: 70px; 
   font-size: 1.2rem;
 }
 .cardWidth {
-  min-width: 30rem !important;
+  min-width: 30rem ;
 }
 
 .timer-container {
@@ -70,6 +71,12 @@ body {
   background-color: #CA3836;
 }
 
+.level-text{
+  font-size: 18px;
+  color: #b7b7b7;
+  font-weight: lighter;
+  margin-left: 12px;
+}
 
 /* إعدادات الشاشة الصغيرة */
 @media (max-width: 768px) {
@@ -84,6 +91,13 @@ body {
     align-content: center;
     justify-content: center; /* توسيط أفقي */
     align-items: center; /* توسيط عمودي */
+  }
+  .gameHeader{
+    column-gap: 35px; 
+  }
+
+  .cardWidth {
+    min-width: 20rem ;
   }
 
   .row {
@@ -126,11 +140,15 @@ body {
 
   .card {
     width: 100%;
-    padding: 10px 15%;
+    padding: 20px 5%;
   }
 
-  .headerGap{
-    column-gap: 20px
+  .gameHeader{
+    column-gap: 10px
+  }
+
+  .cardWidth {
+    min-width: 10rem ;
   }
 
   .level-button {
