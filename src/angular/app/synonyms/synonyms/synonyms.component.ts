@@ -72,8 +72,6 @@ export class SynonymsComponent implements OnInit {
   totalTimeSpent: number = 0;  
   attemptedAfterResume: boolean = false;
 
-
-
   openPlayerNameDialog() {
     this.showPlayerNameDialog = true;
   }
@@ -110,8 +108,10 @@ setDataType(type: string) {
   selectLevel() {
     this.difficulty = this.selectedLevel;
     this.setTimerBasedOnLevel();
+    this.currentLevel = this.selectedLevel;
     this.startGame();
   }
+  
   setTimerBasedOnLevel() {
     this.maxTime = [30,40,50][this.difficulty - 1];
     this.timeLeft = this.maxTime;
@@ -233,9 +233,9 @@ setDataType(type: string) {
       clearInterval(this.intervalId);
       this.showDialog = false;
       this.displayWinMessage();
-      this.attemptedAfterResume = false; // إعادة التتبع عند الفوز
+      this.attemptedAfterResume = false; 
     } else if (this.timeLeft === 0 && this.attemptedAfterResume) {
-      this.showDialog = true; // إظهار الحوار إذا انتهى الوقت في المحاولة الثانية
+      this.showDialog = true;
       clearInterval(this.intervalId);
     }
   }  
@@ -246,15 +246,16 @@ setDataType(type: string) {
     clearInterval(this.intervalId);   
     console.log('الوقت المستغرق للمستوى الحالي:', this.totalTimeSpent);   }
   
-  nextLevel() {
-    if (this.currentLevel < 3) {
-      this.currentLevel += 1;
-      this.selectedLevel = this.currentLevel;
-      this.setDataType(this.selectedDataType);
-      this.totalTimeSpent = 0;       
-      this.selectLevel();
+    nextLevel() {
+      if (this.currentLevel < 3) {
+        this.currentLevel += 1;
+        this.selectedLevel = this.currentLevel;
+        this.setDataType(this.selectedDataType);
+        this.totalTimeSpent = 0;       
+        this.selectLevel();
+      }
     }
-  }
+    
   shuffleCards() {
     this.cards.sort(() => Math.random() - 0.5);
   }
@@ -271,8 +272,6 @@ setDataType(type: string) {
     ) {
       return;
     }
-  
-     
     card.flipped = true;
     this.flippedCards.push(card);
   
@@ -319,7 +318,6 @@ setDataType(type: string) {
     this.display = false;
     this.restartGame();
   }
-
   constructor(private rest: ApiService) {}
   root: string | undefined;
 
@@ -349,23 +347,20 @@ setDataType(type: string) {
     this.showDialog = false;
     this.showWinDialog = false;
     this.showLevelUpDialog = false;
-    this.attemptedAfterResume = false; // إعادة تعيين
+    this.attemptedAfterResume = false;
   }
-  
   resumeGame() {
     if (this.attemptedAfterResume) {
-      this.showDialog = true; // إظهار الحوار عند المحاولة الثانية وعدم الفوز
+      this.showDialog = true; 
       return;
     }
-    this.attemptedAfterResume = true; // تتبع المحاولة الأولى بعد الإكمال
+    this.attemptedAfterResume = true; 
     const extraTime = 30;     
     this.timeLeft += extraTime;  
     this.showDialog = false; 
     this.warningSound.stop();  
     this.startTimer();  
   }
-  
-  
   getStarsCount(): number {
     const totalCards = this.cards.length;
     const matchedCardsCount = this.matchedCards.length;
@@ -380,14 +375,16 @@ setDataType(type: string) {
     this.homeflag = false;
     clearInterval(this.intervalId);
     this.timeLeft = this.maxTime;
+    this.selectedLevel=0;
   }
   restartToLevelFlag() {
-    this.showWinDialog=false;
+    this.showWinDialog = false;
     this.gameflag = false;
     this.levelflag = true;  
     this.homeflag = false; 
     clearInterval(this.intervalId);  
     this.timeLeft = this.maxTime;  
+    this.currentLevel = this.selectedLevel;
   }
   ngOnDestroy() {
     this.warningSound.stop();

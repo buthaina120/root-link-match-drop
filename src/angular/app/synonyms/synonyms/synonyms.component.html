@@ -206,7 +206,7 @@
           <img  *ngIf="difficulty == 3" src="../../../angular/assets/hardIconGray.svg " >
           <div *ngIf="difficulty == 3">صعب</div>
         </div>
-        <p>{{ gameType }}</p>
+        <p class="mt-2">{{ gameType }}</p>
       </div>
 
       <div class="col">
@@ -305,7 +305,7 @@
       >
         <i class="m-2 pi pi-replay" style="font-size: 1rem"></i>
       </button>
-      <button
+      <button *ngIf="attemptedAfterResume==false"
       type="button"
       (click)="resumeGame()"
       class="p-2 m-2 p-button p-component bg-sec-theme"
@@ -365,7 +365,7 @@
       </div>
       <div class="buttons-container d-flex justify-content-center">
         <button
-          *ngIf="selectedLevel == 3"
+          *ngIf="selectedLevel >= 3"
           type="button"
           (click)="restartToLevelFlag()"
           class="p-2 m-2 p-button p-component bg-sec-theme"
@@ -392,7 +392,7 @@
           (click)="nextLevel(); showWinDialog = false"
         ></button>
         <button
-          *ngIf="currentLevel == 3"
+          *ngIf="currentLevel >= 3"
           pButton
           class="pi pi-list p-button-rounded p-button-secondary m-2"
           pTooltip="العودة الى قائمة التحديات "
