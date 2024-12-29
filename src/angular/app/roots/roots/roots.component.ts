@@ -1,9 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -66,9 +61,9 @@ export class RootsComponent implements OnInit {
   timerInterval: ReturnType<typeof setInterval> | undefined;
   isDialogVisible: boolean = false; // لإظهار الحوار
   isWinDialogVisible: boolean = false; // حوار الفوز
-  isCorrectAnimation: boolean = false; // متغير للتحكم في عرض الأنميشن
-  isFailureAnimation: boolean = false; // متغير للتحكم في عرض الأنميشن
-  hintUsed: boolean = false; // متغير لتتبع استخدام الهنت
+  isCorrectAnimation: boolean = false; // عرض الأنميشن
+  isFailureAnimation: boolean = false; // عرض الأنميشن
+  hintUsed: boolean = false; 
   cardStates: CardState[] = [];
   availableLetters: string[] = [];
   selectedLetters: string[] = [];
@@ -99,11 +94,11 @@ export class RootsComponent implements OnInit {
   requiredMsg() {
      // التحقق من إدخال الاسم
      if (!this.playerName.trim()) {
-      this.playerNameRequired = true; // إظهار رسالة الخطأ
+      this.playerNameRequired = true; 
     } else {
-      this.playerNameRequired = false; // إخفاء رسالة الخطأ
-      this.isPlayerNameDialogVisible = false; // إغلاق الـ dialog
-      this.setLevelFlag(); // تنفيذ الإجراء المطلوب
+      this.playerNameRequired = false; 
+      this.isPlayerNameDialogVisible = false; 
+      this.setLevelFlag(); 
     }
   }
 
@@ -166,20 +161,9 @@ export class RootsComponent implements OnInit {
     src: ['../../../angular/assets/tada.mp3'],
   });
 
-
-
-  
   savePlayerName() {
-    this.isPlayerNameDialogVisible = true; // فتح الحوار عند النقر على زر ابدأ    
+    this.isPlayerNameDialogVisible = true;    
   }
-
-
-  // استخدام الواجهة هنا
- /*cards: Card[] = [
-    { originalWord: 'مستشفى', targetWord: 'شفي' },
-    { originalWord: 'كتاب', targetWord: 'كتب' },
-    { originalWord: 'مدرسة', targetWord: 'درس' },
-  ];*/
 
   cards: Card[] = [];
 
@@ -194,7 +178,6 @@ export class RootsComponent implements OnInit {
     // بدء اللعبة
     this.startGame();
   
-    console.log(this.cards); // عرض المصفوفة للتأكد
   }
   
   
@@ -216,64 +199,13 @@ export class RootsComponent implements OnInit {
         this.cardNumber = 7;
         this.selectedDifficultyText = "صعب";
         return this.cardNumber;
-      default: // 'easy' أو أي قيمة افتراضية
+      default:
         return 3;
     }
   }
  
 
-  /*
-  async prepareCards() {
-    const loadWords = async () => {
-      const response = await fetch('../../angular/assets/roots_sample_15.json');
-      return await response.json();
-    };
-  
-    let word = await loadWords();
-    this.cardNumber = this.selectedLevel(this.selectedDifficulty);
-    
-    if (this.isDialogVisible && this.currentCards.length > 0) {
-      // عند الخسارة، استرجع الكلمات المحفوظة
-      this.cards = [...this.currentCards];
-    } else {
-      // عند الفوز، تحميل كلمات جديدة
-      this.cards.length = 0;
-      this.currentCards = []; // إعادة تعيين الكلمات المحفوظة
-  
-      while (this.cards.length < this.cardNumber) {
-        if (this.i >= word.length) {
-          word = await loadWords();
-          this.i = 0;
-        }
-  
-        const randomWord = word[this.i]?.lemma;
-        if (!randomWord) {
-          this.i++;
-          continue;
-        }
-  
-        const tempRoot = word[this.i].root;
-        const root = (tempRoot ?? '').replace(/\s+/g, '');
-        const wordjson = word[this.i].lemma;
-  
-        if (!root) {
-          this.i++;
-          continue;
-        }
-  
-        this.i++;
-  
-        this.cards.push({
-          originalWord: wordjson,
-          targetWord: root,
-        });
-      }
-  
-      // حفظ الكلمات الحالية
-      this.currentCards = [...this.cards];
-    }
-  }
-  */
+
   async prepareCards() {
     const loadWords = async () => {
       const response = await fetch('../../angular/assets/roots_with_definitions.json');
@@ -331,11 +263,10 @@ export class RootsComponent implements OnInit {
           this.i = 0; // إعادة ضبط المؤشر إذا تجاوز عدد الكلمات
         }
   
-        // أضف التعريف كجزء من البطاقة
         this.cards.push({
           originalWord: wordjson,
           targetWord: root,
-          definition: definition, // إضافة التعريف
+          definition: definition, 
         });
       }
   
@@ -348,12 +279,12 @@ export class RootsComponent implements OnInit {
 
   ngOnDestroy() {
     this.warningSound.stop();
-    clearInterval(this.timerInterval); // إيقاف المؤقت عند تدمير المكون
+    clearInterval(this.timerInterval); 
   }
 
   startTimer() {
     this.timeLeft = this.maxTime;
-    clearInterval(this.timerInterval); // تأكد من إيقاف المؤقت القديم إذا كان موجودًا
+    clearInterval(this.timerInterval); // التأكد من إيقاف المؤقت القديم
     this.timerInterval = setInterval(() => {
       if (!this.isWinDialogVisible || this.timeLeft > 0) {
         this.timeLeft -= 1;
@@ -363,10 +294,10 @@ export class RootsComponent implements OnInit {
         }
         if (this.timeLeft <= 0) {
           clearInterval(this.timerInterval); // إيقاف المؤقت عند وصول الوقت إلى 0
-          this.isDialogVisible = true; // عرض الحوار عند انتهاء الوقت
+          this.isDialogVisible = true; 
         }
       }
-    }, 1000); // تعيين الفاصل الزمني إلى 1000 مللي ثانية (1 ثانية)
+    }, 1000); 
   }
 
   get currentCard(): Card {
@@ -432,7 +363,7 @@ export class RootsComponent implements OnInit {
       'إ',
       'آ',
       'ؤ',
-      'ئ', // همزات مع الواو والياء
+      'ئ', 
       'ب',
       'ت',
       'ث',
@@ -461,7 +392,7 @@ export class RootsComponent implements OnInit {
       'و',
       'ي',
       'ة',
-      'ى', // ألف مقصورة
+      'ى', 
     ];
 
     const letters = [];
@@ -639,13 +570,13 @@ export class RootsComponent implements OnInit {
       this.isCorrectAnimation = true;
       setTimeout(() => {
         this.isCorrectAnimation = false;
-      }, 2000); // الانتظار لمدة 2000 مللي ثانية (2 ثانية)
+      }, 2000);// الانتظار لمدة 2 ثانية
     } else {
       this.failureSound.play();
       this.isFailureAnimation = true;
       setTimeout(() => {
         this.isFailureAnimation = false;
-      }, 2000); // الانتظار لمدة 2000 مللي ثانية (2 ثانية)
+      }, 2000); // الانتظار لمدة 2 ثانية
     }
   }
 
@@ -791,7 +722,6 @@ export class RootsComponent implements OnInit {
     } else if (this.selectedDifficulty === 'hard') {
       // إذا كان قد أكمل جميع المستويات
     }
-   // this.startGame();
   }
 
 }
